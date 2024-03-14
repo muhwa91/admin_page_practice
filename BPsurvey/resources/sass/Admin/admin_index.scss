@@ -1,0 +1,252 @@
+@import "../mixin";
+
+.admin_index_container {
+	width: 1700px;
+	height: 100vh;
+	margin: 0 auto;
+	background-color: $admin-index-background-color;
+
+	.admin_index_section {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		.admin_index_left_container {
+			width: 20%;
+			height: 100vh;			
+			background-color: $admin-index-background-color;
+
+			.admin_index_left_info_section {
+				width: 100%;
+				height: 100px;
+				margin-top: 50px;
+
+				.admin_index_left_info_title_area {
+					color: $bookpick-main-color;
+					margin: 0 10px;
+				}
+
+				.admin_index_left_info_name_area {
+					width: 100%;
+				}
+			}
+
+			.admin_index_left_search_section {
+				width: 100%;
+				margin: 20px 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.admin_index_left_search_input {
+					width: 70%;
+					height: 40px;
+					margin: auto;
+					padding: 4px;
+					outline: none;
+					background-color: transparent;
+					border-bottom: 1px solid transparent;
+
+					&:focus {
+						border-bottom: 1px solid $layout-background-color;
+						transition: 0.8s;
+					}
+				}
+			}
+		}
+
+		.admin_index_left_nav_section {
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			padding: 10px 40px;
+
+			.admin_index_left_nav_ul {
+				width: 100%;
+
+				.admin_index_left_nav_li {
+					width: 100%;
+					margin-bottom: 50px;
+
+					.admin_index_left_nav_a {
+						width: 100%;
+						display: flex;
+						align-items: center;
+						
+						svg {
+							margin-right: 10px;
+						}
+					}
+
+					.admin_index_left_nav_dropdown_a {
+						width: 100%;
+						display: flex;
+						align-items: center;
+						
+						.admin_index_left_nav_dropdown_left_svg {
+							margin-right: 10px;
+						}
+
+						.admin_index_left_nav_dropdown_right_svg {
+							margin-left: auto;
+						}
+					}
+
+					.admin_index_left_nav_dropdown_ul {
+						width: 100%;
+						display: block;						
+					}
+				}
+			}
+		}
+
+		.admin_index_right_container {
+			width: 1300px;
+			height: 100vh;
+			margin: 0 auto;
+			color: $admin-font-color;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			align-items: center;
+
+			.admin_index_right_top_container {
+				width: 1350px;				
+				margin: 10px auto;
+				display: flex;
+				background-color: #fff;
+
+				.admin_index_right_top_logo_section {
+					width: 100%;
+					img {
+						width: 100px;
+						height: 60px;
+					}
+				}
+
+				.admin_index_right_top_button_section {
+					svg {
+						width: 60px;
+						height: 60px;
+					}
+				}
+			}
+
+			.admin_index_right_top_container {
+				width: 100%;
+				margin-bottom: 10px;
+				padding: 20px;
+				border-radius: 10px;
+
+				.admin_index_right_top_title_section {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+
+					.admin_index_right_top_title_area {
+						width: 100%;
+						display: flex;
+						flex-direction: column;
+					}
+				}					
+			}
+
+			.admin_index_right_middle_container {
+				width: 100%;
+				margin-bottom: 10px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.admin_index_right_middle_section {
+					width: 100%;
+					height: 100px;
+					padding: 10px;
+					border-radius: 10px;
+					background-color: #FFF;
+
+					.admin_index_right_middle_number_of_transactions,
+					.admin_index_right_middle_paymont_amount,
+					.admin_index_right_middle_register_users {
+						width: 100%;
+						height: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						svg {
+							width: 60px;
+							height: 60px;
+							margin-left: 20px;
+						}
+
+						.admin_index_right_middle_number_of_transactions_text,
+						.admin_index_right_middle_paymont_amount_text,
+						.admin_index_right_middle_register_users_text {
+							width: 100%;
+							padding: 20px;
+							margin-left: 20px;
+						}
+					}
+				}
+			}
+
+			.admin_index_right_bottom_container {
+				width: 100%;
+				height: 400px;
+				border-radius: 10px;
+				
+				.admin_index_right_bottom_chart_section {
+					width: 100%;
+					height: 100%;
+					margin-bottom: 10px;
+					background-color: #fff;
+					border-radius: 10px;
+
+					.admin_index_right_bottom_chart_area {
+						width: 100%;
+						height: 100%;
+						padding: 20px;
+
+						.admin_index_right_bottom_chart_image {
+							width: 1200px;
+							height: 300px;
+							margin: 0 auto;
+						}
+					}
+				}
+			}
+
+			.admin_index_right_bottom_text_section {
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				.admin_index_right_bottom_latest_Posts_section,
+				.admin_index_right_bottom_notice_section {
+					width: 50%;
+					height: 250px;
+					border-radius: 10px;					
+					background-color: #fff;
+
+					.admin_index_right_bottom_latest_Posts_title_area,
+					.admin_index_right_bottom_notice_title_area {
+						width: 100%;
+						padding: 20px;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+
+						.admin_index_right_bottom_notice_title_a,
+						.admin_index_right_bottom_latest_Posts_title_a {
+							display: flex;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// 미디어쿼리 import
+@import "./mixin";
+@import "./Admin/admin_login.scss";
+@import "./Admin/admin_index.scss";
