@@ -1,0 +1,127 @@
+@import "../mixin";
+
+
+@include mobile {
+    .footer_container {
+        width: 100%;
+        height: 50px;
+        margin: 20px auto;
+    
+        .footer_section {
+            width: 100%;
+            height: 100%;
+            margin: 4rem auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+    
+            .footer_p_area {
+                width: 100%;
+                
+                .footer_p_title {
+                    line-height: 40px;              
+                }
+    
+                .footer_p_content {
+                    font-size: 0.875rem;
+                    line-height: 40px;
+                    color: $footer-text-color;
+                }
+            }
+    
+            .footer_a_area {
+                width: 100%;
+                margin-top: 35px;
+    
+                .footer_a {
+                    font-size: 0.875rem;
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}
+    
+@include tablet {
+    .footer_container {
+        width: 100%;
+        height: 50px;
+        margin: 20px auto;
+    
+        .footer_section {
+            width: 100%;
+            height: 100%;
+            margin: 4rem auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+    
+            .footer_p_area {
+                width: 100%;
+                
+                .footer_p_title {
+                    line-height: 40px;
+                }
+    
+                .footer_p_content {
+                    line-height: 40px;
+                    color: $footer-text-color;
+                }
+            }
+    
+            .footer_a_area {
+                width: 100%;
+                margin-top: 35px;
+    
+                .footer_a {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}
+    
+@include desktop {
+    .footer_container {
+        width: 1000px;
+        height: 200px;
+        margin: 0 auto;
+    
+        .footer_section {
+            width: 100%;
+            height: 100%;
+            margin: 4rem auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+    
+            .footer_p_area {
+                width: 100%;
+                
+                .footer_p_title {
+                    line-height: 40px;                
+                }
+    
+                .footer_p_content {
+                    line-height: 40px;
+                    color: $footer-text-color;
+                }
+            }
+    
+            .footer_a_area {
+                width: 100%;
+                margin-top: 35px;
+    
+                .footer_a {
+                    margin-right: 30px;
+                }
+            }
+        }
+    }
+}

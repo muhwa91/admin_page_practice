@@ -11,12 +11,10 @@
 <body>
     <div id="app">
         <div>            
-            <App-Component></App-Component>
-        </div>
-        {{-- <div>
             <Header-Component></Header-Component>
+            <App-Component></App-Component>
             <Footer-Component></Footer-Component>
-        </div> --}}
+        </div>
     </div>
 </body>
 </html>
