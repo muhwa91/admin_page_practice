@@ -21008,6 +21008,139 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'UserLoginComponent',
+  props: {},
+  components: {},
+  data: function data() {
+    return {
+      setting: '',
+      user_email: '',
+      user_password: ''
+    };
+  },
+  created: function created() {},
+  mounted: function mounted() {},
+  methods: {
+    userLogin: function userLogin() {
+      var _this = this;
+      var URL = '/login';
+      var formData = new FormData();
+      formData.append('user_email', this.user_email);
+      formData.append('user_password', this.user_password);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (res) {
+        console.log("진입");
+        if (res.data.code === "ul00") {
+          _this.$router.push('/');
+        } else {
+          alert(res.data.error);
+        }
+      })["catch"](function (err) {
+        console.error('Unexpected error:', err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: 'UserRegisterComponent',
+  props: {},
+  components: {},
+  data: function data() {
+    return {
+      setting: '',
+      registerFirstFlg: false,
+      registerSecondFlg: true,
+      // 현재 날짜 저장용
+      birthdate: '',
+      // 회원가입 유저제출 데이터 저장용
+      registerFormData: {
+        user_email: '',
+        user_password: '',
+        user_password_confirm: '',
+        user_name: '',
+        user_birthdate: '',
+        user_gender: '',
+        user_carrier: '',
+        user_tel: '',
+        userTermsOfUse: ''
+      }
+    };
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    // 현재 날짜 YYYY-MM-DD 변환
+    var today = new Date().toISOString().slice(0, 10);
+    // 데이터에 현재 날짜 할당
+    this.user_birthdate = today;
+  },
+  methods: {
+    moveSecondRegist: function moveSecondRegist() {
+      if (this.registerFormData.userTermsOfUse) {
+        this.registerFirstFlg = true;
+        this.registerSecondFlg = false;
+      } else {
+        alert('이용약관에 동의 체크 해주세요');
+      }
+    },
+    userRegister: function userRegister() {
+      var _this = this;
+      var URL = '/register';
+      var formData = new FormData();
+      formData.append('user_email', this.user_email);
+      formData.append('user_password', this.user_password);
+      formData.append('user_password_confirm', this.user_password_confirm);
+      formData.append('user_name', this.user_name);
+      formData.append('user_birthdate', this.user_birthdate);
+      formData.append('user_gender', this.user_gender);
+      formData.append('user_carrier', this.user_carrier);
+      formData.append('user_tel', this.user_tel);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (res) {
+        if (res.data.code === "ur00") {
+          alert('회원가입이 완료되었습니다. 로그인 해 주세요.');
+          _this.$router.push('/login');
+        } else {
+          alert(res.data.error);
+        }
+      })["catch"](function (err) {
+        console.error('Unexpected error:', err);
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/Admin/AdminIndexComponent.vue?vue&type=template&id=2e32d9f9":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/Admin/AdminIndexComponent.vue?vue&type=template&id=2e32d9f9 ***!
@@ -21281,10 +21414,410 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   key: 0
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"header_container\"><div class=\"header_section\"><div class=\"header_index_area\"><a class=\"text-3xl font-bold header_index_a\" href=\"#\">BOOKPICK&#39;</a></div><div class=\"header_login_area\"><a class=\"font-semibold text-center header_menu_a\" href=\"#\">대시보드</a><a class=\"font-semibold text-center header_menu_a\" href=\"#\">문의</a><a class=\"font-semibold text-center header_login_a\" href=\"#\">로그인</a></div></div></div>", 1);
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_2 = {
+  "class": "header_container"
+};
+var _hoisted_3 = {
+  "class": "header_section"
+};
+var _hoisted_4 = {
+  "class": "header_index_area"
+};
+var _hoisted_5 = {
+  "class": "header_login_area"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "font-semibold text-center header_menu_a",
+  href: "#"
+}, "대시보드", -1 /* HOISTED */);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "font-semibold text-center header_menu_a",
+  href: "#"
+}, "문의", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return !['/admin', '/admin/index'].includes(_ctx.$route.fullPath) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [].concat(_hoisted_3))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return !['/admin', '/admin/index'].includes(_ctx.$route.fullPath) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/",
+    "class": "text-3xl font-bold header_index_a"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("BOOKPICK'")];
+    }),
+    _: 1 /* STABLE */
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/login",
+    "class": "font-semibold text-center header_login_a"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("로그인")];
+    }),
+    _: 1 /* STABLE */
+  })])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "box-border user_login_container"
+};
+var _hoisted_2 = {
+  "class": "user_login_section"
+};
+var _hoisted_3 = {
+  "class": "user_login_left_section"
+};
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "user_login_title_section"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-3xl font-bold user_login_title"
+}, "북픽에서 다양한 책을!"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-3xl font-bold user_login_title"
+}, "독서기록을 남겨보세요.")], -1 /* HOISTED */);
+var _hoisted_5 = {
+  "class": "user_login_input_area"
+};
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "user_login_input_svg",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+})], -1 /* HOISTED */);
+var _hoisted_7 = {
+  "class": "user_login_input_area"
+};
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  "class": "user_login_input_svg",
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+})], -1 /* HOISTED */);
+var _hoisted_9 = {
+  "class": "user_login_button_area"
+};
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "user_login_button_text_area"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "user_login_button_svg"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M5.636 5.636a9 9 0 1 0 12.728 0M12 3v9"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-base font-semibold"
+}, "Login")], -1 /* HOISTED */);
+var _hoisted_11 = [_hoisted_10];
+var _hoisted_12 = {
+  "class": "font-semibold text-center user_login_register"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_login_input",
+    type: "text",
+    name: "user_email",
+    id: "user_email",
+    autocomplete: "off",
+    placeholder: "아이디를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.user_email = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user_email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_login_input",
+    type: "password",
+    name: "user_password",
+    id: "user_password",
+    autocomplete: "off",
+    placeholder: "비밀번호를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.user_password = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.user_password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "user_login_button",
+    type: "submit",
+    onClick: _cache[2] || (_cache[2] = function () {
+      return $options.userLogin && $options.userLogin.apply($options, arguments);
+    })
+  }, [].concat(_hoisted_11))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/register",
+    "class": "user_login_register_a"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("아직 북픽 회원이 아니신가요?↗")];
+    }),
+    _: 1 /* STABLE */
+  })])])])]);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"terms_conditions_box\"><p class=\"text-center\"><strong>서비스 이용약관</strong></p><p><strong>제1조 (목적)</strong></p><br><p>이 이용약관은 [BOOKPICK&#39;] (이하 &quot;회사&quot;라 함)이 운영하는 인터넷 관련 서비스 및 기타 관련 제반 서비스(이하 &quot;서비스&quot;라 함)를 이용함에 있어 회사와 이용자의 권리, 의무 및 책임 사항을 규정함을 목적으로 합니다.</p><br><p><strong>제2조 (약관의 효력과 변경)</strong></p><br><p>본 약관은 서비스를 신청한 이용자가 본 약관에 동의하고 회사가 정한 가입신청 양식에 기반하여 가입을 완료하는 시점부터 효력이 발생합니다.</p><p>1. 회사는 필요한 경우 관련 법령 및 회사의 내부 정책을 반영하여 이 약관을 변경할 수 있으며, 변경된 약관은 회사의 홈페이지나 서비스 내 공지를 통해 이용자에게 공지됩니다.</p><p>변경된 약관은 공지 후 7일 이내에 이용자의 동의 없이 적용됩니다. </p><p>2. 이용자가 변경된 약관에 동의하지 않을 경우 회사는 해당 이용자에 대하여 서비스 제공을 중단할 수 있습니다.</p><br><p><strong>제3조 (이용자의 의무)</strong></p><br><p>1. 이용자는 서비스 이용 시 관련 법령, 약관, 공지사항, 회사의 안내 등에 따라 서비스를 이용해야 하며, 회사의 명시적 동의 없이는 서비스를 이용하여 얻은 정보를 복제, 유통, 출판하거나 상업적으로 이용할 수 없습니다.</p><p>2. 이용자는 서비스 이용 시 다음 각 호의 행위를 하지 않아야 합니다.</p><p>가. 타인의 정보를 도용하거나 부정한 목적으로 이용하는 행위</p><p>나. 서비스를 통해 전송되는 컨텐츠를 위변조, 삭제, 변경하는 행위</p><p>다. 서비스의 안전성, 안정성 및 정상적인 운영을 방해하는 행위</p><br><p><strong>제4조 (회사의 의무)</strong></p><br><p>회사는 이용자의 개인정보 보호를 위해 최선을 다하며, 관련 법령에 따라 이를 처리합니다.</p><p>회사는 서비스 제공을 위해 지속적으로 시스템 및 네트워크 관리를 개선하며, 서비스 이용 중 발생하는 장애나 문제에 대하여 신속하게 조치합니다.</p><br><p><strong>제5조(개인정보의 안전성 확보 조치)</strong></p><br><p>1. 회사는 개인정보보호법 제29조에 따라 다음과 같이 안전성 확보에 필요한 기술적, 관리적, 물리적 조치를 하고 있습니다.</p><p>가. 개인정보 암호화: 이용자의 개인정보는 암호화되어 저장 및 관리됩니다.</p><p>나. 접근 제한: 개인정보를 처리하는 데이터베이스시스템에 대한 접근 권한을 최소한으로 제한하고 있습니다.</p></div>", 1);
+var _hoisted_2 = {
+  "class": "mb-5 text-center terms_conditions_checkbox_btn"
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "terms_conditions_label"
+}, "이용약관 및 개인정보수집 및 이용에 모두 동의합니다.", -1 /* HOISTED */);
+var _hoisted_4 = {
+  "class": "regist_button"
+};
+var _hoisted_5 = {
+  "class": "text-center regist_button_button_area"
+};
+var _hoisted_6 = {
+  "class": "text-center regist_button_button_area"
+};
+var _hoisted_7 = {
+  "class": "user_register_section"
+};
+var _hoisted_8 = {
+  "class": "user_register_left_section"
+};
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "user_register_title_section"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-3xl font-bold user_register_title"
+}, "BOOKPICK'"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "text-3xl font-bold user_register_title_sub"
+}, "북픽 회원가입")], -1 /* HOISTED */);
+var _hoisted_10 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_id"
+}, "아이디", -1 /* HOISTED */);
+var _hoisted_12 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_password"
+}, "비밀번호", -1 /* HOISTED */);
+var _hoisted_14 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_password_confirm"
+}, "비밀번호 확인", -1 /* HOISTED */);
+var _hoisted_16 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_name"
+}, "이름", -1 /* HOISTED */);
+var _hoisted_18 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_birthdate"
+}, "생년월일", -1 /* HOISTED */);
+var _hoisted_20 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "gender"
+}, "성별", -1 /* HOISTED */);
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "select"
+}, "선택안함", -1 /* HOISTED */);
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "male"
+}, "남자", -1 /* HOISTED */);
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "female"
+}, "여자", -1 /* HOISTED */);
+var _hoisted_25 = [_hoisted_22, _hoisted_23, _hoisted_24];
+var _hoisted_26 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "carrier"
+}, "통신사", -1 /* HOISTED */);
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "select"
+}, "선택안함", -1 /* HOISTED */);
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "KT"
+}, "KT", -1 /* HOISTED */);
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "LGU+"
+}, "LGU+", -1 /* HOISTED */);
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "SKT"
+}, "SKT", -1 /* HOISTED */);
+var _hoisted_32 = [_hoisted_28, _hoisted_29, _hoisted_30, _hoisted_31];
+var _hoisted_33 = {
+  "class": "user_register_input_area"
+};
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "user_tel"
+}, "휴대폰 번호", -1 /* HOISTED */);
+var _hoisted_35 = {
+  "class": "user_register_button_area"
+};
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "user_register_button_text_area"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-base font-semibold"
+}, "가입하기")], -1 /* HOISTED */);
+var _hoisted_37 = [_hoisted_36];
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 이용약관 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["regist_terms_box", {
+      'container_signup_none': $data.registerFirstFlg
+    }])
+  }, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "terms_conditions_checkbox",
+    type: "checkbox",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.registerFormData.userTermsOfUse = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $data.registerFormData.userTermsOfUse]]), _hoisted_3]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: '/',
+    "class": "regist_button_cancel"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("취소")];
+    }),
+    _: 1 /* STABLE */
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "regist_button_next",
+    type: "button",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.moveSecondRegist && $options.moveSecondRegist.apply($options, arguments);
+    })
+  }, "다음")])])], 2 /* CLASS */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" 회원가입 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["box-border user_register_container", {
+      'container_signup_none': $data.registerSecondFlg
+    }])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "email",
+    name: "user_email",
+    id: "user_email",
+    autocomplete: "off",
+    placeholder: "example@email.com",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return _ctx.user_email = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_email]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "password",
+    name: "user_password",
+    id: "user_password",
+    autocomplete: "off",
+    placeholder: "비밀번호를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return _ctx.user_password = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [_hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "password",
+    name: "user_password_confirm",
+    id: "user_password_confirm",
+    autocomplete: "off",
+    placeholder: "비밀번호를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.user_password_confirm = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_password_confirm]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "text",
+    name: "user_name",
+    id: "user_name",
+    autocomplete: "off",
+    placeholder: "이름을 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return _ctx.user_name = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "date",
+    name: "user_birthdate",
+    id: "user_birthdate",
+    autocomplete: "off",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return _ctx.user_birthdate = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_birthdate]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    name: "user_gender",
+    id: "user_gender",
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return _ctx.user_gender = $event;
+    })
+  }, [].concat(_hoisted_25), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.user_gender]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    name: "user_carrier",
+    id: "user_carrier",
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return _ctx.user_carrier = $event;
+    })
+  }, [].concat(_hoisted_32), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.user_carrier]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base user_register_input",
+    type: "tel",
+    name: "user_tel",
+    id: "user_tel",
+    autocomplete: "off",
+    placeholder: "'-'없이 숫자만 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+      return _ctx.user_tel = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.user_tel]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "user_register_button",
+    type: "submit",
+    onClick: _cache[10] || (_cache[10] = function () {
+      return $options.userRegister && $options.userRegister.apply($options, arguments);
+    })
+  }, [].concat(_hoisted_37))])])])], 2 /* CLASS */)]);
 }
 
 /***/ }),
@@ -21368,11 +21901,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.mjs");
 /* harmony import */ var _components_AppComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/AppComponent.vue */ "./resources/components/AppComponent.vue");
 /* harmony import */ var _components_IndexComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/IndexComponent.vue */ "./resources/components/IndexComponent.vue");
-/* harmony import */ var _components_Admin_AdminLoginComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Admin/AdminLoginComponent.vue */ "./resources/components/Admin/AdminLoginComponent.vue");
-/* harmony import */ var _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/Admin/AdminIndexComponent.vue */ "./resources/components/Admin/AdminIndexComponent.vue");
+/* harmony import */ var _components_User_UserLoginComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/User/UserLoginComponent.vue */ "./resources/components/User/UserLoginComponent.vue");
+/* harmony import */ var _components_User_UserRegisterComponent_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/User/UserRegisterComponent.vue */ "./resources/components/User/UserRegisterComponent.vue");
+/* harmony import */ var _components_Admin_AdminLoginComponent_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Admin/AdminLoginComponent.vue */ "./resources/components/Admin/AdminLoginComponent.vue");
+/* harmony import */ var _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Admin/AdminIndexComponent.vue */ "./resources/components/Admin/AdminIndexComponent.vue");
+
+
 
 
 
@@ -21382,14 +21919,20 @@ var routes = [{
   path: '/',
   component: _components_IndexComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
+  path: '/login',
+  component: _components_User_UserLoginComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+}, {
+  path: '/register',
+  component: _components_User_UserRegisterComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
   path: '/admin',
-  component: _components_Admin_AdminLoginComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_Admin_AdminLoginComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: '/admin/index',
-  component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+  component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }];
-var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createRouter)({
-  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_4__.createWebHistory)(),
+var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createRouter)({
+  history: (0,vue_router__WEBPACK_IMPORTED_MODULE_6__.createWebHistory)(),
   routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
@@ -21420,33 +21963,7 @@ var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
     return {};
   },
   mutations: {},
-  actions: {
-    // adminLogin({commit}, {adminId, adminPw}) {
-    //     const URL = '/admin';            
-    //     const formData = new FormData();
-    //     formData.append('admin_number', adminId);
-    //     formData.append('admin_password', adminPw);
-
-    //     axios.post(URL, formData, {
-    //         headers: {
-    //             'Content-Type': 'multipart/form-data',
-    //         }
-    //     })
-    //     .then(res => {
-    //         if (res.data.code === "ad01" || res.data.code === "ad02") {
-    //             const token = res.data.token;
-    //             // Admin token 저장
-    // 			commit('setAdminToken', token);
-    // 			// 로컬스토리지 내 token 저장
-    //             localStorage.setItem('admin_token', token);
-    // 			router.push('/admin/index');
-    //         }
-    //     })
-    //     .catch(err => {
-    //         alert('네트워크 오류가 발생했습니다. 페이지를 새로고침 후 다시 로그인해주세요');
-    //     });
-    // }
-  }
+  actions: {}
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
@@ -21493,7 +22010,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21517,7 +22034,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@media (min-width: 335px) and (max-width: 767px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.header_container {\n    width: 1000px;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.875rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n.admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@media (min-width: 335px) and (max-width: 767px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.header_container {\n    width: 1000px;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.875rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n    position: relative;\n    transform: translateY(0%);\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.user_login_section .user_login_right_section .user_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 1000px;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 50%;\n    margin: 70px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 70%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 50%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.terms_conditions {\n    width: 600px;\n    text-align: center;\n}\n.terms_conditions_title {\n    margin-bottom: 10px;\n}\n.terms_conditions_box {\n    border: 1px solid #2C3E50;\n    border-radius: 5px;\n    padding: 20px;\n    width: 50%;\n    text-align: start;\n    margin: 0 auto;\n    overflow: auto;\n    font-size: 12px;\n    color: #333;\n}\n.terms_conditions_label {\n    font-size: 13px;\n    color: #666;\n}\n.terms_conditions_checkbox {\n    margin: 0 5px;\n}\n.terms_conditions_checkbox_btn {\n    margin-top: 5px;\n}\n.regist_button {\n    width: 600px;\n    margin: 5px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.regist_button .regist_button_button_area {\n    width: 80px;\n    height: 35px;\n    margin-right: 30px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.regist_button .regist_button_button_area .regist_button_next {\n    width: 100%;\n    display: inline-block;\n}\n.regist_button .regist_button_button_area .regist_button_next:hover {\n    width: 100%;\n    border: none;\n    border-radius: 10px;\n    background-color: #4dac27;\n    color: #fff;\n}\n.container_signup_none {\n    display: none;\n}\n.user_register_section {\n    width: 600px;\n    font-family: sans-serif;\n    margin: 10px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_title_section {\n    width: 100%;\n    margin: 0 auto;\n    margin-bottom: 40px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n}\n.user_register_section .user_register_title_section .user_register_title {\n    margin-bottom: 20px;\n    color: #4dac27;\n}\n.user_register_section .user_register_title_section .user_register_title_sub {\n    margin-bottom: 20px;\n}\n.user_register_section .user_register_left_section {\n    width: 50%;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_register_section .user_register_left_section .user_register_label {\n    margin: 0 80px;\n}\n.user_register_section .user_register_left_section .user_register_input_area,\n  .user_register_section .user_register_left_section .user_register_button_area {\n    width: 100%;\n    height: 50px;\n    margin: 50px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_input_area label,\n  .user_register_section .user_register_left_section .user_register_button_area label {\n    width: 100%;\n    margin-left: auto;\n    margin-bottom: 10px;\n}\n.user_register_section .user_register_left_section .user_register_input_area select,\n  .user_register_section .user_register_left_section .user_register_button_area select {\n    width: 100%;\n    padding: 4px 10px;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area select:focus,\n  .user_register_section .user_register_left_section .user_register_button_area select:focus {\n    outline: none;\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input {\n    width: 100%;\n    padding: 4px 10px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input:focus,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button {\n    width: 100%;\n    height: 50px;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area .user_register_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_register_section .user_register_left_section .user_register_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n.admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21565,7 +22082,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.875rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.875rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n    position: relative;\n    transform: translateY(0%);\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -21590,6 +22107,54 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.header_container {\n    width: 1000px;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.user_login_section .user_login_right_section .user_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 1000px;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 50%;\n    margin: 70px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 70%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 50%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 1024px) {\n.terms_conditions {\n    width: 600px;\n    text-align: center;\n}\n.terms_conditions_title {\n    margin-bottom: 10px;\n}\n.terms_conditions_box {\n    border: 1px solid #2C3E50;\n    border-radius: 5px;\n    padding: 20px;\n    width: 50%;\n    text-align: start;\n    margin: 0 auto;\n    overflow: auto;\n    font-size: 12px;\n    color: #333;\n}\n.terms_conditions_label {\n    font-size: 13px;\n    color: #666;\n}\n.terms_conditions_checkbox {\n    margin: 0 5px;\n}\n.terms_conditions_checkbox_btn {\n    margin-top: 5px;\n}\n.regist_button {\n    width: 600px;\n    margin: 5px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.regist_button .regist_button_button_area {\n    width: 80px;\n    height: 35px;\n    margin-right: 30px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.regist_button .regist_button_button_area .regist_button_next {\n    width: 100%;\n    display: inline-block;\n}\n.regist_button .regist_button_button_area .regist_button_next:hover {\n    width: 100%;\n    border: none;\n    border-radius: 10px;\n    background-color: #4dac27;\n    color: #fff;\n}\n.container_signup_none {\n    display: none;\n}\n.user_register_section {\n    width: 600px;\n    font-family: sans-serif;\n    margin: 10px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_title_section {\n    width: 100%;\n    margin: 0 auto;\n    margin-bottom: 40px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n}\n.user_register_section .user_register_title_section .user_register_title {\n    margin-bottom: 20px;\n    color: #4dac27;\n}\n.user_register_section .user_register_title_section .user_register_title_sub {\n    margin-bottom: 20px;\n}\n.user_register_section .user_register_left_section {\n    width: 50%;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_register_section .user_register_left_section .user_register_label {\n    margin: 0 80px;\n}\n.user_register_section .user_register_left_section .user_register_input_area,\n  .user_register_section .user_register_left_section .user_register_button_area {\n    width: 100%;\n    height: 50px;\n    margin: 50px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_input_area label,\n  .user_register_section .user_register_left_section .user_register_button_area label {\n    width: 100%;\n    margin-left: auto;\n    margin-bottom: 10px;\n}\n.user_register_section .user_register_left_section .user_register_input_area select,\n  .user_register_section .user_register_left_section .user_register_button_area select {\n    width: 100%;\n    padding: 4px 10px;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area select:focus,\n  .user_register_section .user_register_left_section .user_register_button_area select:focus {\n    outline: none;\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input {\n    width: 100%;\n    padding: 4px 10px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input:focus,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button {\n    width: 100%;\n    height: 50px;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area .user_register_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_register_section .user_register_left_section .user_register_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39301,6 +39866,66 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_style_index_0_id_c728847c_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_style_index_0_id_c728847c_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_style_index_0_id_c728847c_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_style_index_0_id_361d59dc_lang_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_style_index_0_id_361d59dc_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_style_index_0_id_361d59dc_lang_scss__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -39788,6 +40413,68 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/components/User/UserLoginComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/components/User/UserLoginComponent.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserLoginComponent_vue_vue_type_template_id_c728847c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserLoginComponent.vue?vue&type=template&id=c728847c */ "./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c");
+/* harmony import */ var _UserLoginComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserLoginComponent.vue?vue&type=script&lang=js */ "./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js");
+/* harmony import */ var _UserLoginComponent_vue_vue_type_style_index_0_id_c728847c_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss */ "./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+
+
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_UserLoginComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UserLoginComponent_vue_vue_type_template_id_c728847c__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/components/User/UserLoginComponent.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
+/***/ "./resources/components/User/UserRegisterComponent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/components/User/UserRegisterComponent.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _UserRegisterComponent_vue_vue_type_template_id_361d59dc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserRegisterComponent.vue?vue&type=template&id=361d59dc */ "./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc");
+/* harmony import */ var _UserRegisterComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserRegisterComponent.vue?vue&type=script&lang=js */ "./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js");
+/* harmony import */ var _UserRegisterComponent_vue_vue_type_style_index_0_id_361d59dc_lang_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss */ "./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss");
+/* harmony import */ var _node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+
+
+const __exports__ = /*#__PURE__*/(0,_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_3__["default"])(_UserRegisterComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_UserRegisterComponent_vue_vue_type_template_id_361d59dc__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/components/User/UserRegisterComponent.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/components/Admin/AdminIndexComponent.vue?vue&type=script&lang=js":
 /*!************************************************************************************!*\
   !*** ./resources/components/Admin/AdminIndexComponent.vue?vue&type=script&lang=js ***!
@@ -39880,6 +40567,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HeaderComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HeaderComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HeaderComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/Layout/HeaderComponent.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js":
+/*!**********************************************************************************!*\
+  !*** ./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserLoginComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
+/***/ "./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js":
+/*!*************************************************************************************!*\
+  !*** ./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserRegisterComponent.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=script&lang=js");
  
 
 /***/ }),
@@ -39980,6 +40699,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c":
+/*!****************************************************************************************!*\
+  !*** ./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_template_id_c728847c__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_template_id_c728847c__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserLoginComponent.vue?vue&type=template&id=c728847c */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=template&id=c728847c");
+
+
+/***/ }),
+
+/***/ "./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc":
+/*!*******************************************************************************************!*\
+  !*** ./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   render: () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_template_id_361d59dc__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_template_id_361d59dc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserRegisterComponent.vue?vue&type=template&id=361d59dc */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=template&id=361d59dc");
+
+
+/***/ }),
+
 /***/ "./resources/components/Admin/AdminIndexComponent.vue?vue&type=style&index=0&id=2e32d9f9&lang=scss":
 /*!*********************************************************************************************************!*\
   !*** ./resources/components/Admin/AdminIndexComponent.vue?vue&type=style&index=0&id=2e32d9f9&lang=scss ***!
@@ -40054,6 +40805,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_HeaderComponent_vue_vue_type_style_index_0_id_758a56c8_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./HeaderComponent.vue?vue&type=style&index=0&id=758a56c8&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/Layout/HeaderComponent.vue?vue&type=style&index=0&id=758a56c8&lang=scss");
+
+
+/***/ }),
+
+/***/ "./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserLoginComponent_vue_vue_type_style_index_0_id_c728847c_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserLoginComponent.vue?vue&type=style&index=0&id=c728847c&lang=scss");
+
+
+/***/ }),
+
+/***/ "./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_12_use_1_node_modules_vue_loader_dist_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_12_use_2_node_modules_sass_loader_dist_cjs_js_clonedRuleSet_12_use_3_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_UserRegisterComponent_vue_vue_type_style_index_0_id_361d59dc_lang_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!../../../node_modules/vue-loader/dist/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!../../../node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-12.use[1]!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-12.use[2]!./node_modules/sass-loader/dist/cjs.js??clonedRuleSet-12.use[3]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/components/User/UserRegisterComponent.vue?vue&type=style&index=0&id=361d59dc&lang=scss");
 
 
 /***/ }),

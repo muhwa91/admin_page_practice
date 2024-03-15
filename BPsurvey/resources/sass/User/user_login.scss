@@ -1,39 +1,39 @@
 @import "../mixin";
 
 @include mobile {
-	.admin_login_section {
+	.user_login_section {
 		width: 95%;
-		height: 100vh;
 		font-family: sans-serif;
 		margin: 0 auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	
-		.admin_login_title_section {
+		.user_login_title_section {
 			width: 95%;
 			margin: 80px auto;
 			display: flex;
-			justify-content: center;
+            flex-direction: column;
+			justify-content: flex-start;
 			align-items: center;
 	
-			.admin_login_title {
+			.user_login_title {
 				color: $bookpick-main-color;
 			}
 		}
 		
-		.admin_login_left_section {
+		.user_login_left_section {
 			width: 95%;
 			height: 600px;
 			border: 3px solid $layout-background-color;
 			border-radius: 10px;
 	
-			.admin_login_label {
+			.user_login_label {
 				margin: 0 80px;
 			}
 	
-			.admin_login_input_area,
-			.admin_login_button_area {
+			.user_login_input_area,
+			.user_login_button_area {
 				width: 75%;
 				height: 50px;
 				margin: 0 auto 30px auto;
@@ -41,13 +41,13 @@
 				justify-content: center;
 				align-items: center;
 	
-				.admin_login_input_svg {
+				.user_login_input_svg {
 					width: 40px;
 					height: 40px;
 					padding: 4px;
 				}
 	
-				.admin_login_input {
+				.user_login_input {
 					width: 75%;
 					padding: 4px;
 					outline: none;
@@ -61,7 +61,7 @@
 				}
 			}
 	
-			.admin_login_button_area {
+			.user_login_button_area {
 				width: 50%;
 				height: 50px;
 				background-color: $bookpick-main-color;
@@ -73,17 +73,17 @@
 				align-items: center;
 				transition: 0.5s;
 	
-				.admin_login_button {
+				.user_login_button {
 					width: 100%;
 					height: 50px;				
 	
-					.admin_login_button_text_area {
+					.user_login_button_text_area {
 						width: 100%;
 						display: flex;
 						justify-content: center;
 						align-items: center;
 						
-						.admin_login_button_svg {
+						.user_login_button_svg {
 							width: 40px;
 							height: 40px;
 							padding: 4px;
@@ -98,47 +98,47 @@
 			}
 		}
 	
-		.admin_login_right_section {
+		.user_login_right_section {
 			display: none;
 		}
 	}
 }
 	
 @include tablet {
-	.admin_login_section {
+	.user_login_section {
 		width: 95%;
-		height: 100vh;
 		font-family: sans-serif;
 		margin: 0 auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	
-		.admin_login_title_section {
-			width: 100%;
+		.user_login_title_section {
+			width: 95%;
 			margin: 80px auto;
 			display: flex;
-			justify-content: center;
+            flex-direction: column;
+			justify-content: flex-start;
 			align-items: center;
 	
-			.admin_login_title {
+			.user_login_title {
 				color: $bookpick-main-color;
 			}
 		}
 		
-		.admin_login_left_section {
-			width: 50%;
+		.user_login_left_section {
+			width: 45%;
 			height: 600px;
 			border: 3px solid $layout-background-color;
 			border-radius: 10px 0 0 10px;
 			border-right: none;
 	
-			.admin_login_label {
+			.user_login_label {
 				margin: 0 80px;
 			}
 	
-			.admin_login_input_area,
-			.admin_login_button_area {
+			.user_login_input_area,
+			.user_login_button_area {
 				width: 75%;
 				height: 50px;
 				margin: 0 auto 30px auto;
@@ -146,13 +146,13 @@
 				justify-content: center;
 				align-items: center;
 	
-				.admin_login_input_svg {
+				.user_login_input_svg {
 					width: 40px;
 					height: 40px;
 					padding: 4px;
 				}
 	
-				.admin_login_input {
+				.user_login_input {
 					width: 75%;
 					padding: 4px;
 					outline: none;
@@ -166,7 +166,7 @@
 				}
 			}
 	
-			.admin_login_button_area {
+			.user_login_button_area {
 				width: 55%;
 				height: 50px;
 				background-color: $bookpick-main-color;
@@ -178,17 +178,17 @@
 				align-items: center;
 				transition: 0.5s;
 	
-				.admin_login_button {
+				.user_login_button {
 					width: 100%;
 					height: 50px;				
 	
-					.admin_login_button_text_area {
+					.user_login_button_text_area {
 						width: 100%;
 						display: flex;
 						justify-content: center;
 						align-items: center;
 						
-						.admin_login_button_svg {
+						.user_login_button_svg {
 							width: 40px;
 							height: 40px;
 							padding: 4px;
@@ -203,14 +203,14 @@
 			}
 		}
 	
-		.admin_login_right_section {
+		.user_login_right_section {
 			width: 50%;
 			height: 600px;
 			border: 3px solid $layout-background-color;
 			border-radius: 0 10px 10px 0;
 			border-left: none;
 			
-			.admin_login_image {
+			.user_login_image {
 				width: 100%;
 				height: 594px;
 				object-fit: cover;
@@ -221,40 +221,38 @@
 }
 	
 @include desktop {
-	.admin_login_section {
+	.user_login_section {
 		width: 1000px;
-		height: 100vh;
 		font-family: sans-serif;
 		margin: 0 auto;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	
-		.admin_login_title_section {
-			width: 100%;
-			margin: 80px auto;
+		.user_login_title_section {
+			width: 50%;
+			margin: 70px auto;
 			display: flex;
-			justify-content: center;
-			align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;            
 	
-			.admin_login_title {
+			.user_login_title {
+                width: 70%;
 				color: $bookpick-main-color;
 			}
 		}
 		
-		.admin_login_left_section {
+		.user_login_left_section {
 			width: 50%;
 			height: 600px;
-			border: 3px solid $layout-background-color;
-			border-radius: 10px 0 0 10px;
-			border-right: none;
 	
-			.admin_login_label {
+			.user_login_label {
 				margin: 0 80px;
 			}
 	
-			.admin_login_input_area,
-			.admin_login_button_area {
+			.user_login_input_area,
+			.user_login_button_area {
 				width: 80%;
 				height: 50px;
 				margin: 0 auto 30px auto;
@@ -262,13 +260,13 @@
 				justify-content: center;
 				align-items: center;
 	
-				.admin_login_input_svg {
+				.user_login_input_svg {
 					width: 40px;
 					height: 40px;
 					padding: 4px;
 				}
 	
-				.admin_login_input {
+				.user_login_input {
 					width: 80%;
 					padding: 4px;
 					outline: none;
@@ -282,7 +280,7 @@
 				}
 			}
 	
-			.admin_login_button_area {
+			.user_login_button_area {
 				width: 60%;
 				height: 50px;
 				background-color: $bookpick-main-color;
@@ -294,17 +292,17 @@
 				align-items: center;
 				transition: 0.5s;
 	
-				.admin_login_button {
+				.user_login_button {
 					width: 100%;
 					height: 50px;				
 	
-					.admin_login_button_text_area {
+					.user_login_button_text_area {
 						width: 100%;
 						display: flex;
 						justify-content: center;
 						align-items: center;
 						
-						.admin_login_button_svg {
+						.user_login_button_svg {
 							width: 40px;
 							height: 40px;
 							padding: 4px;
@@ -318,20 +316,10 @@
 				}
 			}
 		}
-	
-		.admin_login_right_section {
-			width: 50%;
-			height: 600px;
-			border: 3px solid $layout-background-color;
-			border-radius: 0 10px 10px 0;
-			border-left: none;
-			
-			.admin_login_image {
-				width: 100%;
-				height: 594px;
-				object-fit: cover;
-				border-radius: 10px;
-			}
-		}
+        
+        .user_login_register {
+            width: 100%;
+            color: $bookpick-main-color;
+        }
 	}
 }

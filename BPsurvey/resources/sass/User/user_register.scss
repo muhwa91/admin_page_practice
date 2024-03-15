@@ -1,0 +1,209 @@
+@import "../mixin";
+	
+@include desktop {
+    // ### 이용약관 ###
+    .terms_conditions {
+        width: 600px;
+        text-align: center;
+
+        &_title {
+            margin-bottom: 10px;
+        }
+
+        &_box {
+            border: 1px solid #2C3E50;
+            border-radius: 5px;
+            padding: 20px;
+            width: 50%;
+            text-align: start;
+            margin: 0 auto;
+            overflow: auto;
+            font-size: 12px;
+            color: #333;
+        }
+
+        &_label {
+            font-size: 13px;
+            color: #666;
+        }
+
+        &_checkbox {
+            margin: 0 5px;
+        }
+
+        &_checkbox_btn {
+            margin-top: 5px;
+        }
+    }
+
+    .regist_button {
+        width: 600px;
+        margin: 5px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .regist_button_button_area {
+            width: 80px;
+            height: 35px;
+            margin-right: 30px;
+            line-height: 35px;
+            color: $bookpick-main-color;
+            border: 1px solid $bookpick-main-color;
+            border-radius: 10px;
+
+            .regist_button_cancel {
+                width: 100%;
+                display: inline-block;
+                width: 80px;
+                height: 35px;
+                line-height: 35px;
+                color: $bookpick-main-color;
+                border-radius: 10px;
+                
+                &:hover {
+                    border: none;
+                    background-color: $bookpick-main-color;
+                    color: #fff;
+                }
+            }
+
+            .regist_button_next {
+                width: 100%;
+                display: inline-block;
+
+                &:hover {
+                    width: 100%;
+                    border: none;
+                    border-radius: 10px;
+                    background-color: $bookpick-main-color;
+                    color: #fff;
+                }
+            }
+        }       
+    }
+
+
+
+    // ### 회원가입 ###
+    .container_signup_none {
+        display: none;
+    }
+
+	.user_register_section {
+		width: 600px;
+		font-family: sans-serif;
+		margin: 10px auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	
+		.user_register_title_section {
+			width: 100%;
+			margin: 0 auto;
+            margin-bottom: 40px;
+			display: flex;
+            flex-direction: column;
+			justify-content: center;
+			align-items: flex-start;
+	
+			.user_register_title {
+                margin-bottom: 20px;
+                color: $bookpick-main-color;
+			}
+
+            .user_register_title_sub {
+                margin-bottom: 20px;
+            }
+		}
+		
+		.user_register_left_section {
+			width: 50%;
+			border-radius: 10px 0 0 10px;
+			border-right: none;
+	
+			.user_register_label {
+				margin: 0 80px;
+			}
+	
+			.user_register_input_area,
+			.user_register_button_area {
+				width: 100%;
+				height: 50px;
+				margin: 50px auto;
+				display: flex;
+                flex-direction: column;
+				justify-content: center;
+				align-items: center;
+	
+				label {
+                    width: 100%;
+                    margin-left: auto;
+                    margin-bottom: 10px;                    
+                }
+
+                select {
+                    width: 100%;
+                    padding: 4px 10px;
+                    border-bottom: 3px solid $layout-background-color;
+                    transition: 0.5s;
+
+                    &:focus {
+                        outline: none;
+                        border-bottom: 3px solid $bookpick-main-color;
+                        transition: 0.8s;                     
+                    }
+                }
+	
+				.user_register_input {
+					width: 100%;
+					padding: 4px 10px;
+					outline: none;
+					border-bottom: 3px solid $layout-background-color;
+					transition: 0.5s;
+					
+					&:focus {
+						border-bottom: 3px solid $bookpick-main-color;
+						transition: 0.8s;
+					}
+				}
+			}
+	
+			.user_register_button_area {
+				width: 60%;
+				height: 50px;
+				background-color: $bookpick-main-color;
+				color: #FFF;
+				border-radius: 25px;
+				margin: 80px auto;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				transition: 0.5s;
+	
+				.user_register_button {
+					width: 100%;
+					height: 50px;				
+	
+					.user_register_button_text_area {
+						width: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						
+						.user_register_button_svg {
+							width: 40px;
+							height: 40px;
+							padding: 4px;
+						}
+					}	
+				}
+				
+				&:hover {
+					transform: scale(1.1);
+					transition: 0.3s;
+				}
+			}
+		}	
+	}
+}
