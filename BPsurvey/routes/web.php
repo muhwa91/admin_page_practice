@@ -21,6 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ### Survey ###
+Route::get('/survey', function () {
+    return view('welcome');
+});
+
 // ### User ###
 // User Login
 Route::middleware('userValidation')->prefix('login')->group(function() {

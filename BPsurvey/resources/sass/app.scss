@@ -6,7 +6,26 @@
 @import "./mixin";
 @import "./Layout/header.scss";
 @import "./Layout/footer.scss";
+@import "./survey.scss";
 @import "./User/user_login.scss";
 @import "./User/user_register.scss";
 @import "./Admin/admin_login.scss";
 @import "./Admin/admin_index.scss";
+
+// @include mobile {
+//     id or class {
+//         width : 100px
+//     }
+// }
+    
+// @include tablet {
+//     id or class {
+//         width : 100px
+//     }
+// }
+    
+// @include desktop {
+//     id or class {
+//         width : 100px
+//     }
+// }

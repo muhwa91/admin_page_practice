@@ -1,13 +1,19 @@
 <template>
     <div class="border-box index_container">
         <div class="index_section">
+
             <div class="index_top_container">
 
             </div>
+
             <div class="index_middle_container">
-                
+
             </div>
-            <div class="index_bottom_container"></div>
+
+            <div class="index_bottom_container">
+
+            </div>
+            
         </div>    
     </div>    
 </template>

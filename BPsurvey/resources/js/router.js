@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 import AppComponent from '../components/AppComponent.vue';
 import IndexComponent from '../components/IndexComponent.vue'
+import SurveyComponent from '../components/SurveyComponent.vue'
 import UserLoginComponent from '../components/User/UserLoginComponent.vue';
 import UserRegisterComponent from '../components/User/UserRegisterComponent.vue';
 import AdminLoginComponent from '../components/Admin/AdminLoginComponent.vue';
@@ -10,6 +11,10 @@ const routes = [
 	{
 		path: '/',
 		component: IndexComponent
+	},
+	{
+		path: '/survey',
+		component: SurveyComponent
 	},
 	{
 		path: '/login',

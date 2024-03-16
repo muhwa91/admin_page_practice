@@ -1,0 +1,205 @@
+@import "./mixin";
+
+@include mobile {
+    .survey_container {
+        width: 95%;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $layout-background-color;
+        border-radius: 10px;
+    
+        .survey_section {
+            width: 100%;
+            
+            .survey_top_container {
+                width: 100%;
+                padding: 2rem 5rem;
+                display: flex;
+                flex-direction: column;
+    
+                .survey_top_title_span {
+                    color: $bookpick-main-color;
+                    margin-bottom: 20px;
+                }
+            }
+    
+            .survey_middle_container {
+                width: 100%;
+                padding: 0 6rem;
+    
+                .survey_middle_survey_input_section {
+                    width: 100%;
+    
+                    .survey_middle_survey_input_area {
+                        width: 100%;
+    
+                        .survey_span {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+    
+            .survey_bottom_container {
+                width: 100%;
+    
+                .survey_bottom_button_area {
+                    width: 70%;
+                    margin: 0 auto;
+                    padding-bottom: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+    
+                    .survey_bottom_button {
+                        width: 80px;
+                        height: 35px;
+                        background-color: #fff;
+                        border: 1px solid $bookpick-main-color;
+                        color: $bookpick-main-color;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+    
+@include tablet {
+    .survey_container {
+        width: 95%;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $layout-background-color;
+        border-radius: 10px;
+    
+        .survey_section {
+            width: 100%;
+            
+            .survey_top_container {
+                width: 100%;
+                padding: 2rem 5rem;
+                display: flex;
+                flex-direction: column;
+    
+                .survey_top_title_span {
+                    color: $bookpick-main-color;
+                    margin-bottom: 20px;
+                }
+            }
+    
+            .survey_middle_container {
+                width: 100%;
+                padding: 0 6rem;
+    
+                .survey_middle_survey_input_section {
+                    width: 100%;
+    
+                    .survey_middle_survey_input_area {
+                        width: 100%;
+    
+                        .survey_span {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+    
+            .survey_bottom_container {
+                width: 100%;
+    
+                .survey_bottom_button_area {
+                    width: 70%;
+                    margin: 0 auto;
+                    padding-bottom: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+    
+                    .survey_bottom_button {
+                        width: 80px;
+                        height: 35px;
+                        background-color: #fff;
+                        border: 1px solid $bookpick-main-color;
+                        color: $bookpick-main-color;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+    
+@include desktop {
+    .survey_container {
+        width: 700px;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: $layout-background-color;
+        border-radius: 10px;
+    
+        .survey_section {
+            width: 100%;
+            
+            .survey_top_container {
+                width: 100%;
+                padding: 2rem 5rem;
+                display: flex;
+                flex-direction: column;
+    
+                .survey_top_title_span {
+                    color: $bookpick-main-color;
+                    margin-bottom: 20px;
+                }
+            }
+    
+            .survey_middle_container {
+                width: 100%;
+                padding: 0 6rem;
+    
+                .survey_middle_survey_input_section {
+                    width: 100%;
+    
+                    .survey_middle_survey_input_area {
+                        width: 100%;
+    
+                        .survey_span {
+                            margin-right: 20px;
+                        }
+                    }
+                }
+            }
+    
+            .survey_bottom_container {
+                width: 100%;
+    
+                .survey_bottom_button_area {
+                    width: 50%;
+                    margin: 0 auto;
+                    padding-bottom: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+    
+                    .survey_bottom_button {
+                        width: 80px;
+                        height: 35px;
+                        background-color: #fff;
+                        border: 1px solid $bookpick-main-color;
+                        color: $bookpick-main-color;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
