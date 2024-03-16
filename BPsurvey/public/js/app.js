@@ -21035,12 +21035,17 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      setting: ''
+      setting: '',
+      surveyAnswers: ['', '', '', '', '', '', '', '', '', '']
     };
   },
   created: function created() {},
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    resetSurvey: function resetSurvey() {
+      this.surveyAnswers = ['option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1'];
+    }
+  }
 });
 
 /***/ }),
@@ -21590,69 +21595,67 @@ var _hoisted_7 = {
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기 1", -1 /* HOISTED */);
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기 2", -1 /* HOISTED */);
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기 3", -1 /* HOISTED */);
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_12 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_13 = {
+var _hoisted_9 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+}, "보기 2", -1 /* HOISTED */);
+var _hoisted_11 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+}, "보기 3", -1 /* HOISTED */);
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-5 text-lg font-semibold survey_p"
 }, "질문 1")], -1 /* HOISTED */);
-var _hoisted_18 = {
+var _hoisted_14 = {
   "class": "survey_middle_survey_input_section"
 };
+var _hoisted_15 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
+var _hoisted_17 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
 var _hoisted_19 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-5 text-lg font-semibold survey_p"
 }, "질문 1")], -1 /* HOISTED */);
-var _hoisted_24 = {
+var _hoisted_22 = {
   "class": "survey_middle_survey_input_section"
 };
+var _hoisted_23 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
 var _hoisted_25 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
 var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
 }, "보기2", -1 /* HOISTED */);
+var _hoisted_27 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
 var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
@@ -21670,69 +21673,67 @@ var _hoisted_31 = {
 var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기1", -1 /* HOISTED */);
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_36 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_37 = {
+var _hoisted_33 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기2", -1 /* HOISTED */);
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_35 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-5 text-lg font-semibold survey_p"
 }, "질문 1")], -1 /* HOISTED */);
-var _hoisted_42 = {
+var _hoisted_38 = {
   "class": "survey_middle_survey_input_section"
 };
+var _hoisted_39 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
+var _hoisted_41 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
 var _hoisted_43 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
 var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-5 text-lg font-semibold survey_p"
 }, "질문 1")], -1 /* HOISTED */);
-var _hoisted_48 = {
+var _hoisted_46 = {
   "class": "survey_middle_survey_input_section"
 };
+var _hoisted_47 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
 var _hoisted_49 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
 var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
 }, "보기2", -1 /* HOISTED */);
+var _hoisted_51 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
 var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
@@ -21750,275 +21751,398 @@ var _hoisted_55 = {
 var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
 }, "보기1", -1 /* HOISTED */);
-var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
+var _hoisted_57 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
 var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
+var _hoisted_59 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
-var _hoisted_59 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
   "class": "mb-5 text-lg font-semibold survey_p"
 }, "질문 1")], -1 /* HOISTED */);
-var _hoisted_60 = {
+var _hoisted_62 = {
   "class": "survey_middle_survey_input_section"
 };
-var _hoisted_61 = {
+var _hoisted_63 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
 var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
+var _hoisted_65 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
+var _hoisted_67 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
 }, "보기3", -1 /* HOISTED */);
-var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"survey_bottom_container\"><div class=\"survey_bottom_button_area\"><button class=\"survey_bottom_button\" type=\"button\">뒤로 가기</button><button class=\"survey_bottom_button\" type=\"reset\">다시 하기</button><button class=\"survey_bottom_button\" type=\"submit\">제출 하기</button></div></div>", 1);
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "survey_middle_survey_p_section"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-5 text-lg font-semibold survey_p"
+}, "질문 1")], -1 /* HOISTED */);
+var _hoisted_70 = {
+  "class": "survey_middle_survey_input_section"
+};
+var _hoisted_71 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
+var _hoisted_73 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
+var _hoisted_75 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기3", -1 /* HOISTED */);
+var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "survey_middle_survey_p_section"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-5 text-lg font-semibold survey_p"
+}, "질문 1")], -1 /* HOISTED */);
+var _hoisted_78 = {
+  "class": "survey_middle_survey_input_section"
+};
+var _hoisted_79 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기1", -1 /* HOISTED */);
+var _hoisted_81 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기2", -1 /* HOISTED */);
+var _hoisted_83 = {
+  "class": "mb-5 survey_middle_survey_input_area"
+};
+var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "survey_span"
+}, "보기3", -1 /* HOISTED */);
+var _hoisted_85 = {
+  "class": "survey_bottom_container"
+};
+var _hoisted_86 = {
+  "class": "survey_bottom_button_area"
+};
+var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "survey_bottom_button",
+  type: "button"
+}, "뒤로 가기", -1 /* HOISTED */);
+var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "survey_bottom_button",
+  type: "submit"
+}, "제출 하기", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_1_1",
+    name: "survey_1",
     id: "survey_1_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.survey_1_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_1_1]]), _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[0] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_1_2",
+    name: "survey_1",
     id: "survey_1_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return _ctx.survey_1_2 = $event;
+      return $data.surveyAnswers[0] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_1_2]]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_1_3",
-    id: "survey_1_1",
+    name: "survey_1",
+    id: "survey_1_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return _ctx.survey_1_3 = $event;
+      return $data.surveyAnswers[0] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_1_3]]), _hoisted_10])]), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_12])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_2_1",
+    name: "survey_2",
     id: "survey_2_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return _ctx.survey_2_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_2_1]]), _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[1] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_16]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_2_2",
+    name: "survey_2",
     id: "survey_2_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return _ctx.survey_2_2 = $event;
+      return $data.surveyAnswers[1] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_2_2]]), _hoisted_15, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_2_3",
+    name: "survey_2",
     id: "survey_2_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return _ctx.survey_2_3 = $event;
+      return $data.surveyAnswers[1] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_2_3]]), _hoisted_16])]), _hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_20])]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_3_1",
+    name: "survey_3",
     id: "survey_3_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return _ctx.survey_3_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_3_1]]), _hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[2] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_24]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_3_2",
+    name: "survey_3",
     id: "survey_3_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-      return _ctx.survey_3_2 = $event;
+      return $data.surveyAnswers[2] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_3_2]]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_26]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_3_3",
+    name: "survey_3",
     id: "survey_3_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-      return _ctx.survey_3_3 = $event;
+      return $data.surveyAnswers[2] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_3_3]]), _hoisted_22])]), _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_28])]), _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_4_1",
+    name: "survey_4",
     id: "survey_4_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-      return _ctx.survey_4_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_4_1]]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[3] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_32]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_4_2",
+    name: "survey_4",
     id: "survey_4_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-      return _ctx.survey_4_2 = $event;
+      return $data.surveyAnswers[3] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_4_2]]), _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_34]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_4_3",
+    name: "survey_4",
     id: "survey_4_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-      return _ctx.survey_4_3 = $event;
+      return $data.surveyAnswers[3] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_4_3]]), _hoisted_28])]), _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_36])]), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_5_1",
+    name: "survey_5",
     id: "survey_5_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-      return _ctx.survey_5_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_5_1]]), _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[4] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_40]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_5_2",
+    name: "survey_5",
     id: "survey_5_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-      return _ctx.survey_5_2 = $event;
+      return $data.surveyAnswers[4] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_5_2]]), _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_42]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_5_3",
+    name: "survey_5",
     id: "survey_5_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-      return _ctx.survey_5_3 = $event;
+      return $data.surveyAnswers[4] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_5_3]]), _hoisted_34])]), _hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_44])]), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_6_1",
+    name: "survey_6",
     id: "survey_6_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-      return _ctx.survey_6_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_6_1]]), _hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[5] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_48]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_6_2",
+    name: "survey_6",
     id: "survey_6_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
-      return _ctx.survey_6_2 = $event;
+      return $data.surveyAnswers[5] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_6_2]]), _hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_50]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_6_3",
+    name: "survey_6",
     id: "survey_6_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
-      return _ctx.survey_6_3 = $event;
+      return $data.surveyAnswers[5] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_6_3]]), _hoisted_40])]), _hoisted_41, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_52])]), _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_7_1",
+    name: "survey_7",
     id: "survey_7_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
-      return _ctx.survey_7_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_7_1]]), _hoisted_44, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[6] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_56]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_7_2",
+    name: "survey_7",
     id: "survey_7_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
-      return _ctx.survey_7_2 = $event;
+      return $data.surveyAnswers[6] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_7_2]]), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_58]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_7_3",
+    name: "survey_7",
     id: "survey_7_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
-      return _ctx.survey_7_3 = $event;
+      return $data.surveyAnswers[6] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_7_3]]), _hoisted_46])]), _hoisted_47, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_48, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_60])]), _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_8_1",
+    name: "survey_8",
     id: "survey_8_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
-      return _ctx.survey_8_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_8_1]]), _hoisted_50, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[7] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_64]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_8_2",
+    name: "survey_8",
     id: "survey_8_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
-      return _ctx.survey_8_2 = $event;
+      return $data.surveyAnswers[7] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_8_2]]), _hoisted_51, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_66]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_8_3",
+    name: "survey_8",
     id: "survey_8_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-      return _ctx.survey_8_3 = $event;
+      return $data.surveyAnswers[7] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_8_3]]), _hoisted_52])]), _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_68])]), _hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_9_1",
+    name: "survey_9",
     id: "survey_9_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
-      return _ctx.survey_9_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_9_1]]), _hoisted_56, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[8] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_72]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_9_2",
+    name: "survey_9",
     id: "survey_9_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
-      return _ctx.survey_9_2 = $event;
+      return $data.surveyAnswers[8] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_9_2]]), _hoisted_57, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_74]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_9_3",
+    name: "survey_9",
     id: "survey_9_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[26] || (_cache[26] = function ($event) {
-      return _ctx.survey_9_3 = $event;
+      return $data.surveyAnswers[8] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_9_3]]), _hoisted_58])]), _hoisted_59, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_76])]), _hoisted_77, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_78, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_10_1",
+    name: "survey_10",
     id: "survey_10_1",
+    value: "option1",
     "onUpdate:modelValue": _cache[27] || (_cache[27] = function ($event) {
-      return _ctx.survey_10_1 = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_10_1]]), _hoisted_62, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      return $data.surveyAnswers[9] = $event;
+    }),
+    checked: ""
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_80]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_10_2",
+    name: "survey_10",
     id: "survey_10_2",
+    value: "option2",
     "onUpdate:modelValue": _cache[28] || (_cache[28] = function ($event) {
-      return _ctx.survey_10_2 = $event;
+      return $data.surveyAnswers[9] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_10_2]]), _hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_82]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_83, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "class": "survey_input",
     type: "radio",
-    name: "survey_10_3",
+    name: "survey_10",
     id: "survey_10_3",
+    value: "option3",
     "onUpdate:modelValue": _cache[29] || (_cache[29] = function ($event) {
-      return _ctx.survey_10_3 = $event;
+      return $data.surveyAnswers[9] = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, _ctx.survey_10_3]]), _hoisted_64])])]), _hoisted_65])]);
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_84])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [_hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "survey_bottom_button",
+    type: "button",
+    onClick: _cache[30] || (_cache[30] = function () {
+      return $options.resetSurvey && $options.resetSurvey.apply($options, arguments);
+    })
+  }, "다시 하기"), _hoisted_88])])])]);
 }
 
 /***/ }),
