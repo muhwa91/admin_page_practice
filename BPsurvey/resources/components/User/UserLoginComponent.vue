@@ -30,9 +30,9 @@
 						</div>
 					</button>
 				</div>
-                <div class="font-semibold text-center user_login_register">
-                    <router-link to="/register" class="user_login_register_a">아직 북픽 회원이 아니신가요?↗</router-link>
-                </div>
+				<div class="font-semibold text-center user_login_register">
+					<router-link to="/register" class="user_login_register_a">아직 북픽 회원이 아니신가요?↗</router-link>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -64,22 +64,21 @@ export default {
     methods: {
 		userLogin() {
 			const URL = '/login';            
-            const formData = new FormData();
-            formData.append('user_email', this.user_email);
-            formData.append('user_password', this.user_password);
-			
-            axios.post(URL, formData)
-            .then(res => {                
-				console.log("진입")
-				if(res.data.code === "ul00") {
-                    this.$router.push('/'); 
-                } else {                
-                    alert(res.data.error);
-                }
-            })
-            .catch(err => {             
-                console.error('Unexpected error:', err);
-            });
+			const formData = new FormData();
+			formData.append('user_email', this.user_email);
+			formData.append('user_password', this.user_password);
+
+			axios.post(URL, formData)
+				.then(res => {
+					if(res.data.code === "ul00") {
+						this.$router.push('/'); 
+					} else {                
+						alert(res.data.error);
+					}
+				})
+				.catch(err => {             
+					console.error('Unexpected error:', err);
+				});
         }
     }
 }

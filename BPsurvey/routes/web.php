@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserRegisterController;
+use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,28 +23,39 @@ Route::get('/', function () {
 
 // ### User ###
 // User Login
-Route::get('/login', function () {
-    return view('welcome');
-});
-
-Route::middleware('userValidation')
-    ->post('/', [UserRegisterController::class, 'userRegister']);
-
-Route::prefix('login')->group(function() {
+Route::middleware('userValidation')->prefix('login')->group(function() {
     Route::get('/', function () {
         return view('welcome');
     });
-    Route::middleware('userValidation')
-    ->post('/', [UserAuthController::class, 'userLogin']);
+    Route::post('/', [UserAuthController::class, 'userLogin'])->name('userLogin');
 });
 
+// User Register
+Route::middleware('userValidation')->prefix('register')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::post('/', [UserRegisterController::class, 'userRegister'])->name('userRegister');
+});
 
 // ### Admin ###
 // Admin Login
-Route::get('/admin', function () {
-    return view('welcome');
+Route::middleware('adminValidation')->prefix('admin')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::post('/', [AdminAuthController::class, 'adminLogin'])->name('adminLogin');
+});
+// Admin Register
+Route::prefix('admin/register')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::middleware('adminValidation')
+    ->post('/admin/register', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
 });
 // Admin index
 Route::get('/admin/index', function () {
     return view('welcome');
 });
+

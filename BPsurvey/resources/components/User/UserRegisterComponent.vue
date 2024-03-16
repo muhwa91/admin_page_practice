@@ -103,7 +103,7 @@
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_tel">휴대폰 번호</label>
 						<input class="text-base user_register_input" type="tel" name="user_tel" id="user_tel" 
-						autocomplete="off" placeholder="'-'없이 숫자만 입력 해 주세요." v-model="user_tel">
+						autocomplete="off" placeholder="'-'없이 숫자만 입력 해 주세요." maxlength="11" v-model="user_tel">
 					</div>
 					<div class="user_register_button_area">
 						<button class="user_register_button" type="submit" @click="userRegister">
@@ -184,17 +184,17 @@ export default {
             formData.append('user_tel', this.user_tel);
 
             axios.post(URL, formData)
-            .then(res => {                
-                if(res.data.code === "ur00") {
-                    alert('회원가입이 완료되었습니다. 로그인 해 주세요.');
-                    this.$router.push('/login'); 
-                } else {                
-                    alert(res.data.error);
-                }
-            })
-            .catch(err => {                
-                console.error('Unexpected error:', err);
-            });
+				.then(res => {                
+					if(res.data.code === "ur00") {
+						alert('회원가입이 완료되었습니다. 로그인 해 주세요.');
+						this.$router.push('/login'); 
+					} else {                
+						alert(res.data.error);
+					}
+				})
+				.catch(err => {                
+					console.error('Unexpected error:', err);
+				});
         }
     }
 }

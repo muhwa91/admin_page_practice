@@ -22,18 +22,24 @@ class UserValidation
         Log::debug("### User 유효성 검사 시작 ###");
 
         $requestData = $request->all();
-        Log::debug("요청 데이터: " . json_encode($requestData));
+        Log::debug("User요청 데이터: " . json_encode($requestData));
+
+        Log::debug("Method: " . $request->method());
+        Log::debug("Route Name: " . $request->route()->getName());
+        Log::debug("Has user_password_confirm: " . $request->has('user_password_confirm'));
         
-         // 회원가입, 로그인 시도 요청 확인
-        $isUserRegisterRequest = $request->isMethod('post') && $request->route()->getName() == 'userRegister' && $request->has('user_password_confirm');
-        $isUserLoginRequest = $request->isMethod('post') && $request->route()->getName() == 'userLogin';
-        // user 유효성 검사 목록 : 회원가입
+        // 회원가입, 로그인 시도 요청 확인
+        $isUserRegisterRequest = $request->method() === 'POST' && $request->route()->getName() == 'userRegister' && $request->has('user_password_confirm');
+
+        log::debug("isUserRegisterRequest: " . json_encode($isUserRegisterRequest));
+        // User 유효성 검사 목록 : 회원가입
         $userRegisterValidation = [
             'user_email' => [
                 'required',
                 'regex:/^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/',
                 'max:50',
-                'unique:users,user_email'],
+                'unique:users,user_email'
+            ],
             'user_password' => [
                 'required',
                 'string',
@@ -85,24 +91,36 @@ class UserValidation
         $userValidation = $isUserRegisterRequest ? $userRegisterValidation : $userLoginValidation;
 
 		// 유효성 검사 수행
+        Log::debug("Validation Rules: " . json_encode($userValidation));
         $userValidator = Validator::make($request->all(), $userValidation);
 
-        // 회원가입 또는 로그인에 대한 유효성 검사 수행 여부 확인
-        $isUserRegisterValidation = $isUserRegisterRequest;
-
 		// 유효성 검사 결과 리턴
-        if ($userValidator->passes()) {
-            // 유효성 검사 통과 시 로그 남기기
-            $validatorMsg = $isUserRegisterValidation  ? "회원가입" : "로그인";
-            Log::debug("### User 유효성 검사 성공: $validatorMsg ###");
-        } else {
-            $errorMsg = $isUserRegisterValidation ? "회원가입" : "로그인";
-
+        if($isUserRegisterRequest && $userValidator->fails()) {
+            $errorMsg = "User 회원가입";
+            Log::debug("Validation Failed for: $errorMsg");        
+            $failedFields = [];
+            foreach ($userValidation as $field => $rules) {
+                if ($userValidator->errors()->has($field)) {
+                    $failedFields[$field] = $userValidator->errors()->get($field);
+                }
+            }
             return response()->json([
-                'code' => $userValidator ? 'uv01' : 'uv02',
+                'code' => 'uv01',
                 'error' => $errorMsg,
                 'errors' => $userValidator->errors(),
-            ], 422);
+                'failed_fields' => $failedFields, // 실패한 필드 기록 반환
+            ], 412);
+        } if(!$isUserRegisterRequest && $userValidator->fails()) {
+            $errorMsg = "User 로그인";
+            return response()->json([
+                'code' => 'uv02',
+                'error' => $errorMsg,
+                'errors' => $userValidator->errors(),
+            ], 401);
+        } else {
+            // 유효성 검사 통과 시 로그 남기기
+            $validatorMsg = $isUserRegisterRequest ? "User회원가입" : "User로그인";
+            Log::debug("### User 유효성 검사 성공: $validatorMsg ###");            
         }
 
         return $next($request);

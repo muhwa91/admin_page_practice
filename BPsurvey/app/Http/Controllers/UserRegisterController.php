@@ -6,8 +6,6 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -46,8 +44,8 @@ class UserRegisterController extends Controller
             }
 
             $requestUserInfo['user_password'] = Hash::make($requestUserInfo['user_password']);
-
             Log::debug("### 회원가입 : 비밀번호 암호화 처리완료 ###");
+            
             $newUser = User::create($requestUserInfo);
             Log::debug("### 회원가입 : 유저 생성 ###");
 
