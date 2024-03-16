@@ -47,13 +47,13 @@ Route::middleware('adminValidation')->prefix('admin')->group(function() {
     Route::post('/', [AdminAuthController::class, 'adminLogin'])->name('adminLogin');
 });
 // Admin Register
-Route::prefix('admin/register')->group(function() {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    Route::middleware('adminValidation')
-    ->post('/admin/register', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
-});
+// Route::middleware('adminValidation')->prefix('admin/register')->group(function() {
+//     Route::get('/', function () {
+//         return view('welcome');
+//     });
+//     Route::post('/', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
+// });
+
 // Admin index
 Route::get('/admin/index', function () {
     return view('welcome');

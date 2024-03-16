@@ -21,12 +21,12 @@ const routes = [
 	},
 	{
 		path: '/admin',
-		component: AdminLoginComponent
+		component: AdminLoginComponent,
 	},
 	{
 		path: '/admin/index',
 		component: AdminIndexComponent
-	},	
+	},
 ];
 
 const router = createRouter({
