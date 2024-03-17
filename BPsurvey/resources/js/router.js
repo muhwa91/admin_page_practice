@@ -32,6 +32,18 @@ const routes = [
 		path: '/admin/index',
 		component: AdminIndexComponent
 	},
+	{
+		path: '/admin/auth/user/management',
+		component: AdminIndexComponent
+	},
+	{
+		path: '/admin/auth/management',
+		component: AdminIndexComponent
+	},
+	{
+		path: '/admin/registration',
+		component: AdminIndexComponent
+	},
 ];
 
 const router = createRouter({

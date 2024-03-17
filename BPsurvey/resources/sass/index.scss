@@ -1,2 +1,56 @@
 @import "./mixin";
 
+
+@include mobile {
+    .index_container {
+        width: 95%;
+        margin: 20px auto;
+        
+        .index_section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;        
+
+            img {
+                width: 100%;
+            }
+        }
+    }
+}
+    
+@include tablet {
+    .index_container {
+        width: 95%;
+        margin: 20px auto;
+
+        .index_section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            img {
+                width: 500px;
+            }
+        }
+    }
+}
+    
+@include desktop {
+    .index_container {
+        width: 500px;
+        margin: 20px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .index_section {
+            width: 100%;
+            
+            img {
+                width: 500px;
+            }
+        }
+    }
+}

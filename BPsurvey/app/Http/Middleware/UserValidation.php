@@ -12,6 +12,10 @@ class UserValidation
 {
     public function handle(Request $request, Closure $next)
     {   
+        // /login 접속 시 GET일 때 유효성 검사 진행 패스
+        if ($request->isMethod('get')) {
+            return $next($request);
+        }
         Log::debug("### User 유효성 검사 시작 ###");
 
         $requestData = $request->all();

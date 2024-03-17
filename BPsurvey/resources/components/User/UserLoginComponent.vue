@@ -3,8 +3,8 @@
 		<div class="user_login_section">
 			<div class="user_login_left_section">
 				<div class="user_login_title_section">
-					<p class="text-3xl font-bold user_login_title">북픽에서 다양한 책을!</p>
-					<p class="text-3xl font-bold user_login_title">독서기록을 남겨보세요.</p>
+					<p class="text-xl font-bold user_login_title">북픽에서 다양한 책을!</p>
+					<p class="text-xl font-bold user_login_title">독서기록을 남겨보세요.</p>
 				</div>
 				<div class="user_login_input_area">
 					<svg class="user_login_input_svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -69,15 +69,18 @@ export default {
 			formData.append('user_password', this.user_password);
 
 			axios.post(URL, formData)
-				.then(res => {
-					if(res.data.code === "ul00") {
+				.then(response => {
+					if(response.data.code === "ul00") {
+						const loginUserId = response.data.data.user_id;
+						console.log(loginUserId);
+						localStorage.setItem('loginUserData', loginUserId);
 						this.$router.push('/'); 
 					} else {                
-						alert(res.data.error);
+						alert(response.data.error);
 					}
 				})
-				.catch(err => {             
-					console.error('Unexpected error:', err);
+				.catch(error => {             
+					console.error('Unexpected error:', error);
 				});
         }
     }

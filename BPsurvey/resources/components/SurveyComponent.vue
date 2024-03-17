@@ -2,225 +2,47 @@
     <div class="border-box survey_container">
         <div class="survey_section">
 
-            <div class="survey_top_container">
+			<div class="survey_top_container">
 				<span class="text-3xl font-bold survey_top_title_span">BOOKPICK'</span>
 				<span class="text-2xl font-bold survey_top_content_span">만족도 조사</span>
-            </div>
+			</div>
 
-            <div class="survey_middle_container">                
-                <div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_1" id="survey_1_1" 
-						value="option1" v-model="surveyAnswers[0]" checked>
-						<span class="survey_span">보기 1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_1" id="survey_1_2" 
-						value="option2" v-model="surveyAnswers[0]">
-						<span class="survey_span">보기 2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_1" id="survey_1_3" 
-						value="option3" v-model="surveyAnswers[0]">
-						<span class="survey_span">보기 3</span>
-					</div>
-				</div>
+			<div class="survey_middle_container" v-for="question in surveyQuestionList" :key="question"> 
 				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
+					<p class="mb-5 text-lg font-semibold survey_p">{{ question.survey_question_title }}</p>
 				</div>
 				<div class="survey_middle_survey_input_section">
 					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_2" id="survey_2_1" 
-						value="option1" v-model="surveyAnswers[1]" checked>
-						<span class="survey_span">보기1</span>
+						<input class="survey_input" type="radio" :name="'surveyAnswer_'+question.survey_question_id" :id='"surveyAnswer_"+question.survey_question_id+"_1"' 
+						value="satisfied" checked>
+						
+						<span class="survey_span"> 만족</span>
 					</div>
 					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_2" id="survey_2_2" 
-						value="option2" v-model="surveyAnswers[1]">
-						<span class="survey_span">보기2</span>
+						<input class="survey_input" type="radio" :name="'surveyAnswer_'+question.survey_question_id" :id='"surveyAnswer_"+question.survey_question_id+"_2"' 
+						value="average">
+						<span class="survey_span"> 보통</span>
 					</div>
 					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_2" id="survey_2_3" 
-						value="option3" v-model="surveyAnswers[1]">
-						<span class="survey_span">보기3</span>
+						<input class="survey_input" type="radio" :name="'surveyAnswer_'+question.survey_question_id" :id='"surveyAnswer_"+question.survey_question_id+"_3"'
+						value="dissatisfied">
+						<span class="survey_span"> 불만족</span>
 					</div>
 				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_3" id="survey_3_1" 
-						value="option1" v-model="surveyAnswers[2]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_3" id="survey_3_2" 
-						value="option2" v-model="surveyAnswers[2]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_3" id="survey_3_3" 
-						value="option3" v-model="surveyAnswers[2]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_4" id="survey_4_1" 
-						value="option1" v-model="surveyAnswers[3]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_4" id="survey_4_2" 
-						value="option2" v-model="surveyAnswers[3]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_4" id="survey_4_3" 
-						value="option3" v-model="surveyAnswers[3]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_5" id="survey_5_1" 
-						value="option1" v-model="surveyAnswers[4]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_5" id="survey_5_2" 
-						value="option2" v-model="surveyAnswers[4]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_5" id="survey_5_3" 
-						value="option3" v-model="surveyAnswers[4]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_6" id="survey_6_1" 
-						value="option1" v-model="surveyAnswers[5]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_6" id="survey_6_2" 
-						value="option2" v-model="surveyAnswers[5]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_6" id="survey_6_3" 
-						value="option3" v-model="surveyAnswers[5]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_7" id="survey_7_1" 
-						value="option1" v-model="surveyAnswers[6]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_7" id="survey_7_2" 
-						value="option2" v-model="surveyAnswers[6]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_7" id="survey_7_3" 
-						value="option3" v-model="surveyAnswers[6]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_8" id="survey_8_1" 
-						value="option1" v-model="surveyAnswers[7]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_8" id="survey_8_2" 
-						value="option2" v-model="surveyAnswers[7]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_8" id="survey_8_3" 
-						value="option3" v-model="surveyAnswers[7]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_9" id="survey_9_1" 
-						value="option1" v-model="surveyAnswers[8]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_9" id="survey_9_2" 
-						value="option2" v-model="surveyAnswers[8]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_9" id="survey_9_3" 
-						value="option3" v-model="surveyAnswers[8]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-				<div class="survey_middle_survey_p_section">
-                    <p class="mb-5 text-lg font-semibold survey_p">질문 1</p>
-				</div>
-				<div class="survey_middle_survey_input_section">
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_10" id="survey_10_1" 
-						value="option1" v-model="surveyAnswers[9]" checked>
-						<span class="survey_span">보기1</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_10" id="survey_10_2" 
-						value="option2" v-model="surveyAnswers[9]">
-						<span class="survey_span">보기2</span>
-					</div>
-					<div class="mb-5 survey_middle_survey_input_area">
-						<input class="survey_input" type="radio" name="survey_10" id="survey_10_3" 
-						value="option3" v-model="surveyAnswers[9]">
-						<span class="survey_span">보기3</span>
-					</div>
-				</div>
-            </div>
+			</div>
 
-            <div class="survey_bottom_container">
-                <div class="survey_bottom_button_area">
-                    <button class="survey_bottom_button" type="button">뒤로 가기</button>
-                    <button class="survey_bottom_button" type="button" @click="resetSurvey">다시 하기</button>
-                    <button class="survey_bottom_button" type="submit">제출 하기</button>
-                </div>
-            </div>
+			<div class="survey_bottom_container">
+				<div class="survey_bottom_button_area">
+					<router-link to="/"><button class="survey_bottom_button" type="button">뒤로 가기</button></router-link>
+					<button class="survey_bottom_button" type="submit" @click="surveyAnswer">제출 하기</button>
+				</div>
+			</div>
         </div>    
-    </div>    
+    </div>
 </template>
 <script>
+import axios from 'axios';
+
 export default {
     name: 'SurveyComponent',
     props: {
@@ -234,41 +56,60 @@ export default {
     data() {
         return {
             setting: '',
-			surveyAnswers: [
-				'',
-				'', 
-				'', 
-				'', 
-				'', 
-				'', 
-				'', 
-				'', 
-				'', 
-				''
-			]
+			surveyAnswers: {
+				
+			},
+			surveyQuestionList: [
+
+			],
         }
     },
 
-    created() {},
+    created() {
+		this.surveyList();
+	},
 
-    mounted() {},
+    mounted() {
+	},
 
     methods: {
-		resetSurvey() {
-			this.surveyAnswers = [
-				'option1',
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1', 
-				'option1'
-			];
+		// 만족도 조사 질문
+		surveyList() {
+			const URL = '/survey/user';
+			axios.get(URL)
+			.then(response => {
+				console.log(response.data.data);
+				this.surveyQuestionList = response.data.data;
+			})
+			.catch(error => {
+				console.error('데이터 에러:', error);
+			});
+		},
+
+		// 만족도 조사 응답
+		surveyAnswer() {
+			const URL = '/survey';
+			const formData = new FormData();
+
+			for (const question of this.surveyQuestionList) {
+			const answer = document.querySelector(`input[name="surveyAnswer_${question.survey_question_id}"]:checked`).value;
+			formData.append(`surveyAnswer_${question.survey_question_id}`, answer);
+			}
+
+			axios.post(URL, formData)
+				.then(response => {
+					if(response.data.code === "sp00") {
+						alert('조사에 참여해주셔서 감사합니다.')
+						this.$router.push('/'); 
+					} else {                
+						alert(response.data.error);
+					}
+				})
+				.catch(error => {
+					console.error('Unexpected error:', error);
+				})
 		}
-    }
+	}
 }
 </script>
 

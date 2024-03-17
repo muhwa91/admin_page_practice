@@ -67,15 +67,18 @@ export default {
 			formData.append('admin_password', this.admin_password);
 
 			axios.post(URL, formData)
-				.then(res => {
-					if(res.data.code === "al00") {
+				.then(response => {
+					if(response.data.code === "al00") {
+						const loginAdminFlg = response.data.data.admin_flg;
+						console.log(loginAdminFlg);
+						localStorage.setItem('loginAdminData', loginAdminFlg);
 						this.$router.push('/admin/index'); 
 					} else {                
-						alert(res.data.error);
+						alert(response.data.error);
 					}
 				})
-				.catch(err => {             
-					console.error('Unexpected error:', err);
+				.catch(error => {             
+					console.error('Unexpected error:', error);
 				});
         }
     }

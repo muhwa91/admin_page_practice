@@ -5,6 +5,7 @@ use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\AdminRegisterController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\SurveyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +17,8 @@ use App\Http\Controllers\AdminAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// ### Index ###
 Route::get('/', function () {
-    return view('welcome');
-});
-
-// ### Survey ###
-Route::get('/survey', function () {
     return view('welcome');
 });
 
@@ -34,6 +30,9 @@ Route::middleware('userValidation')->prefix('login')->group(function() {
     });
     Route::post('/', [UserAuthController::class, 'userLogin'])->name('userLogin');
 });
+
+// User Logout
+Route::get('/logout', [UserAuthController::class, 'userLogout']);
 
 // User Register
 Route::middleware('userValidation')->prefix('register')->group(function() {
@@ -52,15 +51,36 @@ Route::middleware('adminValidation')->prefix('admin')->group(function() {
     Route::post('/', [AdminAuthController::class, 'adminLogin'])->name('adminLogin');
 });
 // Admin Register
-// Route::middleware('adminValidation')->prefix('admin/register')->group(function() {
-//     Route::get('/', function () {
-//         return view('welcome');
-//     });
-//     Route::post('/', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
-// });
+Route::middleware('adminValidation')->prefix('admin/index')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::post('/', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
+});
 
 // Admin index
 Route::get('/admin/index', function () {
     return view('welcome');
+});
+// Admin Management(User)
+Route::get('/admin/auth/user/management', function () {
+    return view('welcome');
+});
+// Admin Management(Admin)
+Route::get('/admin/auth/management', function () {
+    return view('welcome');
+});
+// Admin registration
+Route::get('/admin/registration', function () {
+    return view('welcome');
+});
+
+### Survey ###
+Route::prefix('survey')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/user', [SurveyController::class, 'surveyListGet']);
+    Route::post('/', [SurveyController::class, 'surveyPost'])->name('surveyPost');
 });
 

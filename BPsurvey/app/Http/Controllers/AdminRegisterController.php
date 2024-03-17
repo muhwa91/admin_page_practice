@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 class AdminRegisterController extends Controller
 {
     public function adminRegister(Request $request) 
-    {
+    {   
         try {
             DB::beginTransaction();
             Log::debug("### Admin가입 : 트랜잭션 시작 ###");

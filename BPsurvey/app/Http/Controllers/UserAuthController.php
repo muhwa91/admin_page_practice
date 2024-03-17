@@ -46,4 +46,13 @@ class UserAuthController extends Controller
                 ], 400);
         }
     }
+
+    public function userLogout(Request $request)
+    {   
+        // 로그아웃 처리
+        $logoutUser = Auth::logout();
+        return response()->json([
+            'code' => 'ul00'
+        ], 200);
+    }
 }

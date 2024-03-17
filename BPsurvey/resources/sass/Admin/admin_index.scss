@@ -247,6 +247,98 @@
 					}
 				}
 			}
+
+			// admin_registration			
+			.admin_index_registration_section {
+				width: 600px;
+				margin: 0 auto;
+				padding: 4rem;
+
+				.admin_registration_label {
+					margin: 0 80px;
+				}
+		
+				.admin_registration_input_area,
+				.admin_registration_button_area {
+					width: 100%;
+					height: 50px;
+					margin: 50px auto;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+		
+					label {
+						width: 100%;
+						margin-left: auto;
+						margin-bottom: 10px;                    
+					}
+
+					select {
+						width: 100%;
+						padding: 4px 10px;
+						background-color: transparent;
+						border-bottom: 2px solid #000;
+						transition: 0.5s;
+
+						&:focus {
+							outline: none;
+							border-bottom: 2px solid $bookpick-main-color;
+							transition: 0.8s;                     
+						}
+					}
+		
+					.admin_registration_input {
+						width: 100%;
+						padding: 4px 10px;
+						outline: none;
+						background-color: transparent;
+						border-bottom: 2px solid #000;
+						transition: 0.5s;
+						
+						&:focus {
+							border-bottom: 2px solid $bookpick-main-color;
+							transition: 0.8s;
+						}
+					}
+				}
+		
+				.admin_registration_button_area {
+					width: 60%;
+					height: 50px;
+					background-color: $bookpick-main-color;
+					color: #FFF;
+					border-radius: 25px;
+					margin: 80px auto;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					transition: 0.5s;
+		
+					.admin_registration_button {
+						width: 100%;
+						height: 50px;				
+		
+						.admin_registration_button_text_area {
+							width: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							
+							.admin_registration_button_svg {
+								width: 40px;
+								height: 40px;
+								padding: 4px;
+							}
+						}	
+					}
+					
+					&:hover {
+						transform: scale(1.1);
+						transition: 0.3s;
+					}
+				}				
+			}
 		}
 	}
 }

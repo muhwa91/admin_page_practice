@@ -20849,6 +20849,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'AdminIndexComponent',
   props: {},
@@ -20857,17 +20860,79 @@ __webpack_require__.r(__webpack_exports__);
     return {
       setting: '',
       userDropdown: false,
-      adminDropdown: false
+      adminDropdown: false,
+      registerFormData: {
+        admin_number: '',
+        admin_password: '',
+        admin_password_confirm: '',
+        admin_name: '',
+        admin_flg: ''
+      },
+      isAdmin: false,
+      showAdminIndex: true,
+      showAdminRegistration: false
     };
   },
-  created: function created() {},
-  mounted: function mounted() {},
+  created: function created() {
+    this.showAdminUserManagement = this.$route.path === '/admin/auth/user/management';
+    this.showAdminRegistration = this.$route.path === '/admin/registration';
+    this.showAdminIndex = this.$route.path === '/admin/index';
+    if (this.showAdminIndex) {
+      this.showAdminRegistration = false;
+      this.showAdminUserManagement = false;
+    } else if (this.showAdminUserManagement) {
+      this.showAdminIndex = false;
+      this.showAdminRegistration = false;
+    } else {
+      this.showAdminIndex = false;
+      this.showAdminUserManagement = false;
+    }
+  },
+  mounted: function mounted() {
+    var adminFlg = localStorage.getItem('loginAdminData');
+    // root Admin 접속
+    if (adminFlg === '1') {
+      this.isAdmin = true;
+    } else if (adminFlg === '2') {
+      this.isAdmin = false;
+    }
+    console.log(adminFlg);
+  },
   methods: {
     toggleUserDropdown: function toggleUserDropdown() {
       this.userDropdown = !this.userDropdown;
     },
     toggleAdminDropdown: function toggleAdminDropdown() {
       this.adminDropdown = !this.adminDropdown;
+    },
+    showIndex: function showIndex() {
+      this.showAdminIndex = true;
+      this.showAdminRegistration = false;
+      this.showAdminUserManagement = false;
+    },
+    showRegistration: function showRegistration() {
+      this.showAdminIndex = false;
+      this.showAdminRegistration = true;
+    },
+    adminRegister: function adminRegister() {
+      var _this = this;
+      var URL = '/admin/index';
+      var formData = new FormData();
+      formData.append('admin_number', this.admin_number);
+      formData.append('admin_password', this.admin_password);
+      formData.append('admin_password_confirm', this.admin_password_confirm);
+      formData.append('admin_name', this.admin_name);
+      formData.append('admin_flg', this.admin_flg);
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (response) {
+        if (response.data.code === "ar00") {
+          alert('어드민계정이 생성되었습니다.');
+          _this.$router.push('/admin/index');
+        } else {
+          alert(response.data.error);
+        }
+      })["catch"](function (error) {
+        console.error('Unexpected error:', error);
+      });
     }
   }
 });
@@ -20905,14 +20970,17 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('admin_number', this.admin_number);
       formData.append('admin_password', this.admin_password);
-      axios.post(URL, formData).then(function (res) {
-        if (res.data.code === "al00") {
+      axios.post(URL, formData).then(function (response) {
+        if (response.data.code === "al00") {
+          var loginAdminFlg = response.data.data.admin_flg;
+          console.log(loginAdminFlg);
+          localStorage.setItem('loginAdminData', loginAdminFlg);
           _this.$router.push('/admin/index');
         } else {
-          alert(res.data.error);
+          alert(response.data.error);
         }
-      })["catch"](function (err) {
-        console.error('Unexpected error:', err);
+      })["catch"](function (error) {
+        console.error('Unexpected error:', error);
       });
     }
   }
@@ -21008,12 +21076,30 @@ __webpack_require__.r(__webpack_exports__);
   components: {},
   data: function data() {
     return {
-      setting: ''
+      setting: '',
+      isLogin: false
     };
   },
   created: function created() {},
   mounted: function mounted() {},
-  methods: {}
+  methods: {
+    // userLogout() {       
+    //     const URL = '/logout'
+    //     axios.get(URL)
+    //         .then(response => {
+    //             if(response.data.code === "ul00") {
+    // 				localStorage.removeItem('loginUserData');
+    //                 this.isLogin = false;
+    //                 this.$router.push('/');
+    // 			} else {                
+    // 				console.log(response.data.error);
+    // 			}
+    //         })
+    //         .catch(error => {
+    //             console.error('로그아웃 요청 중 오류 발생:', error);
+    //         });
+    // }
+  }
 });
 
 /***/ }),
@@ -21029,6 +21115,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'SurveyComponent',
   props: {},
@@ -21036,14 +21128,54 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       setting: '',
-      surveyAnswers: ['', '', '', '', '', '', '', '', '', '']
+      surveyAnswers: {},
+      surveyQuestionList: []
     };
   },
-  created: function created() {},
+  created: function created() {
+    this.surveyList();
+  },
   mounted: function mounted() {},
   methods: {
-    resetSurvey: function resetSurvey() {
-      this.surveyAnswers = ['option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1', 'option1'];
+    // 만족도 조사 질문
+    surveyList: function surveyList() {
+      var _this = this;
+      var URL = '/survey/user';
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get(URL).then(function (response) {
+        console.log(response.data.data);
+        _this.surveyQuestionList = response.data.data;
+      })["catch"](function (error) {
+        console.error('데이터 에러:', error);
+      });
+    },
+    // 만족도 조사 응답
+    surveyAnswer: function surveyAnswer() {
+      var _this2 = this;
+      var URL = '/survey';
+      var formData = new FormData();
+      var _iterator = _createForOfIteratorHelper(this.surveyQuestionList),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var question = _step.value;
+          var answer = document.querySelector("input[name=\"surveyAnswer_".concat(question.survey_question_id, "\"]:checked")).value;
+          formData.append("surveyAnswer_".concat(question.survey_question_id), answer);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (response) {
+        if (response.data.code === "sp00") {
+          alert('조사에 참여해주셔서 감사합니다.');
+          _this2.$router.push('/');
+        } else {
+          alert(response.data.error);
+        }
+      })["catch"](function (error) {
+        console.error('Unexpected error:', error);
+      });
     }
   }
 });
@@ -21084,14 +21216,17 @@ __webpack_require__.r(__webpack_exports__);
       var formData = new FormData();
       formData.append('user_email', this.user_email);
       formData.append('user_password', this.user_password);
-      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (res) {
-        if (res.data.code === "ul00") {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().post(URL, formData).then(function (response) {
+        if (response.data.code === "ul00") {
+          var loginUserId = response.data.data.user_id;
+          console.log(loginUserId);
+          localStorage.setItem('loginUserData', loginUserId);
           _this.$router.push('/');
         } else {
-          alert(res.data.error);
+          alert(response.data.error);
         }
-      })["catch"](function (err) {
-        console.error('Unexpected error:', err);
+      })["catch"](function (error) {
+        console.error('Unexpected error:', error);
       });
     }
   }
@@ -21206,18 +21341,35 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "admin_index_left_container"
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"text-center admin_index_left_info_section\"><span class=\"text-3xl font-bold admin_index_left_info_title_area\">BOOKPICK&#39;</span><span class=\"text-xl font-semibold admin_index_left_info_name_area\">여중기 님</span></div><p class=\"mb-5 font-semibold text-center\">권한 : Lv2</p><hr><div class=\"admin_index_left_search_section\"><input class=\"admin_index_left_search_input\" type=\"search\" name=\"\" id=\"\" placeholder=\"Search here\"></div>", 4);
-var _hoisted_8 = {
+var _hoisted_4 = {
+  "class": "text-center admin_index_left_info_section"
+};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-xl font-semibold admin_index_left_info_name_area"
+}, "여중기", -1 /* HOISTED */);
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+  "class": "mb-5 font-semibold text-center"
+}, "권한 : Lv2", -1 /* HOISTED */);
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", null, null, -1 /* HOISTED */);
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "admin_index_left_search_section"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  "class": "admin_index_left_search_input",
+  type: "search",
+  name: "",
+  id: "",
+  placeholder: "Search here"
+})], -1 /* HOISTED */);
+var _hoisted_9 = {
   "class": "admin_index_left_nav_section"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "admin_index_left_nav_ul"
 };
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"admin_index_left_nav_li\"><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z\"></path></svg> Chart </a></li><li class=\"admin_index_left_nav_li\"><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z\"></path></svg> Calender </a></li>", 2);
-var _hoisted_12 = {
+var _hoisted_11 = {
   "class": "admin_index_left_nav_li"
 };
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -21229,7 +21381,7 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-linejoin": "round",
   d: "M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
 })], -1 /* HOISTED */);
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -21241,16 +21393,31 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-linejoin": "round",
   d: "m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
 })], -1 /* HOISTED */);
-var _hoisted_15 = {
+var _hoisted_14 = {
   key: 0,
   "class": "admin_index_left_nav_dropdown_ul"
 };
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z\"></path></svg> Management </a></li><li><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636\"></path></svg> Report </a></li>", 2);
-var _hoisted_18 = [_hoisted_16];
-var _hoisted_19 = {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "font-semibold admin_index_left_nav_a",
+  href: "/admin/auth/user/management"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Management ")])], -1 /* HOISTED */);
+var _hoisted_16 = [_hoisted_15];
+var _hoisted_17 = {
+  key: 0,
   "class": "admin_index_left_nav_li"
 };
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -21262,7 +21429,7 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-linejoin": "round",
   d: "M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"
 })], -1 /* HOISTED */);
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   fill: "none",
   viewBox: "0 0 24 24",
@@ -21274,27 +21441,181 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "stroke-linejoin": "round",
   d: "m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5"
 })], -1 /* HOISTED */);
-var _hoisted_22 = {
+var _hoisted_20 = {
   key: 0,
   "class": "admin_index_left_nav_dropdown_ul"
 };
-var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 1 1 0-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 0 1-1.44-4.282m3.102.069a18.03 18.03 0 0 1-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 0 1 8.835 2.535M10.34 6.66a23.847 23.847 0 0 0 8.835-2.535m0 0A23.74 23.74 0 0 0 18.795 3m.38 1.125a23.91 23.91 0 0 1 1.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 0 0 1.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 0 1 0 3.46\"></path></svg> Notice </a></li><li><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z\"></path></svg> Management </a></li><li><a class=\"font-semibold admin_index_left_nav_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z\"></path></svg> Registration </a></li>", 3);
-var _hoisted_26 = [_hoisted_23];
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"admin_index_right_container\"><div class=\"admin_index_right_top_container\"><div class=\"admin_index_right_top_title_section\"><div class=\"admin_index_right_top_title_area\"><span class=\"mb-5 text-xl font-bold\">반가워요, 여중기 관리자님!</span><span>시스템 관리를 간편하고 효율적으로 할 수 있도록 도와드릴게요.</span></div><a href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5\"></path></svg></a></div></div><div class=\"admin_index_right_middle_container\"><div class=\"mr-5 admin_index_right_middle_section\"><div class=\"admin_index_right_middle_number_of_transactions\"><div class=\"admin_index_right_middle_number_of_transactions_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z\"></path></svg></div><div class=\"admin_index_right_middle_number_of_transactions_text\"><p class=\"font-semibold\">총 결제 건수</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">건</span></div></div></div><div class=\"mr-5 admin_index_right_middle_section\"><div class=\"admin_index_right_middle_paymont_amount\"><div class=\"admin_index_right_middle_paymont_amount_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z\"></path></svg></div><div class=\"admin_index_right_middle_paymont_amount_text\"><p class=\"font-semibold\">총 결제금액</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">원</span></div></div></div><div class=\"admin_index_right_middle_section\"><div class=\"admin_index_right_middle_register_users\"><div class=\"admin_index_right_middle_register_users_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"admin_index_right_middle_register_users_text\"><p class=\"font-semibold\">총 이용자 수</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">명</span></div></div></div></div><div class=\"admin_index_right_bottom_container\"><div class=\"admin_index_right_bottom_chart_section\"><div class=\"admin_index_right_bottom_chart_area\"><p class=\"mb-5 text-xl font-semibold\">월 별, 분기 별 통계</p><img class=\"admin_index_right_bottom_chart_image\" src=\"" + _public_images_Admin_chart_ex_png__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\"></div></div><div class=\"admin_index_right_bottom_text_section\"><div class=\"mr-5 admin_index_right_bottom_notice_section\"><div class=\"admin_index_right_bottom_notice_title_area\"><span class=\"mb-5 text-xl font-semibold\">공지사항</span><a class=\"admin_index_right_bottom_notice_title_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"></path></svg> More </a></div><div class=\"admin_index_right_bottom_notice_content_area\"></div></div><div class=\"admin_index_right_bottom_latest_Posts_section\"><div class=\"admin_index_right_bottom_latest_Posts_title_area\"><span class=\"mb-5 text-xl font-semibold\">최신 작성 글</span><a class=\"admin_index_right_bottom_latest_Posts_title_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"></path></svg> More </a></div><div class=\"admin_index_right_bottom_latest_Posts_content_area\"></div></div></div></div></div>", 1);
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "font-semibold admin_index_left_nav_a",
+  href: "#"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 \r\n\t\t\t\t\t\t\t\t\t\t\t0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
+})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Management ")])], -1 /* HOISTED */);
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+  xmlns: "http://www.w3.org/2000/svg",
+  fill: "none",
+  viewBox: "0 0 24 24",
+  "stroke-width": "1.5",
+  stroke: "currentColor",
+  "class": "w-6 h-6"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round",
+  d: "M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 \r\n\t\t\t\t\t\t\t\t\t\t\t4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 \r\n\t\t\t\t\t\t\t\t\t\t\t1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z"
+})], -1 /* HOISTED */);
+var _hoisted_23 = {
+  key: 0
+};
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"admin_index_right_container\"><div class=\"admin_index_right_top_container\"><div class=\"admin_index_right_top_title_section\"><div class=\"admin_index_right_top_title_area\"><span class=\"mb-5 text-xl font-bold\">반가워요, 여중기 관리자님!</span><span>시스템 관리를 간편하고 효율적으로 할 수 있도록 도와드릴게요.</span></div><a href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5\"></path></svg></a></div></div><div class=\"admin_index_right_middle_container\"><div class=\"mr-5 admin_index_right_middle_section\"><div class=\"admin_index_right_middle_number_of_transactions\"><div class=\"admin_index_right_middle_number_of_transactions_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z\"></path></svg></div><div class=\"admin_index_right_middle_number_of_transactions_text\"><p class=\"font-semibold\">총 결제 건수</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">건</span></div></div></div><div class=\"mr-5 admin_index_right_middle_section\"><div class=\"admin_index_right_middle_paymont_amount\"><div class=\"admin_index_right_middle_paymont_amount_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z\"></path></svg></div><div class=\"admin_index_right_middle_paymont_amount_text\"><p class=\"font-semibold\">총 결제금액</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">원</span></div></div></div><div class=\"admin_index_right_middle_section\"><div class=\"admin_index_right_middle_register_users\"><div class=\"admin_index_right_middle_register_users_image\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z\"></path></svg></div><div class=\"admin_index_right_middle_register_users_text\"><p class=\"font-semibold\">총 이용자 수</p><span class=\"text-3xl font-extrabold\">10,000,000 </span><span class=\"font-semibold\">명</span></div></div></div></div><div class=\"admin_index_right_bottom_container\"><div class=\"admin_index_right_bottom_chart_section\"><div class=\"admin_index_right_bottom_chart_area\"><p class=\"mb-5 text-xl font-semibold\">월 별, 분기 별 통계</p><img class=\"admin_index_right_bottom_chart_image\" src=\"" + _public_images_Admin_chart_ex_png__WEBPACK_IMPORTED_MODULE_1__["default"] + "\" alt=\"\"></div></div><div class=\"admin_index_right_bottom_text_section\"><div class=\"mr-5 admin_index_right_bottom_notice_section\"><div class=\"admin_index_right_bottom_notice_title_area\"><span class=\"mb-5 text-xl font-semibold\">공지사항</span><a class=\"admin_index_right_bottom_notice_title_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"></path></svg> More </a></div><div class=\"admin_index_right_bottom_notice_content_area\"></div></div><div class=\"admin_index_right_bottom_latest_Posts_section\"><div class=\"admin_index_right_bottom_latest_Posts_title_area\"><span class=\"mb-5 text-xl font-semibold\">최신 작성 글</span><a class=\"admin_index_right_bottom_latest_Posts_title_a\" href=\"#\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"w-6 h-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M12 4.5v15m7.5-7.5h-15\"></path></svg> More </a></div><div class=\"admin_index_right_bottom_latest_Posts_content_area\"></div></div></div></div></div>", 1);
+var _hoisted_25 = [_hoisted_24];
+var _hoisted_26 = {
+  key: 1
+};
+var _hoisted_27 = {
+  "class": "admin_index_right_container"
+};
+var _hoisted_28 = {
+  "class": "admin_index_registration_section"
+};
+var _hoisted_29 = {
+  "class": "admin_registration_input_area"
+};
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "admin_number"
+}, "사원번호", -1 /* HOISTED */);
+var _hoisted_31 = {
+  "class": "admin_registration_input_area"
+};
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "admin_password"
+}, "비밀번호", -1 /* HOISTED */);
+var _hoisted_33 = {
+  "class": "admin_registration_input_area"
+};
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "admin_password_confirm"
+}, "비밀번호 확인", -1 /* HOISTED */);
+var _hoisted_35 = {
+  "class": "admin_registration_input_area"
+};
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "admin_name"
+}, "이름", -1 /* HOISTED */);
+var _hoisted_37 = {
+  "class": "admin_registration_input_area"
+};
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "font-bold",
+  "for": "admin_flg"
+}, "권한", -1 /* HOISTED */);
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "1"
+}, "root", -1 /* HOISTED */);
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "2"
+}, "sub", -1 /* HOISTED */);
+var _hoisted_41 = [_hoisted_39, _hoisted_40];
+var _hoisted_42 = {
+  "class": "admin_registration_button_area"
+};
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "admin_registration_button_text_area"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "text-base font-semibold"
+}, "등록하기")], -1 /* HOISTED */);
+var _hoisted_44 = [_hoisted_43];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_9, [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "font-semibold admin_index_left_nav_dropdown_a",
-    href: "#",
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/admin/index",
+    "class": "text-3xl font-bold admin_index_left_info_title_area",
     onClick: _cache[0] || (_cache[0] = function () {
-      return $options.toggleUserDropdown && $options.toggleUserDropdown.apply($options, arguments);
+      return $options.showIndex && $options.showIndex.apply($options, arguments);
     })
-  }, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" User "), _hoisted_14]), $data.userDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_15, [].concat(_hoisted_18))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  }, "BOOKPICK'"), _hoisted_5]), _hoisted_6, _hoisted_7, _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     "class": "font-semibold admin_index_left_nav_dropdown_a",
     href: "#",
     onClick: _cache[1] || (_cache[1] = function () {
+      return $options.toggleUserDropdown && $options.toggleUserDropdown.apply($options, arguments);
+    })
+  }, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" User "), _hoisted_13]), $data.userDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_14, [].concat(_hoisted_16))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), $data.isAdmin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "font-semibold admin_index_left_nav_dropdown_a",
+    href: "#",
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.toggleAdminDropdown && $options.toggleAdminDropdown.apply($options, arguments);
     })
-  }, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Administrator "), _hoisted_21]), $data.adminDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_22, [].concat(_hoisted_26))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]), _hoisted_27])]);
+  }, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Administrator "), _hoisted_19]), $data.adminDropdown ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "/admin/registration",
+    "class": "font-semibold admin_index_left_nav_a",
+    onClick: _cache[3] || (_cache[3] = function () {
+      return $options.showRegistration && $options.showRegistration.apply($options, arguments);
+    })
+  }, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Registration ")])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]), $data.showAdminIndex ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [].concat(_hoisted_25))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" User 탈퇴 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"showAdminUserManagement\">\r\n\t\t\t\t<div class=\"admin_index_right_container\">\r\n\t\t\t\t\t\r\n\t\t\t\t</div>\r\n\t\t\t</div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Admin 권한 수정 및 탈퇴 "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"showAdminManagement\">\r\n\t\t\t\t<div class=\"admin_index_right_container\">\r\n\t\t\t\t\t\r\n\t\t\t\t</div>\r\n\t\t\t</div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Admin 등록 "), $data.showAdminRegistration ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base admin_registration_input",
+    type: "email",
+    name: "admin_number",
+    id: "admin_number",
+    autocomplete: "off",
+    placeholder: "사원번호를 입력 해 주세요.",
+    maxlength: "5",
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return _ctx.admin_number = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.admin_number]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base admin_registration_input",
+    type: "password",
+    name: "admin_password",
+    id: "admin_password",
+    autocomplete: "off",
+    placeholder: "비밀번호를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+      return _ctx.admin_password = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.admin_password]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base admin_registration_input",
+    type: "password",
+    name: "admin_password_confirm",
+    id: "admin_password_confirm",
+    autocomplete: "off",
+    placeholder: "비밀번호를 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+      return _ctx.admin_password_confirm = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.admin_password_confirm]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "class": "text-base admin_registration_input",
+    type: "text",
+    name: "admin_name",
+    id: "admin_name",
+    autocomplete: "off",
+    placeholder: "이름을 입력 해 주세요.",
+    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+      return _ctx.admin_name = $event;
+    })
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.admin_name]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    name: "admin_flg",
+    id: "admin_flg",
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+      return _ctx.admin_flg = $event;
+    })
+  }, [].concat(_hoisted_41), 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.admin_flg]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "admin_registration_button",
+    type: "submit",
+    onClick: _cache[9] || (_cache[9] = function () {
+      return $options.adminRegister && $options.adminRegister.apply($options, arguments);
+    })
+  }, [].concat(_hoisted_44))])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),
@@ -21449,22 +21770,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   render: () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _public_images_Index_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../public/images/Index.jpg */ "./public/images/Index.jpg");
+
 
 var _hoisted_1 = {
   "class": "border-box index_container"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_2 = {
   "class": "index_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "index_top_container"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "index_middle_container"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "index_bottom_container"
-})], -1 /* HOISTED */);
-var _hoisted_3 = [_hoisted_2];
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: _public_images_Index_jpg__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alt: ""
+}, null, -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [].concat(_hoisted_3));
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/survey"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_3];
+    }),
+    _: 1 /* STABLE */
+  })])]);
 }
 
 /***/ }),
@@ -21488,7 +21816,7 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<hr><div class=\"footer_container\"><div class=\"footer_section\"><div class=\"footer_p_area\"><p class=\"text-xl font-semibold footer_p_title\">북픽 BOOKPICK&#39;</p><p class=\"footer_p_content\">사업자등록번호 : 880-86-02354 | 주식회사 샌드버그 대표이사 : 배호진</p><p class=\"footer_p_content\">012345 부산광역시 남구 전포대로 133, wework BIFC 14층, 116호</p><p class=\"footer_p_content\">고객센터 : 1500-1234 | 이메일 : contact@sandburg.co.kr</p></div><div class=\"footer_a_area\"><a class=\"footer_a\" href=\"#\">서비스 이용약관</a><a class=\"font-semibold footer_a\" href=\"#\">개인정보 처리방침</a><a class=\"footer_a\" href=\"#\">고객지원</a><a class=\"footer_a\" href=\"#\">제휴문의</a></div></div></div>", 2);
 var _hoisted_4 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return !['/admin', '/admin/index'].includes(_ctx.$route.fullPath) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [].concat(_hoisted_4))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  return !['/admin', '/admin/index', '/admin/registration'].includes(_ctx.$route.fullPath) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [].concat(_hoisted_4))) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
@@ -21524,14 +21852,10 @@ var _hoisted_5 = {
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "font-semibold text-center header_menu_a",
   href: "#"
-}, "대시보드", -1 /* HOISTED */);
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  "class": "font-semibold text-center header_menu_a",
-  href: "#"
 }, "문의", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
-  return !['/admin', '/admin/index'].includes(_ctx.$route.fullPath) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div v-if=\"!['/admin', '/admin/index', '/admin/registration', '/admin/auth/user/management'].includes($route.fullPath)\"> "), !_ctx.$route.fullPath.startsWith('/admin') ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/",
     "class": "text-3xl font-bold header_index_a"
   }, {
@@ -21539,7 +21863,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("BOOKPICK'")];
     }),
     _: 1 /* STABLE */
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, $data.isLogin ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 0,
+    onClick: _ctx.userLogout,
+    "class": "font-semibold text-center header_login_a"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("로그아웃")];
+    }),
+    _: 1 /* STABLE */
+  }, 8 /* PROPS */, ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    key: 1,
     to: "/login",
     "class": "font-semibold text-center header_login_a"
   }, {
@@ -21547,7 +21881,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("로그인")];
     }),
     _: 1 /* STABLE */
-  })])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  }))])])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -21579,570 +21913,85 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "class": "text-2xl font-bold survey_top_content_span"
 }, "만족도 조사")], -1 /* HOISTED */);
 var _hoisted_4 = {
-  "class": "survey_middle_container"
-};
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+};
+var _hoisted_5 = {
   "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
+};
 var _hoisted_6 = {
   "class": "survey_middle_survey_input_section"
 };
 var _hoisted_7 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_8 = ["name", "id"];
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기 1", -1 /* HOISTED */);
-var _hoisted_9 = {
+}, " 만족", -1 /* HOISTED */);
+var _hoisted_10 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기 2", -1 /* HOISTED */);
-var _hoisted_11 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
+var _hoisted_11 = ["name", "id"];
 var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기 3", -1 /* HOISTED */);
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_14 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_15 = {
+}, " 보통", -1 /* HOISTED */);
+var _hoisted_13 = {
   "class": "mb-5 survey_middle_survey_input_area"
 };
-var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_14 = ["name", "id"];
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_17 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_19 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_22 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_23 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_25 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_27 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_30 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_31 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_33 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_35 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_38 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_39 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_41 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_43 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_46 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_47 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_49 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_51 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_52 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_54 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_55 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_57 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_59 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_61 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_62 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_63 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_65 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_67 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_70 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_71 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_73 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_75 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "survey_middle_survey_p_section"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "mb-5 text-lg font-semibold survey_p"
-}, "질문 1")], -1 /* HOISTED */);
-var _hoisted_78 = {
-  "class": "survey_middle_survey_input_section"
-};
-var _hoisted_79 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_80 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기1", -1 /* HOISTED */);
-var _hoisted_81 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기2", -1 /* HOISTED */);
-var _hoisted_83 = {
-  "class": "mb-5 survey_middle_survey_input_area"
-};
-var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "survey_span"
-}, "보기3", -1 /* HOISTED */);
-var _hoisted_85 = {
+}, " 불만족", -1 /* HOISTED */);
+var _hoisted_16 = {
   "class": "survey_bottom_container"
 };
-var _hoisted_86 = {
+var _hoisted_17 = {
   "class": "survey_bottom_button_area"
 };
-var _hoisted_87 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "survey_bottom_button",
   type: "button"
 }, "뒤로 가기", -1 /* HOISTED */);
-var _hoisted_88 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  "class": "survey_bottom_button",
-  type: "submit"
-}, "제출 하기", -1 /* HOISTED */);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_1",
-    id: "survey_1_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-      return $data.surveyAnswers[0] = $event;
+  var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.surveyQuestionList, function (question) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      "class": "survey_middle_container",
+      key: question
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(question.survey_question_title), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "class": "survey_input",
+      type: "radio",
+      name: 'surveyAnswer_' + question.survey_question_id,
+      id: "surveyAnswer_" + question.survey_question_id + "_1",
+      value: "satisfied",
+      checked: ""
+    }, null, 8 /* PROPS */, _hoisted_8), _hoisted_9]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "class": "survey_input",
+      type: "radio",
+      name: 'surveyAnswer_' + question.survey_question_id,
+      id: "surveyAnswer_" + question.survey_question_id + "_2",
+      value: "average"
+    }, null, 8 /* PROPS */, _hoisted_11), _hoisted_12]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+      "class": "survey_input",
+      type: "radio",
+      name: 'surveyAnswer_' + question.survey_question_id,
+      id: "surveyAnswer_" + question.survey_question_id + "_3",
+      value: "dissatisfied"
+    }, null, 8 /* PROPS */, _hoisted_14), _hoisted_15])])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_18];
     }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_8]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_1",
-    id: "survey_1_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-      return $data.surveyAnswers[0] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_10]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_1",
-    id: "survey_1_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.surveyAnswers[0] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[0]]]), _hoisted_12])]), _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_2",
-    id: "survey_2_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-      return $data.surveyAnswers[1] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_16]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_2",
-    id: "survey_2_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-      return $data.surveyAnswers[1] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_18]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_2",
-    id: "survey_2_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
-      return $data.surveyAnswers[1] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[1]]]), _hoisted_20])]), _hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_3",
-    id: "survey_3_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
-      return $data.surveyAnswers[2] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_24]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_3",
-    id: "survey_3_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
-      return $data.surveyAnswers[2] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_26]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_3",
-    id: "survey_3_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
-      return $data.surveyAnswers[2] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[2]]]), _hoisted_28])]), _hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_4",
-    id: "survey_4_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
-      return $data.surveyAnswers[3] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_32]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_4",
-    id: "survey_4_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
-      return $data.surveyAnswers[3] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_34]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_4",
-    id: "survey_4_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[11] || (_cache[11] = function ($event) {
-      return $data.surveyAnswers[3] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[3]]]), _hoisted_36])]), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_5",
-    id: "survey_5_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[12] || (_cache[12] = function ($event) {
-      return $data.surveyAnswers[4] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_40]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_5",
-    id: "survey_5_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
-      return $data.surveyAnswers[4] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_42]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_5",
-    id: "survey_5_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[14] || (_cache[14] = function ($event) {
-      return $data.surveyAnswers[4] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[4]]]), _hoisted_44])]), _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_47, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_6",
-    id: "survey_6_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[15] || (_cache[15] = function ($event) {
-      return $data.surveyAnswers[5] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_48]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_6",
-    id: "survey_6_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[16] || (_cache[16] = function ($event) {
-      return $data.surveyAnswers[5] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_50]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_51, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_6",
-    id: "survey_6_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[17] || (_cache[17] = function ($event) {
-      return $data.surveyAnswers[5] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[5]]]), _hoisted_52])]), _hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_55, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_7",
-    id: "survey_7_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[18] || (_cache[18] = function ($event) {
-      return $data.surveyAnswers[6] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_56]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_7",
-    id: "survey_7_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[19] || (_cache[19] = function ($event) {
-      return $data.surveyAnswers[6] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_58]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_7",
-    id: "survey_7_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[20] || (_cache[20] = function ($event) {
-      return $data.surveyAnswers[6] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[6]]]), _hoisted_60])]), _hoisted_61, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_63, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_8",
-    id: "survey_8_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[21] || (_cache[21] = function ($event) {
-      return $data.surveyAnswers[7] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_64]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_8",
-    id: "survey_8_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[22] || (_cache[22] = function ($event) {
-      return $data.surveyAnswers[7] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_66]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_8",
-    id: "survey_8_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[23] || (_cache[23] = function ($event) {
-      return $data.surveyAnswers[7] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[7]]]), _hoisted_68])]), _hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_70, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_9",
-    id: "survey_9_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[24] || (_cache[24] = function ($event) {
-      return $data.surveyAnswers[8] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_72]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_73, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_9",
-    id: "survey_9_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[25] || (_cache[25] = function ($event) {
-      return $data.surveyAnswers[8] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_74]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_75, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_9",
-    id: "survey_9_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[26] || (_cache[26] = function ($event) {
-      return $data.surveyAnswers[8] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[8]]]), _hoisted_76])]), _hoisted_77, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_78, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_79, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_10",
-    id: "survey_10_1",
-    value: "option1",
-    "onUpdate:modelValue": _cache[27] || (_cache[27] = function ($event) {
-      return $data.surveyAnswers[9] = $event;
-    }),
-    checked: ""
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_80]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_81, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_10",
-    id: "survey_10_2",
-    value: "option2",
-    "onUpdate:modelValue": _cache[28] || (_cache[28] = function ($event) {
-      return $data.surveyAnswers[9] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_82]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_83, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    "class": "survey_input",
-    type: "radio",
-    name: "survey_10",
-    id: "survey_10_3",
-    value: "option3",
-    "onUpdate:modelValue": _cache[29] || (_cache[29] = function ($event) {
-      return $data.surveyAnswers[9] = $event;
-    })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.surveyAnswers[9]]]), _hoisted_84])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_85, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_86, [_hoisted_87, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    _: 1 /* STABLE */
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "survey_bottom_button",
-    type: "button",
-    onClick: _cache[30] || (_cache[30] = function () {
-      return $options.resetSurvey && $options.resetSurvey.apply($options, arguments);
+    type: "submit",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $options.surveyAnswer && $options.surveyAnswer.apply($options, arguments);
     })
-  }, "다시 하기"), _hoisted_88])])])]);
+  }, "제출 하기")])])])]);
 }
 
 /***/ }),
@@ -22172,9 +22021,9 @@ var _hoisted_3 = {
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "user_login_title_section"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-3xl font-bold user_login_title"
+  "class": "text-xl font-bold user_login_title"
 }, "북픽에서 다양한 책을!"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "text-3xl font-bold user_login_title"
+  "class": "text-xl font-bold user_login_title"
 }, "독서기록을 남겨보세요.")], -1 /* HOISTED */);
 var _hoisted_5 = {
   "class": "user_login_input_area"
@@ -22626,6 +22475,15 @@ var routes = [{
 }, {
   path: '/admin/index',
   component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+}, {
+  path: '/admin/auth/user/management',
+  component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+}, {
+  path: '/admin/auth/management',
+  component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+}, {
+  path: '/admin/registration',
+  component: _components_Admin_AdminIndexComponent_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }];
 var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createRouter)({
   history: (0,vue_router__WEBPACK_IMPORTED_MODULE_7__.createWebHistory)(),
@@ -22682,7 +22540,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section {\n  width: 600px;\n  margin: 0 auto;\n  padding: 4rem;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_label {\n  margin: 0 80px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area {\n  width: 100%;\n  height: 50px;\n  margin: 50px auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area label,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area label {\n  width: 100%;\n  margin-left: auto;\n  margin-bottom: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area select,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area select {\n  width: 100%;\n  padding: 4px 10px;\n  background-color: transparent;\n  border-bottom: 2px solid #000;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area select:focus,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area select:focus {\n  outline: none;\n  border-bottom: 2px solid #4dac27;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area .admin_registration_input,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_input {\n  width: 100%;\n  padding: 4px 10px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 2px solid #000;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area .admin_registration_input:focus,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_input:focus {\n  border-bottom: 2px solid #4dac27;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area {\n  width: 60%;\n  height: 50px;\n  background-color: #4dac27;\n  color: #FFF;\n  border-radius: 25px;\n  margin: 80px auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button {\n  width: 100%;\n  height: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button .admin_registration_button_text_area {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button .admin_registration_button_text_area .admin_registration_button_svg {\n  width: 40px;\n  height: 40px;\n  padding: 4px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area:hover {\n  transform: scale(1.1);\n  transition: 0.3s;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22730,7 +22588,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@media (min-width: 335px) and (max-width: 767px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.header_container {\n    width: 1000px;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.85rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n    position: relative;\n    transform: translateY(0%);\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.survey_container {\n    width: 95%;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 70%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.survey_container {\n    width: 95%;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 70%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.survey_container {\n    width: 700px;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 50%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.user_login_section .user_login_right_section .user_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 1000px;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    margin: 70px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 70%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 50%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.terms_conditions {\n    width: 600px;\n    text-align: center;\n}\n.terms_conditions_title {\n    margin-bottom: 10px;\n}\n.terms_conditions_box {\n    border: 1px solid #2C3E50;\n    border-radius: 5px;\n    padding: 20px;\n    width: 50%;\n    text-align: start;\n    margin: 0 auto;\n    overflow: auto;\n    font-size: 12px;\n    color: #333;\n}\n.terms_conditions_label {\n    font-size: 13px;\n    color: #666;\n}\n.terms_conditions_checkbox {\n    margin: 0 5px;\n}\n.terms_conditions_checkbox_btn {\n    margin-top: 5px;\n}\n.regist_button {\n    width: 600px;\n    margin: 5px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.regist_button .regist_button_button_area {\n    width: 80px;\n    height: 35px;\n    margin-right: 30px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.regist_button .regist_button_button_area .regist_button_next {\n    width: 100%;\n    display: inline-block;\n}\n.regist_button .regist_button_button_area .regist_button_next:hover {\n    width: 100%;\n    border: none;\n    border-radius: 10px;\n    background-color: #4dac27;\n    color: #fff;\n}\n.container_signup_none {\n    display: none;\n}\n.user_register_section {\n    width: 600px;\n    font-family: sans-serif;\n    margin: 10px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_title_section {\n    width: 100%;\n    margin: 0 auto;\n    margin-bottom: 40px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n}\n.user_register_section .user_register_title_section .user_register_title {\n    margin-bottom: 20px;\n    color: #4dac27;\n}\n.user_register_section .user_register_title_section .user_register_title_sub {\n    margin-bottom: 20px;\n}\n.user_register_section .user_register_left_section {\n    width: 50%;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_register_section .user_register_left_section .user_register_label {\n    margin: 0 80px;\n}\n.user_register_section .user_register_left_section .user_register_input_area,\n  .user_register_section .user_register_left_section .user_register_button_area {\n    width: 100%;\n    height: 50px;\n    margin: 50px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_input_area label,\n  .user_register_section .user_register_left_section .user_register_button_area label {\n    width: 100%;\n    margin-left: auto;\n    margin-bottom: 10px;\n}\n.user_register_section .user_register_left_section .user_register_input_area select,\n  .user_register_section .user_register_left_section .user_register_button_area select {\n    width: 100%;\n    padding: 4px 10px;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area select:focus,\n  .user_register_section .user_register_left_section .user_register_button_area select:focus {\n    outline: none;\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input {\n    width: 100%;\n    padding: 4px 10px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input:focus,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button {\n    width: 100%;\n    height: 50px;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area .user_register_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_register_section .user_register_left_section .user_register_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n.admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n@media (min-width: 335px) and (max-width: 767px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.header_container {\n    width: 100%;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.header_container {\n    width: 1000px;\n    height: 50px;\n    margin: 10px auto;\n    display: flex;\n    align-items: center;\n}\n.header_container .header_section {\n    width: 100%;\n    height: 100%;\n    margin: 0 30px;\n    display: flex;\n}\n.header_container .header_section .header_index_area {\n    width: 100%;\n}\n.header_container .header_section .header_login_area {\n    width: 100%;\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n}\n.header_container .header_section .header_login_area .header_menu_a {\n    margin-right: 20px;\n}\n.header_container .header_section .header_login_area .header_login_a {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.header_container .header_section .header_login_area .header_login_a:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.header_container .header_section .header_index_a {\n    color: #4dac27;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    font-size: 0.85rem;\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    font-size: 0.875rem;\n    margin-right: 30px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.footer_container {\n    width: 100%;\n    height: 50px;\n    margin: 20px auto;\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 1024px) {\n.footer_container {\n    width: 1000px;\n    height: 200px;\n    margin: 0 auto;\n    position: relative;\n    transform: translateY(0%);\n}\n.footer_container .footer_section {\n    width: 100%;\n    height: 100%;\n    margin: 4rem auto;\n    padding: 20px;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.footer_container .footer_section .footer_p_area {\n    width: 100%;\n}\n.footer_container .footer_section .footer_p_area .footer_p_title {\n    line-height: 40px;\n}\n.footer_container .footer_section .footer_p_area .footer_p_content {\n    line-height: 40px;\n    color: #666666;\n}\n.footer_container .footer_section .footer_a_area {\n    width: 100%;\n    margin-top: 35px;\n}\n.footer_container .footer_section .footer_a_area .footer_a {\n    margin-right: 30px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.survey_container {\n    width: 95%;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 70%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.survey_container {\n    width: 95%;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 70%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.survey_container {\n    width: 700px;\n    margin: 10px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    background-color: #ededed;\n    border-radius: 10px;\n}\n.survey_container .survey_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_top_container {\n    width: 100%;\n    padding: 2rem 5rem;\n    display: flex;\n    flex-direction: column;\n}\n.survey_container .survey_section .survey_top_container .survey_top_title_span {\n    color: #4dac27;\n    margin-bottom: 20px;\n}\n.survey_container .survey_section .survey_middle_container {\n    width: 100%;\n    padding: 0 6rem;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area {\n    width: 100%;\n}\n.survey_container .survey_section .survey_middle_container .survey_middle_survey_input_section .survey_middle_survey_input_area .survey_span {\n    margin-right: 20px;\n}\n.survey_container .survey_section .survey_bottom_container {\n    width: 100%;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area {\n    width: 50%;\n    margin: 0 auto;\n    padding-bottom: 20px;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n}\n.survey_container .survey_section .survey_bottom_container .survey_bottom_button_area .survey_bottom_button {\n    width: 80px;\n    height: 35px;\n    background-color: #fff;\n    border: 1px solid #4dac27;\n    color: #4dac27;\n    border-radius: 10px;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 75%;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 100%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 75%;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 100%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 500px;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 80%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.terms_conditions {\n    width: 600px;\n    text-align: center;\n}\n.terms_conditions_title {\n    margin-bottom: 10px;\n}\n.terms_conditions_box {\n    border: 1px solid #2C3E50;\n    border-radius: 5px;\n    padding: 20px;\n    width: 50%;\n    text-align: start;\n    margin: 0 auto;\n    overflow: auto;\n    font-size: 12px;\n    color: #333;\n}\n.terms_conditions_label {\n    font-size: 13px;\n    color: #666;\n}\n.terms_conditions_checkbox {\n    margin: 0 5px;\n}\n.terms_conditions_checkbox_btn {\n    margin-top: 5px;\n}\n.regist_button {\n    width: 600px;\n    margin: 5px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.regist_button .regist_button_button_area {\n    width: 80px;\n    height: 35px;\n    margin-right: 30px;\n    line-height: 35px;\n    color: #4dac27;\n    border: 1px solid #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel {\n    width: 100%;\n    display: inline-block;\n    width: 80px;\n    height: 35px;\n    line-height: 35px;\n    color: #4dac27;\n    border-radius: 10px;\n}\n.regist_button .regist_button_button_area .regist_button_cancel:hover {\n    border: none;\n    background-color: #4dac27;\n    color: #fff;\n}\n.regist_button .regist_button_button_area .regist_button_next {\n    width: 100%;\n    display: inline-block;\n}\n.regist_button .regist_button_button_area .regist_button_next:hover {\n    width: 100%;\n    border: none;\n    border-radius: 10px;\n    background-color: #4dac27;\n    color: #fff;\n}\n.container_signup_none {\n    display: none;\n}\n.user_register_section {\n    width: 600px;\n    font-family: sans-serif;\n    margin: 10px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_title_section {\n    width: 100%;\n    margin: 0 auto;\n    margin-bottom: 40px;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: flex-start;\n}\n.user_register_section .user_register_title_section .user_register_title {\n    margin-bottom: 20px;\n    color: #4dac27;\n}\n.user_register_section .user_register_title_section .user_register_title_sub {\n    margin-bottom: 20px;\n}\n.user_register_section .user_register_left_section {\n    width: 50%;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_register_section .user_register_left_section .user_register_label {\n    margin: 0 80px;\n}\n.user_register_section .user_register_left_section .user_register_input_area,\n  .user_register_section .user_register_left_section .user_register_button_area {\n    width: 100%;\n    height: 50px;\n    margin: 50px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_input_area label,\n  .user_register_section .user_register_left_section .user_register_button_area label {\n    width: 100%;\n    margin-left: auto;\n    margin-bottom: 10px;\n}\n.user_register_section .user_register_left_section .user_register_input_area select,\n  .user_register_section .user_register_left_section .user_register_button_area select {\n    width: 100%;\n    padding: 4px 10px;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area select:focus,\n  .user_register_section .user_register_left_section .user_register_button_area select:focus {\n    outline: none;\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input {\n    width: 100%;\n    padding: 4px 10px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_input_area .user_register_input:focus,\n  .user_register_section .user_register_left_section .user_register_button_area .user_register_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_register_section .user_register_left_section .user_register_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button {\n    width: 100%;\n    height: 50px;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_register_section .user_register_left_section .user_register_button_area .user_register_button .user_register_button_text_area .user_register_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_register_section .user_register_left_section .user_register_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n}\n@media (min-width: 335px) and (max-width: 767px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.admin_login_section {\n    width: 95%;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.admin_login_section {\n    width: 1000px;\n    height: 100vh;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section {\n    width: 100%;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_title_section .admin_login_title {\n    color: #4dac27;\n}\n.admin_login_section .admin_login_left_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.admin_login_section .admin_login_left_section .admin_login_label {\n    margin: 0 80px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area,\n  .admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input_svg,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_input_area .admin_login_input:focus,\n  .admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button {\n    width: 100%;\n    height: 50px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area .admin_login_button .admin_login_button_text_area .admin_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.admin_login_section .admin_login_left_section .admin_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.admin_login_section .admin_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.admin_login_section .admin_login_right_section .admin_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n.admin_index_container {\n  width: 1700px;\n  height: 100vh;\n  margin: 0 auto;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container {\n  width: 20%;\n  height: 100vh;\n  background-color: #EFF3F8;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section {\n  width: 100%;\n  height: 100px;\n  margin-top: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_title_area {\n  color: #4dac27;\n  margin: 0 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_info_section .admin_index_left_info_name_area {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input {\n  width: 70%;\n  height: 40px;\n  margin: auto;\n  padding: 4px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 1px solid transparent;\n}\n.admin_index_container .admin_index_section .admin_index_left_container .admin_index_left_search_section .admin_index_left_search_input:focus {\n  border-bottom: 1px solid #ededed;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section {\n  width: 100%;\n  height: 50px;\n  line-height: 50px;\n  padding: 10px 40px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li {\n  width: 100%;\n  margin-bottom: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_a svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a {\n  width: 100%;\n  display: flex;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_left_svg {\n  margin-right: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_a .admin_index_left_nav_dropdown_right_svg {\n  margin-left: auto;\n}\n.admin_index_container .admin_index_section .admin_index_left_nav_section .admin_index_left_nav_ul .admin_index_left_nav_li .admin_index_left_nav_dropdown_ul {\n  width: 100%;\n  display: block;\n}\n.admin_index_container .admin_index_section .admin_index_right_container {\n  width: 1300px;\n  height: 100vh;\n  margin: 0 auto;\n  color: #666666;\n  display: flex;\n  flex-direction: column;\n  justify-content: flex-start;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 1350px;\n  margin: 10px auto;\n  display: flex;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section {\n  width: 100%;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_logo_section img {\n  width: 100px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_button_section svg {\n  width: 60px;\n  height: 60px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container {\n  width: 100%;\n  margin-bottom: 10px;\n  padding: 20px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_top_container .admin_index_right_top_title_section .admin_index_right_top_title_area {\n  width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container {\n  width: 100%;\n  margin-bottom: 10px;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section {\n  width: 100%;\n  height: 100px;\n  padding: 10px;\n  border-radius: 10px;\n  background-color: #FFF;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users {\n  width: 100%;\n  height: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount svg,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users svg {\n  width: 60px;\n  height: 60px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_number_of_transactions .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_paymont_amount .admin_index_right_middle_register_users_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_number_of_transactions_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_paymont_amount_text,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_middle_container .admin_index_right_middle_section .admin_index_right_middle_register_users .admin_index_right_middle_register_users_text {\n  width: 100%;\n  padding: 20px;\n  margin-left: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container {\n  width: 100%;\n  height: 400px;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section {\n  width: 100%;\n  height: 100%;\n  margin-bottom: 10px;\n  background-color: #fff;\n  border-radius: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area {\n  width: 100%;\n  height: 100%;\n  padding: 20px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_container .admin_index_right_bottom_chart_section .admin_index_right_bottom_chart_area .admin_index_right_bottom_chart_image {\n  width: 1200px;\n  height: 300px;\n  margin: 0 auto;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section {\n  width: 50%;\n  height: 250px;\n  border-radius: 10px;\n  background-color: #fff;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area {\n  width: 100%;\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_latest_Posts_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_latest_Posts_title_area .admin_index_right_bottom_latest_Posts_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_notice_title_a,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_right_bottom_text_section .admin_index_right_bottom_notice_section .admin_index_right_bottom_notice_title_area .admin_index_right_bottom_latest_Posts_title_a {\n  display: flex;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section {\n  width: 600px;\n  margin: 0 auto;\n  padding: 4rem;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_label {\n  margin: 0 80px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area {\n  width: 100%;\n  height: 50px;\n  margin: 50px auto;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area label,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area label {\n  width: 100%;\n  margin-left: auto;\n  margin-bottom: 10px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area select,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area select {\n  width: 100%;\n  padding: 4px 10px;\n  background-color: transparent;\n  border-bottom: 2px solid #000;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area select:focus,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area select:focus {\n  outline: none;\n  border-bottom: 2px solid #4dac27;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area .admin_registration_input,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_input {\n  width: 100%;\n  padding: 4px 10px;\n  outline: none;\n  background-color: transparent;\n  border-bottom: 2px solid #000;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_input_area .admin_registration_input:focus,\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_input:focus {\n  border-bottom: 2px solid #4dac27;\n  transition: 0.8s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area {\n  width: 60%;\n  height: 50px;\n  background-color: #4dac27;\n  color: #FFF;\n  border-radius: 25px;\n  margin: 80px auto;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  transition: 0.5s;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button {\n  width: 100%;\n  height: 50px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button .admin_registration_button_text_area {\n  width: 100%;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area .admin_registration_button .admin_registration_button_text_area .admin_registration_button_svg {\n  width: 40px;\n  height: 40px;\n  padding: 4px;\n}\n.admin_index_container .admin_index_section .admin_index_right_container .admin_index_registration_section .admin_registration_button_area:hover {\n  transform: scale(1.1);\n  transition: 0.3s;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22754,7 +22612,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.index_container {\n    width: 95%;\n    margin: 20px auto;\n}\n.index_container .index_section {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.index_container .index_section img {\n    width: 100%;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.index_container {\n    width: 95%;\n    margin: 20px auto;\n}\n.index_container .index_section {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.index_container .index_section img {\n    width: 500px;\n}\n}\n@media (min-width: 1024px) {\n.index_container {\n    width: 500px;\n    margin: 20px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.index_container .index_section {\n    width: 100%;\n}\n.index_container .index_section img {\n    width: 500px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22850,7 +22708,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 95%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 50%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    display: none;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 95%;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 95%;\n    margin: 80px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 45%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 10px 0 0 10px;\n    border-right: none;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 75%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 75%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 55%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_right_section {\n    width: 50%;\n    height: 600px;\n    border: 3px solid #ededed;\n    border-radius: 0 10px 10px 0;\n    border-left: none;\n}\n.user_login_section .user_login_right_section .user_login_image {\n    width: 100%;\n    height: 594px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    border-radius: 10px;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 1000px;\n    font-family: sans-serif;\n    margin: 0 auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    margin: 70px auto;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 70%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 50%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "@media (min-width: 335px) and (max-width: 767px) {\n.user_login_section {\n    width: 75%;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 100%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 768px) and (max-width: 1023px) {\n.user_login_section {\n    width: 75%;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 100%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}\n@media (min-width: 1024px) {\n.user_login_section {\n    width: 500px;\n    font-family: sans-serif;\n    margin: 20px auto;\n    border: 3px solid #ededed;\n    border-radius: 20px;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section {\n    width: 100%;\n    padding: 4rem;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_title_section .user_login_title {\n    width: 100%;\n    color: #4dac27;\n}\n.user_login_section .user_login_left_section {\n    width: 80%;\n    height: 600px;\n}\n.user_login_section .user_login_left_section .user_login_label {\n    margin: 0 80px;\n}\n.user_login_section .user_login_left_section .user_login_input_area,\n  .user_login_section .user_login_left_section .user_login_button_area {\n    width: 80%;\n    height: 50px;\n    margin: 0 auto 30px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input_svg,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input {\n    width: 80%;\n    padding: 4px;\n    outline: none;\n    border-bottom: 3px solid #ededed;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_input_area .user_login_input:focus,\n  .user_login_section .user_login_left_section .user_login_button_area .user_login_input:focus {\n    border-bottom: 3px solid #4dac27;\n    transition: 0.8s;\n}\n.user_login_section .user_login_left_section .user_login_button_area {\n    width: 60%;\n    height: 50px;\n    background-color: #4dac27;\n    color: #FFF;\n    border-radius: 25px;\n    margin: 80px auto;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    transition: 0.5s;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button {\n    width: 100%;\n    height: 50px;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area {\n    width: 100%;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n}\n.user_login_section .user_login_left_section .user_login_button_area .user_login_button .user_login_button_text_area .user_login_button_svg {\n    width: 40px;\n    height: 40px;\n    padding: 4px;\n}\n.user_login_section .user_login_left_section .user_login_button_area:hover {\n    transform: scale(1.1);\n    transition: 0.3s;\n}\n.user_login_section .user_login_register {\n    width: 100%;\n    color: #4dac27;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -22984,6 +22842,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Admin_login.jpg?e1351fa90305aa5ca2e75c3fc3571401");
+
+/***/ }),
+
+/***/ "./public/images/Index.jpg":
+/*!*********************************!*\
+  !*** ./public/images/Index.jpg ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Index.jpg?c7bee6b6229967a0a6efea99f4d1b4bc");
 
 /***/ }),
 
