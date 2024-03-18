@@ -98,25 +98,25 @@ class AdminValidation
 
     // Admin 추가에 대한 유효성 검사 실패 시 처리
     private function adminRegisterValidationFailure($validator)
-    {
-        $errorMsg = "Admin 추가 유효성 검사 실패";
-        Log::debug("### $errorMsg ###");
+    {   
+        $errorMsg = "입력하신 정보를 다시 확인해주세요.";
+        $logMsg = "Admin 추가 유효성 검사 실패";
+        Log::debug("### $logMsg ###");
         return response()->json([
             'code' => 'av01',
-            'error' => $errorMsg,
-            'errors' => $validator->errors(),
+            'error' => $errorMsg
         ], 422);
     }
 
     // 로그인에 대한 유효성 검사 실패 시 처리
     private function adminLoginValidationFailure($validator)
-    {
-        $errorMsg = "Admin 로그인 유효성 검사 실패";
-        Log::debug("### $errorMsg ###");
+    {   
+        $errorMsg = "사번과 비밀번호를 다시 확인해주세요.";
+        $logMsg = "Admin 로그인 유효성 검사 실패";
+        Log::debug("### $logMsg ###");
         return response()->json([
             'code' => 'av02',
-            'error' => $errorMsg,
-            'errors' => $validator->errors(),
+            'error' => $errorMsg
         ], 422);
     }
 }

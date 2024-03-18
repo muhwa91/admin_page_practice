@@ -15,7 +15,11 @@ class UserAuthController extends Controller
         // 로그인 시도 처리
         $loginUser = User::where('user_email', $request->user_email)->first();
         // User모델 내 user_email에서 요청보낸 user_email로 검색된 결과 중 첫번째 레코드 반환
-        Log::debug('### User 로그인 시도 일치 유저: ' . $loginUser['user_email']);
+        if ($loginUser) {
+            Log::debug('### User 로그인 시도 일치 유저: ' . $loginUser->user_email);
+        } else {
+            Log::debug('### User 로그인 시도 일치 유저: 없음 ###');
+        }
 
         // 로그인 실패 처리
         if(!$loginUser || !(Hash::check($request->user_password, $loginUser->user_password))) {

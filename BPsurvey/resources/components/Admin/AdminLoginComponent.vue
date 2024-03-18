@@ -19,6 +19,7 @@
 					<input class="text-base admin_login_input" type="password" name="admin_password" id="admin_password" 
 					autocomplete="off" placeholder="Enter your Password" v-model="admin_password">
 				</div>
+				<p class="text-lg text-center text-red-500">{{ errorMsg }}</p>
 				<div class="admin_login_button_area">
 					<button class="admin_login_button" type="submit" @click="adminLogin">
 						<div class="admin_login_button_text_area">
@@ -52,6 +53,7 @@ export default {
             setting: '',
 			admin_number: '',
 			admin_password: '',
+			errorMsg: '',
         }
     },
 
@@ -76,11 +78,11 @@ export default {
 						localStorage.setItem('loginAdminFlg', loginAdminFlg);
 						this.$router.push('/admin/index'); 
 					} else {                
-						alert(response.data.error);
+						this.errorMsg = error.response.data.error;
 					}
 				})
 				.catch(error => {             
-					console.error('Unexpected error:', error);
+					this.errorMsg = error.response.data.error;
 				});
         }
     }

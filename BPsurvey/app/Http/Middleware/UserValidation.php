@@ -114,8 +114,9 @@ class UserValidation
     // 회원가입에 대한 유효성 검사 실패 시 처리
     private function userRegisterValidationFailure($validator)
     {
-        $errorMsg = "User 회원가입 유효성 검사 실패";
-        Log::debug("### $errorMsg ###");
+        $errorMsg = "입력하신 정보를 다시 확인해주세요.";
+        $logMsg = "User 추가 유효성 검사 실패";
+        Log::debug("### $logMsg ###");
         return response()->json([
             'code' => 'uv01',
             'error' => $errorMsg,
@@ -126,12 +127,12 @@ class UserValidation
     // 로그인에 대한 유효성 검사 실패 시 처리
     private function userLoginValidationFailure($validator)
     {
-        $errorMsg = "User 로그인 유효성 검사 실패";
-        Log::debug("### $errorMsg ###");
+        $errorMsg = "이메일주소와 비밀번호를 다시 확인해주세요.";
+        $logMsg = "User 로그인 유효성 검사 실패";
+        Log::debug("### $logMsg ###");
         return response()->json([
             'code' => 'uv02',
             'error' => $errorMsg,
-            'errors' => $validator->errors(),
         ], 422);
     }
 }

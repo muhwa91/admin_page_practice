@@ -20,6 +20,7 @@
 					<input class="text-base user_login_input" type="password" name="user_password" id="user_password" 
 					autocomplete="off" placeholder="비밀번호를 입력 해 주세요." v-model="user_password">
 				</div>
+				<p class="text-lg text-center error_span">{{ errorMsg }}</p>
 				<div class="user_login_button_area">
 					<button class="user_login_button" type="submit" @click="userLogin">
 						<div class="user_login_button_text_area">
@@ -54,6 +55,7 @@ export default {
             setting: '',
 			user_email: '',
 			user_password: '',
+			errorMsg: '',
         }
     },
 
@@ -72,15 +74,14 @@ export default {
 				.then(response => {
 					if(response.data.code === "ul00") {
 						const loginUserId = response.data.data.user_id;
-						console.log(loginUserId);
 						localStorage.setItem('loginUserData', String(loginUserId));
 						this.$router.push('/'); 
-					} else {                
-						alert(response.data.error);
+					} else {
+						this.errorMsg = error.response.data.error;
 					}
 				})
-				.catch(error => {             
-					console.error('Unexpected error:', error);
+				.catch(error => {   
+					this.errorMsg = error.response.data.error;
 				});
         }
     }

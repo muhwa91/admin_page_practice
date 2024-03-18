@@ -297,6 +297,7 @@
 								<option value="2">sub</option>
 							</select>
 						</div>
+						<p class="text-lg text-center text-red-500">{{ errorMsg }}</p>
 						<div class="admin_registration_button_area">
 							<button class="admin_registration_button" type="submit" @click="adminRegister">
 								<div class="admin_registration_button_text_area">
@@ -349,6 +350,7 @@ export default {
 			},
 			loginAdminFlg: '',
 			loginAdminName: '',
+			errorMsg: '',
         }
     },
 
@@ -438,7 +440,7 @@ export default {
 				this.userAllList = response.data.data;
 			})
 			.catch(error => {
-				console.error('데이터 에러:', error);
+				alert(response.data.error);
 			});
 		},
 
@@ -449,7 +451,7 @@ export default {
 				this.adminAllList = response.data.data;
 			})
 			.catch(error => {
-				console.error('데이터 에러:', error);
+				alert(response.data.error);
 			});
 		},
 
@@ -467,7 +469,7 @@ export default {
 					}
 				})
 				.catch(error => {                
-					console.error('Unexpected error:', error);
+					alert(response.data.error);
 				});
         },
 
@@ -486,7 +488,7 @@ export default {
 					}
 				})
 				.catch(error => {                
-					console.error('Unexpected error:', error);
+					alert(response.data.error);
 				});
         },
 
@@ -509,7 +511,7 @@ export default {
 					}
 				})
 				.catch(error => {                
-					console.error('Unexpected error:', error);
+					this.errorMsg = error.response.data.error;
 				});
         },
 
@@ -528,7 +530,7 @@ export default {
 					}
 				})
 				.catch(error => {                
-					console.error('Unexpected error:', error);
+					alert(response.data.error);
 				});
         },
 
@@ -541,7 +543,7 @@ export default {
 						alert('로그아웃 되었습니다.');
 						this.$router.push('/admin'); 
 					} else {                
-						alert(response.data.error);
+						console.log("로그아웃 오류");
 					}
 			})
 			.catch(error => {

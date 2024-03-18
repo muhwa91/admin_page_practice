@@ -20,11 +20,13 @@ class ManagementController extends Controller
                 )
                 ->orderByDesc('user_created')
                 ->get();
-
+        
+        $errorMsg = "오류가 발생했습니다. 페이지를 새로고침 해주세요";
         Log::debug($userAllList);
         return response()->json([
             'code' => 'ul00',
-            'data' => $userAllList
+            'data' => $userAllList,
+            'error' => $errorMsg
         ], 200);
     }
 
@@ -37,11 +39,13 @@ class ManagementController extends Controller
                     )
                     ->orderByDesc('admin_created')
                     ->get();
-
+        
+        $errorMsg = "오류가 발생했습니다. 페이지를 새로고침 해주세요";
         Log::debug($adminAllList);
         return response()->json([
             'code' => 'al00',
-            'data' => $adminAllList
+            'data' => $adminAllList,
+            'error' => $errorMsg
         ], 200);
     }
 }

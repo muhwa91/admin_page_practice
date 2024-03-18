@@ -58,7 +58,7 @@ class UserRegisterController extends Controller
                     'code' => 'ur00'
                     ,'data' => $newUser
                 ], 200);
-            }else {
+            } else {
                 $errorMsg = "오류가 발생했습니다. 페이지를 새로고침 후 재 가입해주세요";
                 Log::debug("### User 회원가입 : 예외처리 ###");
                 return response()->json([
