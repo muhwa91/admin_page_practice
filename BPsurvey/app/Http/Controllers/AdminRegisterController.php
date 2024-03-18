@@ -20,10 +20,7 @@ class AdminRegisterController extends Controller
             // Admin가입 요청 Admin 정보 저장
             $requestAdminInfo = $request
             ->only(
-                'admin_flg',
-                'admin_number', 
-                'admin_password', 
-                'admin_name',
+                'admin_number',
             );
 
             // Admin가입 요청 Admin 정보 조회

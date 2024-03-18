@@ -1,6 +1,5 @@
 <template>
-    <!-- <div v-if="!['/admin', '/admin/index', '/admin/registration', '/admin/auth/user/management'].includes($route.fullPath)"> -->
-    <div v-if="!$route.fullPath.startsWith('/admin')">
+    <div v-if="$route && $route.path !== '/admin' && $route.path !== '/admin/index' && $route.path !== '/admin/auth/user/management' && $route.path !== '/admin/auth/management' && $route.path !== '/admin/registration'">
         <div class="header_container">
             <div class="header_section">
                 <div class="header_index_area">
@@ -8,8 +7,8 @@
                 </div>
                 <div class="header_login_area">
                     <a class="font-semibold text-center header_menu_a" href="#">문의</a>
-                    <router-link v-if="isLogin" @click="userLogout" class="font-semibold text-center header_login_a">로그아웃</router-link>
-                    <router-link v-else to="/login" class="font-semibold text-center header_login_a">로그인</router-link>           
+                    <router-link to="/login" class="font-semibold text-center header_login_a" v-if="!isLogin">로그인</router-link>           
+                    <a class="font-semibold text-center header_login_a" href="/" @click="userLogout" v-if="isLogin">로그아웃</a>
                 </div>
             </div>            
         </div>
@@ -30,6 +29,7 @@ export default {
         return {
             setting: '',
             isLogin: false,
+            loginUserData: false,
         }
     },
 
@@ -38,26 +38,36 @@ export default {
     },
 
     mounted() {
-
+        
+    },
+    
+    updated() {
+        const loginUserData = localStorage.getItem('loginUserData');
+        console.log(loginUserData);
+		if (loginUserData) {
+        this.isLogin = true;
+		} else {
+			this.isLogin = false;
+		}
     },
 
     methods: {
-        // userLogout() {       
-        //     const URL = '/logout'
-        //     axios.get(URL)
-        //         .then(response => {
-        //             if(response.data.code === "ul00") {
-		// 				localStorage.removeItem('loginUserData');
-        //                 this.isLogin = false;
-        //                 this.$router.push('/');
-		// 			} else {                
-		// 				console.log(response.data.error);
-		// 			}
-        //         })
-        //         .catch(error => {
-        //             console.error('로그아웃 요청 중 오류 발생:', error);
-        //         });
-        // }
+        userLogout() {       
+            const URL = '/logout'
+            axios.get(URL)
+                .then(response => {
+                    if(response.data.code === "ul00") {
+						localStorage.clear();
+                        this.isLogin = false;
+                        this.$router.push('/');
+					} else {                
+						console.log(response.data.error);
+					}
+                })
+                .catch(error => {
+                    console.error('로그아웃 요청 중 오류 발생:', error);
+                });
+        }
     }
 }
 </script>

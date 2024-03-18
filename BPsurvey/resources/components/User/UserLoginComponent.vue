@@ -73,7 +73,7 @@ export default {
 					if(response.data.code === "ul00") {
 						const loginUserId = response.data.data.user_id;
 						console.log(loginUserId);
-						localStorage.setItem('loginUserData', loginUserId);
+						localStorage.setItem('loginUserData', String(loginUserId));
 						this.$router.push('/'); 
 					} else {                
 						alert(response.data.error);

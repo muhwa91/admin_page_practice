@@ -69,9 +69,11 @@ export default {
 			axios.post(URL, formData)
 				.then(response => {
 					if(response.data.code === "al00") {
+						const loginAdminName = response.data.data.admin_name;
 						const loginAdminFlg = response.data.data.admin_flg;
 						console.log(loginAdminFlg);
-						localStorage.setItem('loginAdminData', loginAdminFlg);
+						localStorage.setItem('loginAdminName', loginAdminName);
+						localStorage.setItem('loginAdminFlg', loginAdminFlg);
 						this.$router.push('/admin/index'); 
 					} else {                
 						alert(response.data.error);

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!['/admin', '/admin/index', '/admin/registration'].includes($route.fullPath)">
+    <div v-if="$route && $route.path !== '/admin' && $route.path !== '/admin/index' && $route.path !== '/admin/auth/user/management' && $route.path !== '/admin/auth/management' && $route.path !== '/admin/registration'">
         <hr>
         <div class="footer_container">
             <div class="footer_section">                

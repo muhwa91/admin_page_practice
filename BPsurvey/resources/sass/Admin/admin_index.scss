@@ -150,6 +150,23 @@
 						display: flex;
 						flex-direction: column;
 					}
+
+					a {
+						width: 100%;
+						display: inline-block;
+						width: 80px;
+						height: 35px;
+						line-height: 35px;
+						color: $bookpick-main-color;
+						border: 1px solid $bookpick-main-color;
+						border-radius: 10px;
+
+						&:hover {
+							border: none;
+							background-color: $bookpick-main-color;
+							color: #fff;
+						}
+					}
 				}					
 			}
 
@@ -195,7 +212,7 @@
 
 			.admin_index_right_bottom_container {
 				width: 100%;
-				height: 400px;
+				height: 300px;
 				border-radius: 10px;
 				
 				.admin_index_right_bottom_chart_section {
@@ -212,7 +229,7 @@
 
 						.admin_index_right_bottom_chart_image {
 							width: 1200px;
-							height: 300px;
+							height: 200px;
 							margin: 0 auto;
 						}
 					}
@@ -228,7 +245,7 @@
 				.admin_index_right_bottom_latest_Posts_section,
 				.admin_index_right_bottom_notice_section {
 					width: 50%;
-					height: 250px;
+					height: 200px;
 					border-radius: 10px;					
 					background-color: #fff;
 
@@ -250,7 +267,8 @@
 
 			// admin_registration			
 			.admin_index_registration_section {
-				width: 600px;
+				width: 700px;
+				height: 100vh;
 				margin: 0 auto;
 				padding: 4rem;
 
@@ -338,6 +356,224 @@
 						transition: 0.3s;
 					}
 				}				
+			}
+			// Admin Management(User)
+			.admin_auth_user_section {
+				width: 1000px;
+				margin: 0 auto;
+				padding: 5rem 0;
+
+				.admin_user_top_container {
+					width: 100%;
+					height: 150px;
+					line-height: 150px;
+				}
+
+				.admin_user_middle_container {
+					width: 100%;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+
+					.user_info_section {
+						width: 100%;
+					}
+					
+					.user_button_section {
+						width: 100%;
+
+						.user_withdrawal_button {
+							width: 50px;
+							color: #fff;
+							background-color: red;
+							border: none;
+							border-radius: 20px;
+							
+							&:hover {
+								transform: scale(1.1);
+								transition: 0.3s;
+							}
+						}
+					}
+				}
+			}
+
+			// Admin Management(User)
+			.admin_auth_user_section {
+				width: 1000px;
+				margin: 0 auto;
+				padding: 5rem 0;
+
+				.admin_user_top_container {
+					width: 100%;
+					height: 80px;
+					line-height: 150px;
+				}
+
+				.admin_user_middle_container {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;					
+					border: 1px solid #000;
+					border-radius: 20px;
+
+					.admin_user_info_title_section {
+						width: 100%;	
+						height: 100px;					
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						p {
+							width: 100%;
+							height: 100%;
+							line-height: 100px;
+							margin: 10px auto;
+							border-bottom: 1px solid #000;
+						}
+					}
+
+					.admin_user_info_content_section {
+						width: 100%;
+						height: 50px;
+						margin: 10px auto;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						.user_info_section {
+							width: 100%;
+							height: 100%;
+							line-height: 50px;
+
+							p {
+								width: 100%;
+								height: 100%;
+								text-decoration: underline;
+							}
+						}
+						
+						.user_button_section {
+							width: 100%;
+	
+							.user_auth_area {
+								width: 100%;
+								height: 60px;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								
+								.user_withdrawal_button {
+									width: 50px;
+									color: #fff;
+									background-color: red;
+									border: none;
+									border-radius: 20px;
+	
+									&:hover {
+										transform: scale(1.1);
+										transition: 0.3s;
+									}
+								}						
+							}						
+						}
+					}					
+				}
+			}
+
+			// Admin Management(Admin)
+			.admin_auth_admin_section {
+				width: 1000px;
+				margin: 0 auto;
+				padding: 5rem 0;
+
+				.admin_admin_top_container {
+					width: 100%;
+					height: 80px;
+					line-height: 150px;
+				}
+
+				.admin_admin_middle_container {
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					border: 1px solid #000;
+					border-radius: 20px;
+
+					.admin_admin_info_title_section {
+						width: 100%;	
+						height: 100px;					
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						p {
+							width: 100%;
+							height: 100%;
+							line-height: 100px;
+							margin: 10px auto;
+							border-bottom: 1px solid #000;
+						}
+					}
+
+					.admin_admin_info_content_section {
+						width: 100%;
+						height: 50px;
+						margin: 10px auto;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						.admin_info_section {
+							width: 100%;
+							height: 100%;
+							line-height: 50px;
+
+							p {
+								width: 100%;
+								height: 100%;
+								text-decoration: underline;
+							}
+						}
+						
+						.admin_button_section {
+							width: 100%;
+	
+							.admin_auth_area {
+								width: 100%;
+								height: 60px;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+	
+								select {
+									width: 100px;
+
+									&:focus {
+										outline: none;              
+									}
+								}							
+	
+								.admin_withdrawal_button {
+									width: 50px;
+									color: #fff;
+									background-color: red;
+									border: none;
+									border-radius: 20px;
+	
+									&:hover {
+										transform: scale(1.1);
+										transition: 0.3s;
+									}
+								}						
+							}						
+						}
+					}					
+				}
 			}
 		}
 	}

@@ -4,9 +4,9 @@
 			<div class="admin_index_left_container">
 				<div class="text-center admin_index_left_info_section">
 					<a href="/admin/index" class="text-3xl font-bold admin_index_left_info_title_area" @click="showIndex">BOOKPICK'</a>
-					<span class="text-xl font-semibold admin_index_left_info_name_area">여중기</span>
+					<span class="text-xl font-semibold admin_index_left_info_name_area">{{ loginAdminName }}</span>
 				</div>
-					<p class="mb-5 font-semibold text-center">권한 : Lv2</p>
+					<p class="mb-5 font-semibold text-center">권한 : {{ loginAdminFlg }}</p>
 				<hr>
 				<div class="admin_index_left_search_section">
 					<input class="admin_index_left_search_input" type="search" name="" id="" placeholder="Search here">
@@ -25,7 +25,7 @@
 							</a>
 							<ul class="admin_index_left_nav_dropdown_ul" v-if="userDropdown">
 								<li>
-									<a class="font-semibold admin_index_left_nav_a" href="/admin/auth/user/management">
+									<a class="font-semibold admin_index_left_nav_a" href="/admin/auth/user/management" @click="showUserMenuManagement">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
 										</svg>
@@ -46,7 +46,7 @@
 							</a>
 							<ul class="admin_index_left_nav_dropdown_ul" v-if="adminDropdown">
 								<li>
-									<a class="font-semibold admin_index_left_nav_a" href="#">
+									<a class="font-semibold admin_index_left_nav_a" href="/admin/auth/management" @click="showAdminMenuManagement">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 
 											0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
@@ -55,7 +55,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="/admin/registration" class="font-semibold admin_index_left_nav_a" @click="showRegistration">
+									<a class="font-semibold admin_index_left_nav_a" href="/admin/registration" @click="showAdminMenuRegistration">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 
 											4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 
@@ -74,14 +74,10 @@
 					<div class="admin_index_right_top_container">
 						<div class="admin_index_right_top_title_section">
 							<div class="admin_index_right_top_title_area">
-								<span class="mb-5 text-xl font-bold">반가워요, 여중기 관리자님!</span>
+								<span class="mb-5 text-xl font-bold">반가워요, {{ loginAdminName }} 관리자님!</span>
 								<span>시스템 관리를 간편하고 효율적으로 할 수 있도록 도와드릴게요.</span>
 							</div>
-							<a href="#">
-								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-								</svg>
-							</a>
+							<a class="text-center" href="/admin" @click="adminLogout" v-if="isAdmin">로그아웃</a>
 						</div>	
 					</div>
 					<div class="admin_index_right_middle_container">
@@ -170,18 +166,105 @@
 			</div>
 
 			<!-- User 탈퇴 -->
-			<!-- <div v-if="showAdminUserManagement">
+			<div v-if="showAdminUserManagement">
 				<div class="admin_index_right_container">
-					
+					<div class="admin_auth_user_section">
+						<div class="admin_user_top_container">
+							<div class="admin_user_title_section">
+								<p class="text-3xl font-semibold">유저관리</p>
+							</div>
+						</div>
+
+						<div class="admin_user_middle_container">
+							<div class="admin_user_info_title_section">
+								<p class="mb-10 text-xl font-medium text-center">유저 이메일</p>
+								<p class="mb-10 text-xl font-medium text-center">유저 이름</p>
+								<p class="mb-10 text-xl font-medium text-center">유저 가입날짜</p>
+								<p class="mb-10 text-xl font-medium text-center">탈퇴여부</p>
+								<p class="mb-10 text-xl font-medium text-center">탈퇴관리</p>
+							</div>
+							<div class="admin_user_info_content_section" v-for="userInfo in userAllList" :key="userInfo">
+								<div class="user_info_section">
+									<p class="text-center">{{ userInfo.user_email }}</p>
+								</div>
+								<div class="user_info_section">
+									<p class="text-center">{{ userInfo.user_name }}</p>
+								</div>
+								<div class="user_info_section">
+									<p class="text-center">{{ userInfo.user_created }}</p>
+								</div>
+								<div class="user_info_section">
+									<p class="text-center">{{ userInfo.user_deleted }}</p>
+								</div>
+								<div class="user_button_section">
+									<div class="text-center user_button_area" v-if="userInfo.user_deleted">
+										<button class="user_withdrawal_button" type="submit" @click="userWithdrawal(userInfo.user_email)">탈퇴</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- 페이지네이션 -->
+						<div class="admin_user_bottom_container">
+
+						</div>
+					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- Admin 권한 수정 및 탈퇴 -->
-			<!-- <div v-if="showAdminManagement">
+			<div v-if="showAdminAdminManagement">
 				<div class="admin_index_right_container">
-					
+					<div class="admin_auth_admin_section">
+						<div class="admin_admin_top_container">
+							<div class="admin_admin_title_section">
+								<p class="text-3xl font-semibold">어드민 관리</p>
+							</div>
+						</div>
+						
+						<div class="admin_admin_middle_container">
+							<div class="admin_admin_info_title_section">
+								<p class="mb-10 text-xl font-medium text-center">사원번호</p>
+								<p class="mb-10 text-xl font-medium text-center">사원이름</p>
+								<p class="mb-10 text-xl font-medium text-center">등록날짜</p>
+								<p class="mb-10 text-xl font-medium text-center">탈퇴여부</p>
+								<p class="mb-10 text-xl font-medium text-center">권한 및 탈퇴관리</p>
+							</div>
+							<div class="admin_admin_info_content_section" v-for="adminInfo in adminAllList" :key="adminInfo">
+								<div class="admin_info_section">
+									<p class="text-center">{{ adminInfo.admin_number }}</p>
+								</div>
+								<div class="admin_info_section">									
+									<p class="text-center">{{ adminInfo.admin_name }}</p>
+								</div>
+								<div class="admin_info_section">									
+									<p class="text-center">{{ adminInfo.admin_created }}</p>
+								</div>
+								<div class="admin_info_section">									
+									<p class="text-center">{{ adminInfo.admin_deleted }}</p>
+								</div>
+								<div class="admin_button_section">									
+									<div class="admin_auth_area">
+										<div class="mr-10 text-center admin_select_area">
+											<select class="text-center" name="admin_flg" id="admin_flg">
+												<option v-if="adminInfo.admin_flg === 2" value="1" selected>root</option>
+												<option v-if="adminInfo.admin_flg === 1" value="2" selected>sub</option>
+											</select>
+										</div>
+										<div class="text-center admin_button_area" v-if="adminInfo.admin_deleted">
+											<button class="mb-1 admin_withdrawal_button" @click="adminUpdate(adminInfo.admin_number)">변경</button>
+											<button class="admin_withdrawal_button" @click="adminWithdrawal(adminInfo.admin_number)">탈퇴</button>
+										</div>
+									</div>
+								</div>								
+							</div>							
+						</div>
+						<!-- 페이지네이션 -->
+						<div class="admin_admin_bottom_container">
+
+						</div>
+					</div>
 				</div>
-			</div> -->
+			</div>
 
 			<!-- Admin 등록 -->
 			<div v-if="showAdminRegistration">
@@ -209,7 +292,7 @@
 						</div>
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_flg">권한</label>
-							<select name="admin_flg" id="admin_flg" v-model="admin_flg">
+							<select name="admin_flg" id="admin_flg">
 								<option value="1">root</option>
 								<option value="2">sub</option>
 							</select>
@@ -253,36 +336,62 @@ export default {
 			},
 			isAdmin: false,
 			showAdminIndex: true,
+			showAdminUserManagement: false,
+			showAdminAdminManagement: false,
 			showAdminRegistration: false,
+			userAllList: [],
+			adminAllList: [],
+			userWithdrawalFormData: {
+				user_email: '',
+			},
+			adminWithdrawalFormData: {
+				admin_number: '',
+			},
+			loginAdminFlg: '',
+			loginAdminName: '',
         }
     },
 
     created() {		
-		this.showAdminUserManagement = this.$route.path === '/admin/auth/user/management';
-		this.showAdminRegistration = this.$route.path === '/admin/registration';
 		this.showAdminIndex = this.$route.path === '/admin/index';
+		this.showAdminUserManagement = this.$route.path === '/admin/auth/user/management';
+		this.showAdminAdminManagement = this.$route.path === '/admin/auth/management';
+		this.showAdminRegistration = this.$route.path === '/admin/registration';
 
 		if (this.showAdminIndex) {
-			this.showAdminRegistration = false;
 			this.showAdminUserManagement = false;
-		} else if (this.showAdminUserManagement) {
+			this.showAdminAdminManagement = false;
+			this.showAdminRegistration = false;
+		} else if(this.showAdminUserManagement) {
 			this.showAdminIndex = false;
+			this.showAdminAdminManagement = false;
+			this.showAdminRegistration = false;
+		} else if(this.showAdminAdminManagement) {
+			this.showAdminIndex = false;
+			this.showAdminUserManagement = false;
 			this.showAdminRegistration = false;
 		} else {
 			this.showAdminIndex = false;
 			this.showAdminUserManagement = false;
+			this.showAdminAdminManagement = false;
 		}
+
+		this.userList();
+		this.adminList();
 	},
 
     mounted() {
-		const adminFlg = localStorage.getItem('loginAdminData');
+		const adminFlg = localStorage.getItem('loginAdminFlg');
 		// root Admin 접속
 		if (adminFlg === '1') {
         this.isAdmin = true;
+		this.loginAdminFlg = 'root';
 		} else if (adminFlg === '2') {
 			this.isAdmin = false;
+			this.loginAdminFlg = 'sub';
 		}
-		console.log(adminFlg);
+
+		this.loginAdminName = localStorage.getItem('loginAdminName')
 	},
 
 	methods: {
@@ -296,17 +405,93 @@ export default {
 
 		showIndex() {
             this.showAdminIndex = true;
-            this.showAdminRegistration = false;
 			this.showAdminUserManagement = false;
+			this.showAdminAdminManagement = false;
+            this.showAdminRegistration = false;
         },
 
-		showRegistration() {
+		showUserMenuManagement() {
+			this.showAdminIndex = false;
+			this.showAdminUserManagement = true;
+			this.showAdminAdminManagement = false;
+            this.showAdminRegistration = false;
+		},
+
+		showAdminMenuManagement() {
+			this.showAdminIndex = false;
+			this.showAdminUserManagement = false;
+			this.showAdminAdminManagement = true;
+            this.showAdminRegistration = false;
+		},
+
+		showAdminMenuRegistration() {
             this.showAdminIndex = false;
+			this.showAdminUserManagement = false;
+			this.showAdminAdminManagement = false;
             this.showAdminRegistration = true;
         },
 
+		userList() {
+			const URL = '/admin/auth/user/management/ul';
+			axios.get(URL)
+			.then(response => {
+				this.userAllList = response.data.data;
+			})
+			.catch(error => {
+				console.error('데이터 에러:', error);
+			});
+		},
+
+		adminList() {
+			const URL = '/admin/auth/management/al';
+			axios.get(URL)
+			.then(response => {
+				this.adminAllList = response.data.data;
+			})
+			.catch(error => {
+				console.error('데이터 에러:', error);
+			});
+		},
+
+		userWithdrawal(user_email) {
+            const URL = '/admin/auth/user/management';            
+            const formData = new FormData();
+            formData.append('user_email', user_email);
+            axios.post(URL, formData)
+				.then(response => {                
+					if(response.data.code === "uw00") {
+						alert('계정이 탈퇴처리 되었습니다.');
+						this.$router.push('/admin/index'); 
+					} else {                
+						alert(response.data.error);
+					}
+				})
+				.catch(error => {                
+					console.error('Unexpected error:', error);
+				});
+        },
+
+		adminWithdrawal(admin_number) {
+            const URL = '/admin/auth/management/withdrawal';            
+            const formData = new FormData();
+            formData.append('admin_number', admin_number);	
+			console.log(this.adminWithdrawalFormData);		
+            axios.post(URL, formData)
+				.then(response => {                
+					if(response.data.code === "aw00") {
+						alert('어드민계정이 탈퇴처리 되었습니다.');
+						this.$router.push('/admin/index'); 
+					} else {                
+						alert(response.data.error);
+					}
+				})
+				.catch(error => {                
+					console.error('Unexpected error:', error);
+				});
+        },
+
 		adminRegister() {
-            const URL = '/admin/index';            
+            const URL = '/admin/registration';            
             const formData = new FormData();
             formData.append('admin_number', this.admin_number);
             formData.append('admin_password', this.admin_password);
@@ -326,7 +511,43 @@ export default {
 				.catch(error => {                
 					console.error('Unexpected error:', error);
 				});
-        }
+        },
+
+		adminUpdate(admin_number) {
+            const URL = '/admin/auth/management/update';            
+            const formData = new FormData();
+            formData.append('admin_number', admin_number);
+
+            axios.post(URL, formData)
+				.then(response => {                
+					if(response.data.code === "au00") {
+						alert('권한이 변경되었습니다.');
+						this.$router.push('/admin/index'); 
+					} else {                
+						alert(response.data.error);
+					}
+				})
+				.catch(error => {                
+					console.error('Unexpected error:', error);
+				});
+        },
+
+		adminLogout() {
+			const URL = '/admin/logout';
+			axios.get(URL)
+			.then(response => {
+				if(response.data.code === "al00") {
+						localStorage.clear();
+						alert('로그아웃 되었습니다.');
+						this.$router.push('/admin'); 
+					} else {                
+						alert(response.data.error);
+					}
+			})
+			.catch(error => {
+				console.error('Unexpected error:', error);
+			});
+		},
     }
 }
 </script>

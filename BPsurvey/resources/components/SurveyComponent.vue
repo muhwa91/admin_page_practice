@@ -14,8 +14,7 @@
 				<div class="survey_middle_survey_input_section">
 					<div class="mb-5 survey_middle_survey_input_area">
 						<input class="survey_input" type="radio" :name="'surveyAnswer_'+question.survey_question_id" :id='"surveyAnswer_"+question.survey_question_id+"_1"' 
-						value="satisfied" checked>
-						
+						value="satisfied" checked>						
 						<span class="survey_span"> 만족</span>
 					</div>
 					<div class="mb-5 survey_middle_survey_input_area">

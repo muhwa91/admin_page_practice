@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Log;
 
 class AdminAuthController extends Controller
 {
-    // ### Admin 로그인 ###
 	public function adminLogin(Request $request) 
     {   
         // 로그인 시도 처리
@@ -56,5 +55,13 @@ class AdminAuthController extends Controller
                 'error' => $errorMsg
             ], 400);
         }
+    }
+
+    public function adminLogout(Request $request) {
+        Auth::logout();
+        session_unset();
+        return response()->json([
+            'code' => 'al00'
+        ], 200);
     }
 }

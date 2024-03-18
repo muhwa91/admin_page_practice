@@ -14,7 +14,14 @@ const routes = [
 	},
 	{
 		path: '/survey',
-		component: SurveyComponent
+		component: SurveyComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginUserData')) {
+                next('/');
+            } else {
+                next();
+            }
+        },
 	},
 	{
 		path: '/login',
@@ -30,19 +37,47 @@ const routes = [
 	},
 	{
 		path: '/admin/index',
-		component: AdminIndexComponent
+		component: AdminIndexComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginAdminFlg')) {
+                next('/admin');
+            } else {
+                next();
+            }
+        },
 	},
 	{
 		path: '/admin/auth/user/management',
-		component: AdminIndexComponent
+		component: AdminIndexComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginAdminFlg')) {
+                next('/admin');
+            } else {
+                next();
+            }
+        },
 	},
 	{
 		path: '/admin/auth/management',
-		component: AdminIndexComponent
+		component: AdminIndexComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginAdminFlg')) {
+                next('/admin');
+            } else {
+                next();
+            }
+        },
 	},
 	{
 		path: '/admin/registration',
-		component: AdminIndexComponent
+		component: AdminIndexComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginAdminFlg')) {
+                next('/admin');
+            } else {
+                next();
+            }
+        },
 	},
 ];
 
