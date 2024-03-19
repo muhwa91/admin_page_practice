@@ -273,28 +273,31 @@
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_number">사원번호</label>
 							<input class="text-base admin_registration_input" type="email" name="admin_number" id="admin_number" 
-							autocomplete="off" placeholder="사원번호를 입력 해 주세요." maxlength="5" v-model="admin_number">
+							autocomplete="off" placeholder="사원번호를 입력 해 주세요." maxlength="5" v-model="registerFormData.admin_number">
 						</div>
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_password">비밀번호</label>
 							<input class="text-base admin_registration_input" type="password" name="admin_password" id="admin_password" 
-							autocomplete="off" placeholder="비밀번호를 입력 해 주세요." v-model="admin_password">
+							autocomplete="off" placeholder="비밀번호를 입력 해 주세요." v-model="registerFormData.admin_password">
 						</div>
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_password_confirm">비밀번호 확인</label>
 							<input class="text-base admin_registration_input" type="password" name="admin_password_confirm" id="admin_password_confirm" 
-							autocomplete="off" placeholder="비밀번호를 입력 해 주세요." v-model="admin_password_confirm">
+							autocomplete="off" placeholder="비밀번호를 입력 해 주세요." v-model="registerFormData.admin_password_confirm" @input="valAdminPasswordConfirm">
+							<div class="w-full text-xs text-red-500 error_message" v-if="errors.admin_password_confirm">{{ errors.admin_password_confirm }}</div>
+						<div class="w-full text-xs text-blue-500 success_message" v-else-if="!errors.admin_password_confirm && registerFormData.admin_password_confirm">비밀번호가 일치합니다</div>
+						<div class="w-full text-xs text-red-500 error_message" v-else-if="validationErrorMsg.admin_password_confirm">{{ validationErrorMsg.admin_password_confirm }}</div>
 						</div>
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_name">이름</label>
 							<input class="text-base admin_registration_input" type="text" name="admin_name" id="admin_name" 
-							autocomplete="off" placeholder="이름을 입력 해 주세요." v-model="admin_name">
+							autocomplete="off" placeholder="이름을 입력 해 주세요." v-model="registerFormData.admin_name">
 						</div>
 						<div class="admin_registration_input_area">
 							<label class="font-bold" for="admin_flg">권한</label>
 							<select name="admin_flg" id="admin_flg">
 								<option value="1">root</option>
-								<option value="2">sub</option>
+								<option value="2" selected>sub</option>
 							</select>
 						</div>
 						<p class="text-lg text-center text-red-500">{{ errorMsg }}</p>
@@ -314,6 +317,7 @@
 <script>
 import axios from 'axios';
 import Chart from 'chart.js/auto';
+
 export default {
     name: 'AdminIndexComponent',
     props: {
@@ -355,6 +359,50 @@ export default {
 			totalRegisterUser: 0,
 			totalTodayRegisterUser: 0,
 			totalSurveyResponseUser: 0,
+			// 실시간 유효성 검사
+			errorMsg: '',
+			errors: {				
+			},
+			validationErrorMsg: {
+				admin_password_confirm: '',
+				admin_name: '',
+			},
+
+			// 가입 유저 차트
+			barChartData: {
+				labels: [
+					'1월',
+					'2월', 
+					'3월', 
+					'4월', 
+					'5월', 
+					'6월', 
+					'7월', 
+					'8월', 
+					'9월', 
+					'10월', 
+					'11월', 
+					'12월'
+				],
+				datasets: [{
+						backgroundColor: [
+									'#ff9999',
+									'#ffcc99',
+									'#ffff99',
+									'#ccff99',
+									'#99ff99',
+									'#99ffcc',
+									'#99ffff',
+									'#99ccff',
+									'#9999ff',
+									'#cc99ff',
+									'#ff99ff',
+									'#ffccff',
+								],
+						data: []
+					}]
+			},
+			// 차트 메소드 작성 및 데이터 넘어오는지 확인, 뷰 메소드 작성
         }
     },
 
@@ -436,7 +484,7 @@ export default {
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = false;
             this.showAdminRegistration = true;
-        },
+        },		
 
 		userList() {
 			const URL = '/admin/auth/user/management/ul';
@@ -498,6 +546,15 @@ export default {
         },
 
 		adminRegister() {
+			if (!(this.registerFormData.admin_number && this.registerFormData.admin_password
+				&& this.registerFormData.admin_password_confirm && this.registerFormData.admin_name)) {
+				this.errorMsg = '필수입력사항을 입력해주세요.';
+				return;
+			} else if (this.registerFormData.admin_flg === 'select') {
+				this.errorMsg = '권한을 선택해주세요.';
+				return;
+			}	
+
             const URL = '/admin/registration';            
             const formData = new FormData();
             formData.append('admin_number', this.admin_number);
@@ -567,7 +624,15 @@ export default {
 			.catch(error => {
 				console.error(error);
 			});
-		}
+		},
+
+		valAdminPasswordConfirm() {
+			if(this.registerFormData.admin_password_confirm !== this.registerFormData.admin_password) {
+				this.errors.admin_password_confirm = '비밀번호와 비밀번호 확인이 일치하지 않습니다';
+			} else {
+				this.errors.admin_password_confirm = '';
+			}
+		},
     }
 }
 </script>

@@ -9,6 +9,7 @@
         .index_section {
             width: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;        
 
@@ -27,6 +28,7 @@
         .index_section {
             width: 100%;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             
@@ -42,6 +44,7 @@
         width: 500px;
         margin: 20px auto;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         
