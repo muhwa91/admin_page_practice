@@ -62,61 +62,67 @@
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_id">아이디</label>
 						<input class="text-base user_register_input" type="email" name="user_email" id="user_email" 
-						autocomplete="off" placeholder="example@email.com" v-model="user_email">
+						autocomplete="off" placeholder="example@email.com" v-model="registerFormData.user_email">
 					</div>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_email }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_password">비밀번호</label>
 						<input class="text-base user_register_input" type="password" name="user_password" id="user_password" 
-						autocomplete="off" placeholder="영문, 숫자, 특수문자 조합" v-model="registerFormData.user_password">
-						<!-- <div class="text-xs text-red-500 error_message" v-if="errors.user_password">{{ errors.user_password }}</div>
-						<div class="text-xs text-blue-500 success_message" v-else-if="!errors.user_password && registerFormData.user_password">유효한 비밀번호입니다</div>
-						<div class="text-xs text-red-500 error_message" v-else-if="validationErrorMsg.user_password">{{ validationErrorMsg.user_password }}</div> -->
-						<!-- @input="valUserPassword" -->
+						autocomplete="off" placeholder="영문, 숫자, 특수문자 조합" v-model="registerFormData.user_password" @input="valUserPassword">
+						<div class="w-full text-xs text-red-500 error_message" v-if="errors.user_password">{{ errors.user_password }}</div>
+						<div class="w-full text-xs text-blue-500 success_message" v-else-if="!errors.user_password && registerFormData.user_password">유효한 비밀번호입니다</div>
+						<div class="w-full text-xs text-red-500 error_message" v-else-if="validationErrorMsg.user_password">{{ validationErrorMsg.user_password }}</div>
 					</div>
-					
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_password }}</p>			
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_password_confirm">비밀번호 확인</label>
 						<input class="text-base user_register_input" type="password" name="user_password_confirm" id="user_password_confirm" 
-						autocomplete="off" placeholder="비밀번호를 한번 더 입력해주세요." v-model="user_password_confirm">
+						autocomplete="off" placeholder="비밀번호를 한번 더 입력해주세요." v-model="registerFormData.user_password_confirm" @input="valUserPasswordConfirm">
+						<div class="w-full text-xs text-red-500 error_message" v-if="errors.user_password_confirm">{{ errors.user_password_confirm }}</div>
+						<div class="w-full text-xs text-blue-500 success_message" v-else-if="!errors.user_password_confirm && registerFormData.user_password_confirm">비밀번호가 일치합니다</div>
+						<div class="w-full text-xs text-red-500 error_message" v-else-if="validationErrorMsg.user_password_confirm">{{ validationErrorMsg.user_password_confirm }}</div>
 					</div>
-					<p class="text-lg text-center error_span"></p>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_password_confirm }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_name">이름</label>
 						<input class="text-base user_register_input" type="text" name="user_name" id="user_name" 
-						autocomplete="off" placeholder="이름을 입력해주세요." v-model="user_name">
+						autocomplete="off" placeholder="이름을 입력해주세요." v-model="registerFormData.user_name" @input="valUserName">
+						<div class="w-full text-xs text-red-500 error_message" v-if="errors.user_name">{{ errors.user_name }}</div>
+						<div class="w-full text-xs text-blue-500 success_message" v-else-if="!errors.user_name && registerFormData.user_name">유효한 이름입니다</div>
+						<div class="w-full text-xs text-red-500 error_message" v-else-if="validationErrorMsg.user_name">{{ validationErrorMsg.user_name }}</div>
 					</div>
-					<p class="text-lg text-center error_span"></p>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_name }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_birthdate">생년월일</label>
 						<input class="text-base user_register_input" type="date" name="user_birthdate" id="user_birthdate" 
-						autocomplete="off" v-model="user_birthdate">
+						autocomplete="off" v-model="registerFormData.user_birthdate">
 					</div>
-					<p class="text-lg text-center error_span"></p>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_birthdate }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="gender">성별</label>
-						<select name="user_gender" id="user_gender" v-model="user_gender">
+						<select name="user_gender" id="user_gender" v-model="registerFormData.user_gender">
 							<option value="select">선택안함</option>
 							<option value="male">남자</option>
 							<option value="female">여자</option>
 						</select>
 					</div>
-					<p class="text-lg text-center error_span"></p>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_gender }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="carrier">통신사</label>
-						<select name="user_carrier" id="user_carrier" v-model="user_carrier">
+						<select name="user_carrier" id="user_carrier" v-model="registerFormData.user_carrier">
 							<option value="select">선택안함</option>
 							<option value="KT">KT</option>
 							<option value="LGU+">LGU+</option>
 							<option value="SKT">SKT</option>
 						</select>
 					</div>
-					<p class="text-lg text-center error_span"></p>
+					<p class="w-full text-xs text-red-500 my-20px">{{ errorMsg.user_carrier }}</p>
 					<div class="user_register_input_area">
 						<label class="font-bold" for="user_tel">휴대폰 번호</label>
 						<input class="text-base user_register_input" type="tel" name="user_tel" id="user_tel" 
-						autocomplete="off" placeholder="'-'없이 숫자만 입력 해 주세요." maxlength="11" v-model="user_tel">
+						autocomplete="off" placeholder="'-'없이 숫자만 입력 해 주세요." maxlength="11" v-model="registerFormData.user_tel">
 					</div>
-					<p class="text-lg text-center error_span">{{ errorMsg }}</p>
+					<p class="w-full text-xs text-red-500">{{ errorMsg.user_tel }}</p>
 					<div class="user_register_button_area">
 						<button class="user_register_button" type="submit" @click="userRegister">
 							<div class="user_register_button_text_area">
@@ -161,15 +167,22 @@ export default {
 				userTermsOfUse: '',
 			},
 			//실시간 유효성 검사
-			errorMsg: '',
-			errors: {},
-			validationErrorMsg: {
+			errorMsg: {
+				user_email: '',
 				user_password: '',
 				user_password_confirm: '',
 				user_name: '',
 				user_birthdate: '',
 				user_gender: '',
 				user_carrier: '',
+				user_tel: '',
+			},
+			errors: {
+			},
+			validationErrorMsg: {
+				user_password: '',
+				user_password_confirm: '',
+				user_name: '',
 			},
         }
     },
@@ -195,6 +208,20 @@ export default {
         },
 		
 		userRegister() {
+			console.log("registerFormData:", this.registerFormData);
+			if (!(this.registerFormData.user_email && this.registerFormData.user_password
+				&& this.registerFormData.user_password_confirm && this.registerFormData.user_name 
+				&& this.registerFormData.user_birthdate	&& this.registerFormData.user_tel)) {
+				this.errorMsg = '필수입력사항을 입력해주세요.';
+				return;
+			} else if (this.registerFormData.user_gender === 'select') {
+				this.errorMsg = '성별을 선택해주세요.';
+				return;
+			} else if (this.registerFormData.user_carrier === 'select') {
+				this.errorMsg = '통신사를 선택해주세요.';
+				return;
+			}			
+
             const URL = '/register';            
             const formData = new FormData();
             formData.append('user_email', this.user_email);
@@ -218,56 +245,40 @@ export default {
 				.catch(error => {        
 					this.errorMsg = error.response.data.error;
 				});
-        }
+        },
 
 		// 실시간 유효성 검사
-		// valUserPassword()  {
-		// 	if (!this.registerFormData.user_password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)) {
-		// 		this.errors.user_password = '보안이 취약합니다. 영문과 숫자, 특수문자를 포함해주세요';
-		// 	} else {
-		// 		this.errors.user_password = '';
-		// 	}
-		// }		
+		valUserPassword()  {
+			if (!this.registerFormData.user_password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/)) {
+				this.errors.user_password = '보안이 취약합니다. 영문과 숫자, 특수문자를 포함해주세요';
+			} else {
+				this.errors.user_password = '';
+			}
+		},	
 
-		// valUserPasswordConfirm() {
-		// 	if(this.registerFormData.user_password_confirm !== this.registerFormData.user_password) {
-		// 		this.errorMsg.user_password_confirm = '비밀번호와 비밀번호 확인이 일치하지 않습니다';
-		// 	} else {
-		// 		this.errorMsg.user_password_confirm = '';
-		// 	}
-		// } 
+		valUserPasswordConfirm() {
+			if(this.registerFormData.user_password_confirm !== this.registerFormData.user_password) {
+				this.errors.user_password_confirm = '비밀번호와 비밀번호 확인이 일치하지 않습니다';
+			} else {
+				this.errors.user_password_confirm = '';
+			}
+		},
 
-		// valUserName() {
-		// 	if(this.registerFormData.user_name.match(/^[가-힣]{1,50}$/)) {
-		// 		this.errorMsg.user_name = '한글로만 입력해주세요';
-		// 	} else {
-		// 		this.errorMsg.user_name = '';
-		// 	}
-		// } 
+		valUserName() {
+			if(!this.registerFormData.user_name.match(/^[가-힣]{1,50}$/)) {
+				this.errors.user_name = '한글로만 입력해주세요';
+			} else {
+				this.errors.user_name = '';
+			}
+		},
 
-		// valUserBirthdate() {
-		// 	if(this.registerFormData.user_birthdate.match(/^(19|20)\d\d-(0[1-9]|1[0-2])-((0[1-9])|([12][0-9])|(3[01]))$/)) {
-		// 		this.errorMsg.user_birthdate = '생년월일이 유효하지 않습니다';
-		// 	} else {
-		// 		this.errorMsg.user_birthdate = '';
-		// 	}
-		// } 
-
-		// valUserGender() {
-		// 	if(!this.registerFormData.user_gender) {
-		// 		this.errorMsg.user_gender = '성별을 선택해주세요';
-		// 	} else {
-		// 		this.errorMsg.user_gender = '';
-		// 	}
-		// } 		
-
-		// valUserCarrier() {
-		// 	if(!this.registerFormData.user_carrier) {
-		// 		this.errorMsg.user_carrier = '통신사를 선택해주세요';
-		// 	} else {
-		// 		this.errorMsg.user_carrier = '';
-		// 	}
-		// } 
+		valUserBirthdate() {
+			if(!this.registerFormData.user_birthdate.match(/^(19|20)\d\d-(0[1-9]|1[0-2])-((0[1-9])|([12][0-9])|(3[01]))$/)) {
+				this.errors.user_birthdate = '생년월일이 유효하지 않습니다';
+			} else {
+				this.errors.user_birthdate = '';
+			}
+		},
     }
 }
 </script>

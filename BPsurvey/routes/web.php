@@ -10,6 +10,7 @@ use App\Http\Controllers\UserWithdrawalController;
 use App\Http\Controllers\AdminWithdrawalController;
 use App\Http\Controllers\AdminUpdateController;
 use App\Http\Controllers\SurveyController;
+use App\Http\Controllers\TotalUserStatController;
 
 
 /*
@@ -27,7 +28,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// ### User ###
+// ### Survey ###
+Route::prefix('survey')->group(function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+    Route::get('/user', [SurveyController::class, 'surveyListGet']);
+    Route::post('/', [SurveyController::class, 'surveyPost'])->name('surveyPost');
+});
+
+
+// ### User auth ###
 // User Login
 Route::middleware('userValidation')->prefix('login')->group(function() {
     Route::get('/', function () {
@@ -45,7 +56,8 @@ Route::middleware('userValidation')->prefix('register')->group(function() {
     Route::post('/', [UserRegisterController::class, 'userRegister'])->name('userRegister');
 });
 
-// ### Admin ###
+
+// ### Admin auth ###
 // Admin Login
 Route::middleware('adminValidation')->prefix('admin')->group(function() {
     Route::get('/', function () {
@@ -60,7 +72,9 @@ Route::middleware('adminValidation')->prefix('admin/index')->group(function() {
     });
     Route::post('/', [AdminRegisterController::class, 'adminRegister'])->name('adminRegister');
 });
-// Admin Sidebar Menu
+
+
+// ### Admin Sidebar Menu ###
 Route::prefix('admin')->group(function() {
     // Admin index
     Route::get('/index', function () {
@@ -87,15 +101,11 @@ Route::prefix('admin')->group(function() {
     // Admin registration
     Route::get('/registration', function () {
         return view('welcome');
-    });    
-});
-
-### Survey ###
-Route::prefix('survey')->group(function() {
-    Route::get('/', function () {
-        return view('welcome');
     });
-    Route::get('/user', [SurveyController::class, 'surveyListGet']);
-    Route::post('/', [SurveyController::class, 'surveyPost'])->name('surveyPost');
+    Route::get('/index/totalUserStat', [TotalUserStatController::class, 'totalUserStat']);
 });
 
+// ### Admin Total Statistics ###
+
+
+// ### Admin Survey Stattistics ###

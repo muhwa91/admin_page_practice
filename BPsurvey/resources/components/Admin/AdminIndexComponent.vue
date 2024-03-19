@@ -89,9 +89,9 @@
 									</svg>							
 								</div>
 								<div class="admin_index_right_middle_number_of_transactions_text">
-									<p class="font-semibold">총 결제 건수</p>
-									<span class="text-3xl font-extrabold">10,000,000 </span>
-									<span class="font-semibold">건</span>
+									<p class="font-semibold">총 가입유저 수</p>
+									<span class="text-3xl font-extrabold">{{ totalRegisterUser }}</span>
+									<span class="font-semibold"> 명</span>
 								</div>
 							</div>
 						</div>
@@ -103,9 +103,9 @@
 									</svg>
 								</div>
 								<div class="admin_index_right_middle_paymont_amount_text">
-									<p class="font-semibold">총 결제금액</p>
-									<span class="text-3xl font-extrabold">10,000,000 </span>
-									<span class="font-semibold">원</span>
+									<p class="font-semibold">금일 가입유저 수</p>
+									<span class="text-3xl font-extrabold">{{ totalTodayRegisterUser }}</span>
+									<span class="font-semibold"> 명</span>
 								</div>
 							</div>
 						</div>
@@ -117,9 +117,9 @@
 									</svg>
 								</div>
 								<div class="admin_index_right_middle_register_users_text">
-									<p class="font-semibold">총 이용자 수</p>
-									<span class="text-3xl font-extrabold">10,000,000 </span>
-									<span class="font-semibold">명</span>
+									<p class="font-semibold">만족도 조사 참여유저 수</p>
+									<span class="text-3xl font-extrabold">{{ totalSurveyResponseUser }}</span>
+									<span class="font-semibold"> 명</span>
 								</div>
 							</div>
 						</div>					
@@ -313,6 +313,7 @@
 </template>
 <script>
 import axios from 'axios';
+import Chart from 'chart.js/auto';
 export default {
     name: 'AdminIndexComponent',
     props: {
@@ -351,6 +352,9 @@ export default {
 			loginAdminFlg: '',
 			loginAdminName: '',
 			errorMsg: '',
+			totalRegisterUser: 0,
+			totalTodayRegisterUser: 0,
+			totalSurveyResponseUser: 0,
         }
     },
 
@@ -380,6 +384,7 @@ export default {
 
 		this.userList();
 		this.adminList();
+		this.adminTotalUser();
 	},
 
     mounted() {
@@ -393,7 +398,7 @@ export default {
 			this.loginAdminFlg = 'sub';
 		}
 
-		this.loginAdminName = localStorage.getItem('loginAdminName')
+		this.loginAdminName = localStorage.getItem('loginAdminName');
 	},
 
 	methods: {
@@ -550,6 +555,19 @@ export default {
 				console.error('Unexpected error:', error);
 			});
 		},
+
+		adminTotalUser() {
+			const URL = '/admin/index/totalUserStat';
+			axios.get(URL)
+			.then(response => {
+				this.totalRegisterUser = response.data.totalRegisterUser;
+				this.totalTodayRegisterUser = response.data.totalTodayRegisterUser;
+				this.totalSurveyResponseUser = response.data.totalSurveyResponseUser;				
+			})
+			.catch(error => {
+				console.error(error);
+			});
+		}
     }
 }
 </script>
