@@ -85,8 +85,8 @@
 							<div class="admin_index_right_middle_number_of_transactions">
 								<div class="admin_index_right_middle_number_of_transactions_image">
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-									</svg>							
+										<path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
+									</svg>		
 								</div>
 								<div class="admin_index_right_middle_number_of_transactions_text">
 									<p class="font-semibold">총 가입유저 수</p>
@@ -98,8 +98,8 @@
 						<div class="mr-5 admin_index_right_middle_section">
 							<div class="admin_index_right_middle_paymont_amount">
 								<div class="admin_index_right_middle_paymont_amount_image">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
 									</svg>
 								</div>
 								<div class="admin_index_right_middle_paymont_amount_text">
@@ -112,8 +112,8 @@
 						<div class="admin_index_right_middle_section">
 							<div class="admin_index_right_middle_register_users">
 								<div class="admin_index_right_middle_register_users_image">
-									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
 									</svg>
 								</div>
 								<div class="admin_index_right_middle_register_users_text">
@@ -127,8 +127,8 @@
 					<div class="admin_index_right_bottom_container">
 						<div class="admin_index_right_bottom_chart_section">
 							<div class="admin_index_right_bottom_chart_area">
-								<p class="mb-5 text-xl font-semibold">월 별, 분기 별 통계</p>
-								<img class="admin_index_right_bottom_chart_image" src="../../../public/images/Admin_chart_ex.png" alt="">
+								<p class="mb-5 text-xl font-semibold">월 별 가입유저 수</p>
+								<apexchart width="1200" height="230" type="bar" :options="chartOption" :series="barChartData"></apexchart>
 							</div>
 						</div>
 						<div class="admin_index_right_bottom_text_section">
@@ -316,7 +316,7 @@
 </template>
 <script>
 import axios from 'axios';
-import Chart from 'chart.js/auto';
+import VueApexCharts from "vue3-apexcharts";
 
 export default {
     name: 'AdminIndexComponent',
@@ -325,7 +325,7 @@ export default {
     },
     
     components: {
-
+		apexchart: VueApexCharts,
     },
 
     data() {
@@ -368,41 +368,34 @@ export default {
 				admin_name: '',
 			},
 
-			// 가입 유저 차트
-			barChartData: {
-				labels: [
-					'1월',
-					'2월', 
-					'3월', 
-					'4월', 
-					'5월', 
-					'6월', 
-					'7월', 
-					'8월', 
-					'9월', 
-					'10월', 
-					'11월', 
-					'12월'
-				],
-				datasets: [{
-						backgroundColor: [
-									'#ff9999',
-									'#ffcc99',
-									'#ffff99',
-									'#ccff99',
-									'#99ff99',
-									'#99ffcc',
-									'#99ffff',
-									'#99ccff',
-									'#9999ff',
-									'#cc99ff',
-									'#ff99ff',
-									'#ffccff',
-								],
-						data: []
-					}]
+			// 가입 유저 차트(BarChart)	
+			chartOption: {
+				chart: {
+					id: "bar-chart"
+				},
+				xaxis: {
+					categories: [
+					],
+				},
+				yaxis: {
+					tickAmount: 5,
+					forceNiceScale: true,
+					min: 0,
+					max: 100,
+				},
 			},
-			// 차트 메소드 작성 및 데이터 넘어오는지 확인, 뷰 메소드 작성
+			barChartData: [
+				{
+					name: "가입자 수",
+					data: [],					
+				}
+			],
+
+			// 페이징 처리
+			userListInfo: [],
+			currentPage: 1,
+			perpage: 7,
+			totalpages: 1,
         }
     },
 
@@ -433,6 +426,7 @@ export default {
 		this.userList();
 		this.adminList();
 		this.adminTotalUser();
+		this.barChartDataList();
 	},
 
     mounted() {
@@ -446,7 +440,7 @@ export default {
 			this.loginAdminFlg = 'sub';
 		}
 
-		this.loginAdminName = localStorage.getItem('loginAdminName');
+		this.loginAdminName = localStorage.getItem('loginAdminName');	
 	},
 
 	methods: {
@@ -491,6 +485,8 @@ export default {
 			axios.get(URL)
 			.then(response => {
 				this.userAllList = response.data.data;
+				// this.userListInfo = this.userAllList.slice(0, this.perPage);
+				// this.totalPages = Math.ceil(this.userAllList.length / this.perPage);
 			})
 			.catch(error => {
 				alert(response.data.error);
@@ -632,6 +628,24 @@ export default {
 			} else {
 				this.errors.admin_password_confirm = '';
 			}
+		},
+
+		barChartDataList() {			
+			const URL = '/admin/index/barChart';
+			axios.get(URL)
+				.then(response => {
+					if(response.data.code === "bd00") {			
+						response.data.monthlyRegisterUserData.forEach(monthlyRegisterUserData => {
+							this.chartOption.xaxis.categories.push(monthlyRegisterUserData.month+'월');						
+							this.barChartData[0].data.push(monthlyRegisterUserData.user_count);
+						});
+					} else {
+						console.error('Response data is not an array:', response.data);
+					}
+				})
+				.catch(error => {
+					console.error(error);
+				});
 		},
     }
 }

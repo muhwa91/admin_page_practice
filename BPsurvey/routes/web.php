@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminWithdrawalController;
 use App\Http\Controllers\AdminUpdateController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\TotalUserStatController;
+use App\Http\Controllers\ChartController;
 
 
 /*
@@ -102,10 +103,13 @@ Route::prefix('admin')->group(function() {
     Route::get('/registration', function () {
         return view('welcome');
     });
+    // Admin Total Statistics 
     Route::get('/index/totalUserStat', [TotalUserStatController::class, 'totalUserStat']);
+    // Admin Register Statisticss
+    Route::get('/index/barChart', [ChartController::class, 'barChartData']);
 });
 
-// ### Admin Total Statistics ###
 
 
-// ### Admin Survey Stattistics ###
+
+
