@@ -79,6 +79,17 @@ const routes = [
             }
         },
 	},
+	{
+		path: '/admin/question',
+		component: AdminIndexComponent,
+		beforeEnter: (to, from, next) => {
+            if (!localStorage.getItem('loginAdminFlg')) {
+                next('/admin');
+            } else {
+                next();
+            }
+        },
+	},
 ];
 
 const router = createRouter({

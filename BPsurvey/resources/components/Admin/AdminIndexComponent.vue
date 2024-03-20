@@ -8,9 +8,6 @@
 				</div>
 					<p class="mb-5 font-semibold text-center">권한 : {{ loginAdminFlg }}</p>
 				<hr>
-				<div class="admin_index_left_search_section">
-					<input class="admin_index_left_search_input" type="search" name="" id="" placeholder="Search here">
-				</div>
 				<div class="admin_index_left_nav_section">
 					<ul class="admin_index_left_nav_ul">
 						<li class="admin_index_left_nav_li">
@@ -132,32 +129,18 @@
 							</div>
 						</div>
 						<div class="admin_index_right_bottom_text_section">
-							<div class="mr-5 admin_index_right_bottom_notice_section">
-								<div class="admin_index_right_bottom_notice_title_area">
-									<span class="mb-5 text-xl font-semibold">공지사항</span>
-									<a class="admin_index_right_bottom_notice_title_a" href="#">
+							<div class=" admin_index_right_bottom_latest_Posts_section">
+								<div class="admin_index_right_bottom_latest_Posts_title_area">
+									<span class="mb-5 text-xl font-semibold">만족도 조사 질문 등록</span>
+									<a class="admin_index_right_bottom_latest_Posts_title_a" href="/admin/question">
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
 										</svg>
-									More
-									</a>
-								</div>
-								<div class="admin_index_right_bottom_notice_content_area">
-									
-								</div>
-							</div>
-							<div class=" admin_index_right_bottom_latest_Posts_section">
-								<div class="admin_index_right_bottom_latest_Posts_title_area">
-									<span class="mb-5 text-xl font-semibold">최신 작성 글</span>
-									<a class="admin_index_right_bottom_latest_Posts_title_a" href="#">
-										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-													<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-										</svg>
-									More
-									</a>
+									추가
+									</a>									
 								</div>
 								<div class="admin_index_right_bottom_latest_Posts_content_area">
-									
+									<p class="mb-2 text-sm font-semibold" v-for="question in surveyQuestionList" :key="question">{{ question.survey_question_title }}</p>
 								</div>
 							</div>
 						</div>
@@ -183,33 +166,81 @@
 								<p class="mb-10 text-xl font-medium text-center">탈퇴여부</p>
 								<p class="mb-10 text-xl font-medium text-center">탈퇴관리</p>
 							</div>
-							<div class="admin_user_info_content_section" v-for="userInfo in userAllList" :key="userInfo">
+							<div class="admin_user_info_content_section" v-for="user in userAllList" :key="user">
 								<div class="user_info_section">
-									<p class="text-center">{{ userInfo.user_email }}</p>
+									<p class="text-center">{{ user.user_email }}</p>
 								</div>
 								<div class="user_info_section">
-									<p class="text-center">{{ userInfo.user_name }}</p>
+									<p class="text-center">{{ user.user_name }}</p>
 								</div>
 								<div class="user_info_section">
-									<p class="text-center">{{ userInfo.user_created }}</p>
+									<p class="text-center">{{ user.user_created_at }}</p>
 								</div>
 								<div class="user_info_section">
-									<p class="text-center">{{ userInfo.user_deleted }}</p>
+									<p class="text-center">{{ user.deleted_at  ? 'Y' : 'N'  }}</p>
 								</div>
 								<div class="user_button_section">
-									<div class="text-center user_button_area" v-if="userInfo.user_deleted">
-										<button class="user_withdrawal_button" type="submit" @click="userWithdrawal(userInfo.user_email)">탈퇴</button>
+									<div class="text-center user_button_area" v-if="!user.deleted_at">
+										<button class="user_withdrawal_button" type="submit" @click="userWithdrawal(user.user_email)">탈퇴</button>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 						<!-- 페이지네이션 -->
 						<div class="admin_user_bottom_container">
-
+							<div class="admin_user_paging_section">
+								<div class="admin_user_paging_area">
+									<ul class="mt-5 admin_user_paging_ul">
+										<li class="admin_user_paging_li" :class="[{ 'disabled': this.page === 1 }, (this.page !== 1) ? 'cursor-pointer' : '']">
+											<div class="admin_user_paging_p_area">
+												<p class="admin_user_paging_p" @click="userListUpdate(1)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_user_paging_li" :class="[{ 'disabled': this.page === 1 }, (this.page !== 1) ? 'cursor-pointer' : '']">
+											<div class="admin_user_paging_p_area">
+												<p class="admin_user_paging_p" @click="userListUpdate(prevnum)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_user_paging_li" v-for="num in numbox" :key="num" :class="[{ 'active': num === this.page }, (num !== this.page) ? 'cursor-pointer' : '']">
+											<span class="mt-5 text-lg font-semibold text-center admin_user_paging_p" @click="userListUpdate(num)">{{ num }}</span>
+										</li>
+										<li class="admin_user_paging_li" :class="[{ 'disabled': this.page === this.lastpage }, (this.page !== this.lastpage) ? 'cursor-pointer' : '']">
+											<div class="admin_user_paging_p_area">
+												<p class="admin_user_paging_p" @click="userListUpdate(nextnum)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_user_paging_li" :class="[{ 'disabled': this.page === this.lastpage }, (this.page !== this.lastpage) ? 'cursor-pointer' : '']">
+											<div class="admin_user_paging_p_area">
+												<p class="admin_user_paging_p" @click="userListUpdate(lastpage)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+					
+				
+			
 
 			<!-- Admin 권한 수정 및 탈퇴 -->
 			<div v-if="showAdminAdminManagement">
@@ -229,30 +260,30 @@
 								<p class="mb-10 text-xl font-medium text-center">탈퇴여부</p>
 								<p class="mb-10 text-xl font-medium text-center">권한 및 탈퇴관리</p>
 							</div>
-							<div class="admin_admin_info_content_section" v-for="adminInfo in adminAllList" :key="adminInfo">
+							<div class="admin_admin_info_content_section" v-for="admin in adminAllList" :key="admin">
 								<div class="admin_info_section">
-									<p class="text-center">{{ adminInfo.admin_number }}</p>
+									<p class="text-center">{{ admin.admin_number }}</p>
 								</div>
 								<div class="admin_info_section">									
-									<p class="text-center">{{ adminInfo.admin_name }}</p>
+									<p class="text-center">{{ admin.admin_name }}</p>
 								</div>
 								<div class="admin_info_section">									
-									<p class="text-center">{{ adminInfo.admin_created }}</p>
+									<p class="text-center">{{ admin.created_at }}</p>
 								</div>
 								<div class="admin_info_section">									
-									<p class="text-center">{{ adminInfo.admin_deleted }}</p>
+									<p class="text-center">{{ admin.deleted_at }}</p>
 								</div>
 								<div class="admin_button_section">									
 									<div class="admin_auth_area">
 										<div class="mr-10 text-center admin_select_area">
 											<select class="text-center" name="admin_flg" id="admin_flg">
-												<option v-if="adminInfo.admin_flg === 2" value="1" selected>root</option>
-												<option v-if="adminInfo.admin_flg === 1" value="2" selected>sub</option>
+												<option v-if="admin.admin_flg === 2" value="1" selected>root</option>
+												<option v-if="admin.admin_flg === 1" value="2" selected>sub</option>
 											</select>
 										</div>
-										<div class="text-center admin_button_area" v-if="adminInfo.admin_deleted">
-											<button class="mb-1 admin_withdrawal_button" @click="adminUpdate(adminInfo.admin_number)">변경</button>
-											<button class="admin_withdrawal_button" @click="adminWithdrawal(adminInfo.admin_number)">탈퇴</button>
+										<div class="text-center admin_button_area" v-if="admin.deleted_at">
+											<button class="mb-1 admin_withdrawal_button" @click="adminUpdate(admin.admin_number)">변경</button>
+											<button class="admin_withdrawal_button" @click="adminWithdrawal(admin.admin_number)">탈퇴</button>
 										</div>
 									</div>
 								</div>								
@@ -260,7 +291,51 @@
 						</div>
 						<!-- 페이지네이션 -->
 						<div class="admin_admin_bottom_container">
-
+							<div class="admin_admin_paging_section">
+								<div class="admin_admin_paging_area">
+									<ul class="mt-5 admin_admin_paging_ul">
+										<li class="admin_admin_paging_li" :class="[{ 'disabled': this.page === 1 }, (this.page !== 1) ? 'cursor-pointer' : '']">
+											<div class="admin_admin_paging_p_area">
+												<p class="text-center admin_admin_paging_p" @click="adminListUpdate(1)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_admin_paging_li" :class="[{ 'disabled': this.page === 1 }, (this.page !== 1) ? 'cursor-pointer' : '']">
+											<div class="admin_admin_paging_p_area">
+												<p class="text-center admin_admin_paging_p" @click="adminListUpdate(prevnum)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_admin_paging_li" v-for="num in numbox" :key="num" :class="[{ 'active': num === this.page }, (num !== this.page) ? 'cursor-pointer' : '']">
+											<span class="mt-5 text-lg font-semibold text-center admin_admin_paging_span" @click="adminListUpdate(num)">{{ num }}</span>
+										</li>
+										<li class="admin_admin_paging_li" :class="[{ 'disabled': this.page === this.lastpage }, (this.page !== this.lastpage) ? 'cursor-pointer' : '']">
+											<div class="admin_admin_paging_p_area">
+												<p class="text-center admin_admin_paging_p" @click="adminListUpdate(nextnum)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+										<li class="admin_admin_paging_li" :class="[{ 'disabled': this.page === this.lastpage }, (this.page !== this.lastpage) ? 'cursor-pointer' : '']">
+											<div class="admin_admin_paging_p_area">
+												<p class="text-center admin_admin_paging_p" @click="adminListUpdate(lastpage)">
+													<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+														<path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+													</svg>
+												</p>
+											</div>
+										</li>
+									</ul>
+								</div>								
+							</div>
 						</div>
 					</div>
 				</div>
@@ -311,6 +386,26 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 만족도 조사 질문 등록 -->
+			<div v-if="showAdminQuestionAdd">
+				<div class="admin_index_right_container">
+					<div class="admin_question_add_section">
+						<div class="admin_question_add_input_area">
+							<input class="text-base admin_question_add_input" type="text" name="survey_question_title" id="survey_question_title" 
+							autocomplete="off" placeholder="추가할 질문을 입력해주세요" v-model="questionFormData.survey_question_title">
+						</div>
+						<p class="text-lg text-center text-red-500">{{ errorMsg }}</p>
+						<div class="admin_question_add_button_area">
+							<button class="admin_question_add_button" type="submit" @click="adminQuestionAdd">
+								<div class="question_add_button_text_area">
+								<span class="text-base font-semibold">등록하기</span>
+								</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -345,8 +440,7 @@ export default {
 			showAdminUserManagement: false,
 			showAdminAdminManagement: false,
 			showAdminRegistration: false,
-			userAllList: [],
-			adminAllList: [],
+			showAdminQuestionAdd: false,			
 			userWithdrawalFormData: {
 				user_email: '',
 			},
@@ -359,6 +453,9 @@ export default {
 			totalRegisterUser: 0,
 			totalTodayRegisterUser: 0,
 			totalSurveyResponseUser: 0,
+			questionFormData: {
+				survey_question_title: '',
+			},
 			// 실시간 유효성 검사
 			errorMsg: '',
 			errors: {				
@@ -366,6 +463,8 @@ export default {
 			validationErrorMsg: {
 				admin_password_confirm: '',
 				admin_name: '',
+			},
+			surveyQuestionList: {
 			},
 
 			// 가입 유저 차트(BarChart)	
@@ -392,10 +491,28 @@ export default {
 			],
 
 			// 페이징 처리
-			userListInfo: [],
+			userAllList: [],
+			adminAllList: [],
+			paginationData: {},
 			currentPage: 1,
-			perpage: 7,
-			totalpages: 1,
+			lastPage: 1, // 마지막 페이지 번호
+			perPage: 7, // 페이지당 항목 수
+			totalPageData: 0, // 전체 항목 수
+			
+			// 페이지
+			page:1,
+
+			lastpage:1,
+
+			first_num:1,
+
+			last_num:1,
+
+			prevnum:1,
+
+			nextnum:2,
+
+			numbox:[],
         }
     },
 
@@ -404,29 +521,35 @@ export default {
 		this.showAdminUserManagement = this.$route.path === '/admin/auth/user/management';
 		this.showAdminAdminManagement = this.$route.path === '/admin/auth/management';
 		this.showAdminRegistration = this.$route.path === '/admin/registration';
+		this.showAdminQuestionAdd = this.$route.path === '/admin/question';
 
 		if (this.showAdminIndex) {
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = false;
 			this.showAdminRegistration = false;
+			this.showAdminQuestionAdd = false;
 		} else if(this.showAdminUserManagement) {
 			this.showAdminIndex = false;
 			this.showAdminAdminManagement = false;
 			this.showAdminRegistration = false;
+			this.showAdminQuestionAdd = false;
 		} else if(this.showAdminAdminManagement) {
 			this.showAdminIndex = false;
 			this.showAdminUserManagement = false;
 			this.showAdminRegistration = false;
-		} else {
+			this.showAdminQuestionAdd = false;
+		} else if (this.showAdminRegistration) {
 			this.showAdminIndex = false;
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = false;
+			this.showAdminQuestionAdd = false;
 		}
 
-		this.userList();
-		this.adminList();
+		this.userListUpdate();
+		this.adminListUpdate();
 		this.adminTotalUser();
 		this.barChartDataList();
+		this.surveyList()
 	},
 
     mounted() {
@@ -457,6 +580,7 @@ export default {
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = false;
             this.showAdminRegistration = false;
+			this.showAdminQuestionAdd = false;
         },
 
 		showUserMenuManagement() {
@@ -464,6 +588,7 @@ export default {
 			this.showAdminUserManagement = true;
 			this.showAdminAdminManagement = false;
             this.showAdminRegistration = false;
+			this.showAdminQuestionAdd = false;
 		},
 
 		showAdminMenuManagement() {
@@ -471,6 +596,7 @@ export default {
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = true;
             this.showAdminRegistration = false;
+			this.showAdminQuestionAdd = false;
 		},
 
 		showAdminMenuRegistration() {
@@ -478,30 +604,77 @@ export default {
 			this.showAdminUserManagement = false;
 			this.showAdminAdminManagement = false;
             this.showAdminRegistration = true;
+			this.showAdminQuestionAdd = false;
         },		
 
-		userList() {
-			const URL = '/admin/auth/user/management/ul';
+		showAdminindexQuestionAdd() {
+			this.showAdminIndex = false;
+			this.showAdminUserManagement = false;
+			this.showAdminAdminManagement = false;
+			this.showAdminRegistration = false;
+            this.showAdminQuestionAdd = true;
+		},
+
+		userListUpdate(page) {
+			const URL = '/admin/auth/user/management/ul?page=' + page;
 			axios.get(URL)
 			.then(response => {
-				this.userAllList = response.data.data;
-				// this.userListInfo = this.userAllList.slice(0, this.perPage);
-				// this.totalPages = Math.ceil(this.userAllList.length / this.perPage);
+				this.userAllList = response.data.userAllList.data;
+				console.log(response.data.userAllList.data);
+				this.page = response.data.userAllList.current_page;
+				this.lastpage = response.data.userAllList.last_page;
+				this.paging()
 			})
 			.catch(error => {
-				alert(response.data.error);
+				alert(error.response.data.error);
 			});
 		},
 
-		adminList() {
-			const URL = '/admin/auth/management/al';
+		adminListUpdate(page) {
+			const URL = '/admin/auth/management/al?page=' + page;
 			axios.get(URL)
 			.then(response => {
-				this.adminAllList = response.data.data;
+				this.adminAllList = response.data.adminAllList.data;
+				console.log(this.adminAllList);
+				this.page = response.data.adminAllList.current_page;
+				this.lastpage = response.data.adminAllList.last_page;
+				this.paging()
 			})
 			.catch(error => {
-				alert(response.data.error);
+				alert(error.response.data.error);
 			});
+		},
+
+		paging(){
+			this.numbox = [];
+			if(this.lastpage < 7){
+				this.first_num = 1
+				this.last_num = this.lastpage
+			} else {
+				if(this.page <= 4){
+					this.first_num = 1
+					this.last_num = 7
+				} else if(this.page >= this.lastpage-3) {
+					this.first_num = this.lastpage-6
+					this.last_num = this.lastpage
+				} else {
+					this.first_num = this.page-3
+					this.last_num = this.page+3
+				}
+			}	
+			for(let i = this.first_num; i <= this.last_num; i++){
+					this.numbox.push(i);
+				}
+			if(this.page === 1){
+				this.prevnum = 1
+				this.nextnum = 2
+			}else if(this.page === this.lastpage){
+				this.prevnum = this.lastpage-1
+				this.nextnum = this.lastpage
+			}else{  
+				this.prevnum = this.page-1
+				this.nextnum = this.page+1
+			}
 		},
 
 		userWithdrawal(user_email) {
@@ -647,6 +820,42 @@ export default {
 					console.error(error);
 				});
 		},
+
+		surveyList() {
+			const URL = '/admin/index/survey';
+			axios.get(URL)
+			.then(response => {				
+				this.surveyQuestionList = response.data.data;
+				console.log(this.surveyQuestionList);
+			})
+			.catch(error => {
+				console.error('데이터 에러:', error);
+			});
+		},
+
+		adminQuestionAdd() {
+			if (!(this.questionFormData.survey_question_title)) {
+				this.errorMsg = '등록할 질문을 입력해주세요.';
+				return;
+			} 
+
+            const URL = '/admin/question';            
+            const formData = new FormData();
+            formData.append('survey_question_title', this.questionFormData.survey_question_title);
+			console.log(this.survey_question_title);
+            axios.post(URL, formData)
+				.then(response => {                
+					if(response.data.code === "qa00") {
+						alert('만족도 조사 질문이 생성되었습니다.');
+						this.$router.push('/admin/index'); 
+					} else {                
+						alert(response.data.error);
+					}
+				})
+				.catch(error => {                
+					this.errorMsg = error.response.data.error;
+				});
+        },
     }
 }
 </script>

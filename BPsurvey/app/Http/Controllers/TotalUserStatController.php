@@ -20,7 +20,8 @@ class TotalUserStatController extends Controller
         $totalTodayRegisterUser = User::where('created_at','>=', now())
                                 ->count();
         // 만족도 조사 참여유저 수
-        $totalSurveyResponseUser = Survey_responses::where('survey_response_id')
+        $totalSurveyResponseUser = Survey_responses::whereNotNull('user_id')
+                    ->distinct('user_id')
                     ->count();     
         
         Log::debug("### 총 가입유저 수 : " . $totalRegisterUser . " ###");

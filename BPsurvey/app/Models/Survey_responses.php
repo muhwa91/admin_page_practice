@@ -10,10 +10,13 @@ class Survey_responses extends Model
 {
     use HasFactory, softDeletes;
 
+    protected $table = 'survey_responses';
     protected $primaryKey = 'survey_response_id';
+    public $timestamps = true;
 
     protected $fillable = [
         'user_id',
         'survey_question_id',
+        'survey_response_content',
     ];
 }

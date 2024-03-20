@@ -244,8 +244,8 @@
 
 				.admin_index_right_bottom_latest_Posts_section,
 				.admin_index_right_bottom_notice_section {
-					width: 50%;
-					height: 200px;
+					width: 100%;
+					height: 300px;
 					border-radius: 10px;					
 					background-color: #fff;
 
@@ -261,6 +261,13 @@
 						.admin_index_right_bottom_latest_Posts_title_a {
 							display: flex;
 						}
+					}
+
+					.admin_index_right_bottom_latest_Posts_content_area {
+						width: 100%;
+						height: 200px;
+						overflow-y: scroll;
+						padding: 20px;
 					}
 				}
 			}
@@ -357,6 +364,7 @@
 					}
 				}				
 			}
+
 			// Admin Management(User)
 			.admin_auth_user_section {
 				width: 1000px;
@@ -481,6 +489,47 @@
 						}
 					}					
 				}
+
+				.admin_user_bottom_container {
+					width: 100%;
+
+					.admin_user_paging_section {
+						width: 100%;
+
+						.admin_user_paging_area {
+							width: 100%;
+
+							.admin_user_paging_ul {
+								width: 100%;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+
+								.admin_user_paging_li {
+									margin: 0 10px;
+									cursor: pointer;
+
+									.admin_user_paging_p_area {
+										width: 30px;
+										height: 30px;
+
+										.admin_user_paging_p {
+											color: $bookpick-main-color;
+											border: 1px solid $bookpick-main-color;
+											border-radius: 10px;											
+
+											&:hover {
+												border: none;
+												background-color: $bookpick-main-color;
+												color: #fff;
+											}
+										}
+									}										
+								}
+							}
+						}
+					}
+				}
 			}
 
 			// Admin Management(Admin)
@@ -574,7 +623,112 @@
 						}
 					}					
 				}
+
+				.admin_admin_bottom_container {
+					width: 100%;
+
+					.admin_admin_paging_section {
+						width: 100%;
+
+						.admin_admin_paging_area {
+							width: 100%;
+
+							.admin_admin_paging_ul {
+								width: 100%;
+								display: flex;
+								justify-content: center;
+								align-items: center;
+
+								.admin_admin_paging_li {
+									margin: 0 10px;
+									cursor: pointer;
+
+									.admin_admin_paging_p_area {
+										width: 30px;
+										height: 30px;
+
+										.admin_admin_paging_p {
+											// display: inline-block;
+											color: $bookpick-main-color;
+											border: 1px solid $bookpick-main-color;
+											border-radius: 10px;											
+
+											&:hover {
+												border: none;
+												background-color: $bookpick-main-color;
+												color: #fff;
+											}
+										}
+									}										
+								}
+							}
+						}
+					}
+				}
 			}
+
+			// Admin Question Add
+			.admin_question_add_section {
+				width: 700px;
+				height: 100vh;
+				margin: 0 auto;
+				padding: 6rem 4rem;
+
+				.admin_question_add_input_area,
+				.admin_question_add_button_area {
+					width: 100%;
+					height: 50px;
+					margin: 40px auto;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+		
+					.admin_question_add_input {
+						width: 100%;
+						padding: 4px 10px;
+						outline: none;
+						background-color: transparent;
+						border-bottom: 2px solid #000;
+						transition: 0.5s;
+						
+						&:focus {
+							border-bottom: 2px solid $bookpick-main-color;
+							transition: 0.8s;
+						}
+					}
+				}
+		
+				.admin_question_add_button_area {
+					width: 60%;
+					height: 50px;
+					background-color: $bookpick-main-color;
+					color: #FFF;
+					border-radius: 25px;
+					margin: 40px auto;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					transition: 0.5s;
+		
+					.admin_question_add_button {
+						width: 100%;
+						height: 50px;				
+		
+						.admin_question_add_button_text_area {
+							width: 100%;
+							display: flex;
+							justify-content: center;
+							align-items: center;padding: 4px;
+						}						
+					}
+					
+					&:hover {
+						transform: scale(1.1);
+						transition: 0.3s;
+					}
+				}				
+			}		
 		}
 	}
 }

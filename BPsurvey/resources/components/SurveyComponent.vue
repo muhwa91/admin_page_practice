@@ -101,11 +101,11 @@ export default {
 						alert('조사에 참여해주셔서 감사합니다.')
 						this.$router.push('/'); 
 					} else {                
-						alert(response.data.error);
+						alert(error.response.data.error);
 					}
 				})
 				.catch(error => {
-					console.error('Unexpected error:', error);
+					alert(error.response.data.error);
 				})
 		}
 	}

@@ -11,6 +11,7 @@ class Survey_option extends Model
     use HasFactory, softDeletes;
 
     protected $primaryKey = 'survey_option_id';
+    public $timestamps = true;
 
     protected $fillable = [
         'survey_question_id',

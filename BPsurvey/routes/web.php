@@ -87,6 +87,9 @@ Route::prefix('admin')->group(function() {
     Route::get('/auth/management', function () {
         return view('welcome');
     });
+    Route::get('/question', function () {
+        return view('welcome');
+    });
     // Admin Logout
     Route::get('/logout', [AdminAuthController::class, 'adminLogout']);
     // Admin Management(User)
@@ -107,6 +110,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/index/totalUserStat', [TotalUserStatController::class, 'totalUserStat']);
     // Admin Register Statisticss
     Route::get('/index/barChart', [ChartController::class, 'barChartData']);
+    // Admin Survey List
+    Route::get('/index/survey', [SurveyController::class, 'surveyListGet']);
+    // Admin Question Add
+    Route::post('/question', [SurveyController::class, 'questionAdd'])->name('questionAdd');
 });
 
 

@@ -11,6 +11,7 @@ class Admin extends Authenticatable
     use HasFactory, softDeletes;
 
     protected $primaryKey = 'admin_id';
+    public $timestamps = true;
 
     protected $fillable = [
         'admin_flg',
