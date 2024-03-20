@@ -271,7 +271,7 @@
 									<p class="text-center">{{ admin.created_at }}</p>
 								</div>
 								<div class="admin_info_section">									
-									<p class="text-center">{{ admin.deleted_at }}</p>
+									<p class="text-center">{{ admin.deleted_at ? 'Y' : 'N' }}</p>
 								</div>
 								<div class="admin_button_section">									
 									<div class="admin_auth_area">
@@ -281,7 +281,7 @@
 												<option v-if="admin.admin_flg === 1" value="2" selected>sub</option>
 											</select>
 										</div>
-										<div class="text-center admin_button_area" v-if="admin.deleted_at">
+										<div class="text-center admin_button_area" v-if="!admin.deleted_at">
 											<button class="mb-1 admin_withdrawal_button" @click="adminUpdate(admin.admin_number)">변경</button>
 											<button class="admin_withdrawal_button" @click="adminWithdrawal(admin.admin_number)">탈퇴</button>
 										</div>
